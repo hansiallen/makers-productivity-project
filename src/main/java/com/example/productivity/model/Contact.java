@@ -22,10 +22,10 @@ public class Contact {
     }
 
     // Getters/ setters
-    public Long getId() {return this.user_id1;}
-    public void setId(Long user_id1) {this.user_id1 = user_id1;}
+    public Long getUserId1() {return this.user_id1;}
+    public void setUserId1(Long user_id1) {this.user_id1 = user_id1;}
 
-    public Long getUserId(){return this.user_id2;}
-    public void setUserId(Long user_id2) {this.user_id2 = user_id2;}
+    public Long getUserId2(){return this.user_id2;}
+    public void setUserId2(Long user_id2) {this.user_id2 = user_id2;}
 
 }
