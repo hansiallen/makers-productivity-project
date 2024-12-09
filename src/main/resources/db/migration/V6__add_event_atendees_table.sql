@@ -12,5 +12,5 @@ CREATE TABLE event_attendees (
         FOREIGN KEY (attendee_id)
         REFERENCES user_profiles(id)
         ON DELETE CASCADE,
-    attending_status varchar(63),
+    attending_status varchar(63)
 );
