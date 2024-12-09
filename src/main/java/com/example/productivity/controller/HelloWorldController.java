@@ -6,5 +6,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class HelloWorldController {
-
+    @GetMapping("/")
+    public String home(){
+        return "home page";
+    }
 }
