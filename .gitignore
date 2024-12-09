@@ -13,3 +13,5 @@ dependency-reduced-pom.xml
 /test-results
 package-lock.json
 .DS_Store
+.gradle
+build
