@@ -10,4 +10,9 @@ public class HelloWorldController {
     public String home(){
         return "home page";
     }
+
+    @GetMapping("/example")
+    public ModelAndView examplePage() {
+        return new ModelAndView("core/example_template.html");
+    }
 }
