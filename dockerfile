@@ -10,7 +10,7 @@ COPY ./ .
 RUN ./gradlew build -x test
 
 # Copy the JAR file from the build stage
-COPY /app/build/libs/productivity-0.0.1-SNAPSHOT.jar ./app.jar
+COPY ./build/libs/productivity-0.0.1-SNAPSHOT.jar ./app.jar
 
 # Expose the port the app will run on (default Spring Boot port is 8080)
 EXPOSE 8080
