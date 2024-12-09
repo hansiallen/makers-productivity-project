@@ -11,21 +11,21 @@ public class Contact {
 
     // Attributes
     @Id
-    private Long id;
-    private Long user_id;
+    private Long user_id1;
+    private Long user_id2;
 
     // Constructors
     public Contact(){}
-    public Contact(Long id, Long user_id){
-        this.id = id;
-        this.user_id = user_id;
+    public Contact(Long user_id1, Long user_id2){
+        this.user_id1 = user_id1;
+        this.user_id2 = user_id2;
     }
 
     // Getters/ setters
-    public Long getId() {return this.id;}
-    public void setId(Long id) {this.id = id;}
+    public Long getId() {return this.user_id1;}
+    public void setId(Long user_id1) {this.user_id1 = user_id1;}
 
-    public Long getUserId(){return this.user_id;}
-    public void setUserId(Long user_id) {this.user_id = user_id;}
+    public Long getUserId(){return this.user_id2;}
+    public void setUserId(Long user_id2) {this.user_id2 = user_id2;}
 
 }
