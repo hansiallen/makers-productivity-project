@@ -9,22 +9,22 @@ public class UserLink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
+    private Long userProfileId;
     private String websiteLinkName;
     private String WebsiteLinkUrl;
 
     UserLink(){
 
     }
-    UserLink(Long id, Long userId, String websiteLinkName, String websiteLinkUrl){
+    UserLink(Long id, Long userProfileId, String websiteLinkName, String websiteLinkUrl){
         this.id=id;
-        this.userId=userId;
+        this.userProfileId=userProfileId;
         this.websiteLinkName=websiteLinkName;
         this.WebsiteLinkUrl = websiteLinkUrl;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getuserProfileId() {
+        return userProfileId;
     }
 
     public Long getId() {
@@ -39,8 +39,8 @@ public class UserLink {
         return WebsiteLinkUrl;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setuserProfileId(Long userProfileId) {
+        this.userProfileId = userProfileId;
     }
 
     public void setId(Long id) {
