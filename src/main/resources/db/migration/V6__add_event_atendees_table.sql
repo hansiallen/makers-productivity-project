@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS event_attendees;
 
-CREATE TABLE event_attendees (
+CREATE TABLE event_attendee (
     id BIGSERIAL PRIMARY KEY,
     event_id BIGSERIAL,
           CONSTRAINT fk_event
@@ -12,5 +12,5 @@ CREATE TABLE event_attendees (
         FOREIGN KEY (attendee_id)
         REFERENCES user_profiles(id)
         ON DELETE CASCADE,
-    attending_status varchar(63)
+   attending_status varchar(63)
 );
