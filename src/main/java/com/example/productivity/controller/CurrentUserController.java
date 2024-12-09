@@ -1,4 +1,5 @@
-package com.example.productivity.service;
+package com.example.productivity.controller;
+
 
 import com.example.productivity.model.User;
 import com.example.productivity.repository.UserRepository;
@@ -6,33 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Map;
-import java.util.Optional;
 
-public class CurrentUserService {
+@RestController
+public class CurrentUserController {
 
     @Autowired
-    public UserRepository userRepository;
-    private final Map<String, Object> userDetails;
+    UserRepository userRepository;
+    private Map<String, Object> userDetails;
 
-    public CurrentUserService() {
+    @GetMapping("users/after-login")
+    public RedirectView handleLogin(){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
         this.userDetails = principal.getAttributes();
-
-    }
-
-    public String getEmail() {
-        return this.userDetails.get("email").toString();
-    }
-    public String getAuth0id(){
-        return this.userDetails.get("sub").toString();
-    }
-
-    public void handleLogin(){
 
         User user = userRepository.findByAuth0Id(getAuth0id());
         if (user == null){
@@ -42,10 +35,14 @@ public class CurrentUserService {
             user.setEmail(getEmail());
             userRepository.save(user);
         }
-
+        return new RedirectView("/");
     }
 
-
+    public String getEmail() {
+        return this.userDetails.get("email").toString();
+    }
+    public String getAuth0id(){
+        return this.userDetails.get("sub").toString();
+    }
 
 }
-
