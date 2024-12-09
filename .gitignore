@@ -1,0 +1,15 @@
+/target
+.idea/
+/node_modules
+dependency-reduced-pom.xml
+*.iml
+.log
+/src/main/resources/static/built
+.classpath
+.factorypath
+.project
+.settings/
+.env
+/test-results
+package-lock.json
+.DS_Store
