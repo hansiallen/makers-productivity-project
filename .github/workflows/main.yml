@@ -35,10 +35,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Install dependencies and playwright
-        run: |
-          ./gradlew build
-
       - name: Set Auth0 environment variables
         run: |
           echo "OKTA_CLIENT_ID=${{ secrets.OKTA_CLIENT_ID }}" >> $GITHUB_ENV
@@ -51,12 +47,17 @@ jobs:
           echo "OKTA_CLIENT_SECRET=$OKTA_CLIENT_SECRET"
           echo "OKTA_ISSUER=$OKTA_ISSUER"
 
-      # Run tests with maven
-      - name: Setup db and run server in background
+      # Run tests with gradle
+      - name: Setup db
         env:
           PGPASSWORD: postgres
         run: |
           PGPASSWORD=$POSTGRES_PASSWORD createdb -h localhost -p 5432 -U postgres productivity_dev_db
+
+      - name: Install dependencies and playwright
+        run: |
+          export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
+          ./gradlew build
 
       - name: Test with gradle
         run: |
