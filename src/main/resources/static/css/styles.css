@@ -92,7 +92,6 @@ nav input:checked ~ #toggleable-add-menu {
 @media(min-width: 480px) {
     nav {
         width: 420px;
-        left: 50%;
         /* Would have used transform-translate, but created bug for the invisible input selector inheriting a form of absolute positioning, css is weird! */
         left: calc(50% - 220px);
     }
