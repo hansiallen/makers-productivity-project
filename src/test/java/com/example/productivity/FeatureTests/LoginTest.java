@@ -25,7 +25,7 @@ public class LoginTest {
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
         context = browser.newContext();
         page = context.newPage();
-        page.navigate("http://localhost:8080/meezchurger");//gets sent to login page
+        page.navigate("http://localhost:8080/");//gets sent to login page
     }
 
     @AfterEach
