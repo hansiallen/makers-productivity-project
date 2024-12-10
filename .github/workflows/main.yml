@@ -55,12 +55,8 @@ jobs:
         run: |
           PGPASSWORD=$POSTGRES_PASSWORD createdb -h localhost -p 5432 -U postgres productivity_dev_db
 
-      - name: Install dependencies and playwright
+      - name: Build and test with gradle
         run: |
           export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
-          ./gradlew build
+          ./gradlew bootRun -x :test & sleep 3; ./gradlew test
 
-      - name: Test with gradle
-        run: |
-          export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
-          ./gradlew test
