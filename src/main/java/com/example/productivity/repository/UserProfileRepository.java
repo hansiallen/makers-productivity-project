@@ -1,7 +1,10 @@
 package com.example.productivity.repository;
 
-import com.example.productivity.model.UserProfiles;
-import org.springframework.data.repository.CrudRepository;
+import com.example.productivity.model.UserProfile;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserProfileRepository extends CrudRepository<UserProfiles, Long> {
+import java.util.Optional;
+
+public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
+    Optional<UserProfile> findByUserId(Long userId);
 }
