@@ -18,31 +18,28 @@ public class CurrentUserController {
 
     @Autowired
     UserRepository userRepository;
-    private Map<String, Object> userDetails;
+    private final User currentUser = new User();
 
     @GetMapping("users/after-login")
     public RedirectView handleLogin(){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
-        this.userDetails = principal.getAttributes();
+        Map<String, Object> userDetails = principal.getAttributes();
 
-        User user = userRepository.findByAuth0Id(getAuth0id());
+        this.currentUser.setEmail(userDetails.get("email").toString());
+        this.currentUser.setAuth0Id(userDetails.get("sub").toString());
+
+        User user = userRepository.findByAuth0Id(currentUser.getAuth0Id());
         if (user == null){
-
             user = new User();
-            user.setAuth0Id(getAuth0id());
-            user.setEmail(getEmail());
+            user.setAuth0Id(currentUser.getAuth0Id());
+            user.setEmail(currentUser.getEmail());
             userRepository.save(user);
         }
+        this.currentUser.setId(user.getId());
         return new RedirectView("/");
     }
 
-    public String getEmail() {
-        return this.userDetails.get("email").toString();
-    }
-    public String getAuth0id(){
-        return this.userDetails.get("sub").toString();
-    }
-
+    public User getCurrentUser(){return this.currentUser;}
 }
