@@ -21,6 +21,7 @@ public class CurrentUserController {
     private String email;
     private Long id;
     private String auth0id;
+    private boolean newUser = false;
 
     @GetMapping("users/after-login")
     public RedirectView handleLogin(){
@@ -38,6 +39,7 @@ public class CurrentUserController {
             user.setAuth0Id(getAuth0id());
             user.setEmail(getEmail());
             userRepository.save(user);
+            this.newUser = true;
         }
 
         this.id = user.getId();
@@ -47,5 +49,5 @@ public class CurrentUserController {
     public String getEmail() {return this.email;}
     public Long getId(){return this.id;}
     public String getAuth0id(){return this.auth0id;}
-
+    public boolean isNewUser() {return this.newUser;}
 }
