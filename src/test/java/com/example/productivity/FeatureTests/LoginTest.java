@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+import java.nio.file.Paths;
+
 
 @SpringBootTest
 public class LoginTest {
@@ -35,7 +37,7 @@ public class LoginTest {
     public void successfulSignUpAlsoLogsInUser(){
         page.setDefaultTimeout(6000);
         page.getByText("Sign up").click();
-        String email = faker.name().fullName() + "@email.com";
+        String email = faker.name().firstName() + faker.name().lastName() + "@email.com";
 
 //        page.screenshot(new Page.ScreenshotOptions()
 //                .setPath(Paths.get("screenshot0.png"))
@@ -44,11 +46,12 @@ public class LoginTest {
         page.locator("#email").fill(email);
         page.locator("#password").fill("P@s5W0rd");
 
+
+        page.getByText("Continue").nth(1).click();
+
 //        page.screenshot(new Page.ScreenshotOptions()
 //                .setPath(Paths.get("screenshot1.png"))
 //                .setFullPage(true));
-
-        page.getByText("Continue").nth(1).click();
         page.getByText("Accept").click();
 
 
