@@ -13,8 +13,7 @@ public class CustomField {
     private String customInfoKey;
     private String customInfoValue;
 
-    CustomField(Long id, Long userProfileId,String customInfoKey,String customInfoValue){
-        this.id = id;
+    CustomField(Long userProfileId,String customInfoKey,String customInfoValue){
         this.userProfileId = userProfileId;
         this.customInfoKey = customInfoKey;
         this.customInfoValue = customInfoValue;
