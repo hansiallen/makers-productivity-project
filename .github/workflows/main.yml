@@ -8,6 +8,7 @@ jobs:
   test:
     # Set up the virtual machine for testing
     runs-on: ubuntu-latest
+    timeout-seconds: 150
 
     services:
       # Configure PostgreSQL service
