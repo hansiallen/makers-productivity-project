@@ -16,8 +16,7 @@ public class UserLink {
     UserLink(){
 
     }
-    UserLink(Long id, Long userProfileId, String websiteLinkName, String websiteLinkUrl){
-        this.id=id;
+    UserLink(Long userProfileId, String websiteLinkName, String websiteLinkUrl){
         this.userProfileId=userProfileId;
         this.websiteLinkName=websiteLinkName;
         this.WebsiteLinkUrl = websiteLinkUrl;
