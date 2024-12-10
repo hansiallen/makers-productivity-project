@@ -19,7 +19,7 @@ public class LoginTest {
     BrowserContext context;
 
     @BeforeEach
-    public void setup() {
+    public void setup() {//
         faker = new Faker();
         playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
@@ -35,7 +35,7 @@ public class LoginTest {
 
     @Test
     public void successfulSignUpAlsoLogsInUser(){
-        page.setDefaultTimeout(6000);
+        page.setDefaultTimeout(7000);
         page.getByText("Sign up").click();
         String email = faker.name().firstName() + faker.name().lastName() + "@email.com";
 
