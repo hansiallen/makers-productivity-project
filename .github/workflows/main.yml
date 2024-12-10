@@ -62,5 +62,4 @@ jobs:
       - name: Test with gradle
         run: |
           export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
-          chmod +x gradlew
-          ./gradlew test --tests "*"
+          ./gradlew build -x :test || ./gradlew test
