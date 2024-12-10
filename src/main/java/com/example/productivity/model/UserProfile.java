@@ -29,13 +29,9 @@ public class UserProfile {
     public UserProfile() {
     }
 
-    public Long getId() {
-        return this.id;
-    }
+    public Long getId() { return this.id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public Long getUserId() {
         return userId;
