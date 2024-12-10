@@ -15,8 +15,7 @@ public class EventAttendee {
 
         EventAttendee(){}
 
-        EventAttendee(Long id, Long eventId, Long attendeeId, Long attendingStatus){
-                this.id = id;
+        EventAttendee(Long eventId, Long attendeeId, Long attendingStatus){
                 this.eventId = eventId;
                 this.attendeeId = attendeeId;
                 this.attendingStatus = attendingStatus;
