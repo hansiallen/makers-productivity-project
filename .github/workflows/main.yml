@@ -57,8 +57,9 @@ jobs:
       - name: Install dependencies and playwright
         run: |
           export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
-          gradle build -x :test
+          ./gradlew build -x :test
 
       - name: Test with gradle
         run: |
-          ./gradlew test
+          export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
+          ./gradlew build -x :test && ./gradlew test
