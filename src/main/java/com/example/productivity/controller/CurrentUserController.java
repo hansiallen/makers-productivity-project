@@ -18,10 +18,7 @@ public class CurrentUserController {
 
     @Autowired
     UserRepository userRepository;
-    private String email;
-    private Long id;
-    private String auth0id;
-    private boolean newUser = false;
+    private final User currentUser = new User();
 
     @GetMapping("users/after-login")
     public RedirectView handleLogin(){
@@ -30,24 +27,19 @@ public class CurrentUserController {
         DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
         Map<String, Object> userDetails = principal.getAttributes();
 
-        this.email = userDetails.get("email").toString();
-        this.auth0id = userDetails.get("sub").toString();
+        this.currentUser.setEmail(userDetails.get("email").toString());
+        this.currentUser.setAuth0Id(userDetails.get("sub").toString());
 
-        User user = userRepository.findByAuth0Id(getAuth0id());
+        User user = userRepository.findByAuth0Id(currentUser.getAuth0Id());
         if (user == null){
             user = new User();
-            user.setAuth0Id(getAuth0id());
-            user.setEmail(getEmail());
+            user.setAuth0Id(currentUser.getAuth0Id());
+            user.setEmail(currentUser.getEmail());
             userRepository.save(user);
-            this.newUser = true;
         }
-
-        this.id = user.getId();
+        this.currentUser.setId(user.getId());
         return new RedirectView("/");
     }
 
-    public String getEmail() {return this.email;}
-    public Long getId(){return this.id;}
-    public String getAuth0id(){return this.auth0id;}
-    public boolean isNewUser() {return this.newUser;}
+    public User getCurrentUser(){return this.currentUser;}
 }
