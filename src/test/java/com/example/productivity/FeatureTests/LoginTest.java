@@ -35,7 +35,7 @@ public class LoginTest {
 
     @Test
     public void successfulSignUpAlsoLogsInUser(){
-        page.setDefaultTimeout(7000);
+        page.setDefaultTimeout(5000);
         page.getByText("Sign up").click();
         String email = faker.name().firstName() + faker.name().lastName() + "@email.com";
 
