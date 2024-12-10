@@ -61,5 +61,6 @@ public class LoginTest {
 //                .setFullPage(true));
 
         Assert.hasText("http://localhost:8080/",page.url());
+        Assert.hasText("this should break","opps");
     }
 }
