@@ -56,8 +56,6 @@ jobs:
           PGPASSWORD=$POSTGRES_PASSWORD createdb -h localhost -p 5432 -U postgres productivity_dev_db
 
       - name: Build and test with gradle
-        timeout: 15
-        wait: 15
         run: |
           export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
           ./gradlew bootRun -x :test & sleep 10; ./gradlew test
