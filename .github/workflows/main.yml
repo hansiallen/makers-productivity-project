@@ -58,5 +58,5 @@ jobs:
       - name: Build and test with gradle
         run: |
           export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
-          ./gradlew bootRun -x :test & sleep 10; ./gradlew test
+          ./gradlew bootRun -x :test & sleep 3; ./gradlew test
 
