@@ -8,7 +8,7 @@ jobs:
   test:
     # Set up the virtual machine for testing
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 5
 
     services:
       # Configure PostgreSQL service
@@ -55,8 +55,12 @@ jobs:
         run: |
           PGPASSWORD=$POSTGRES_PASSWORD createdb -h localhost -p 5432 -U postgres productivity_dev_db
 
-      - name: Build and test with gradle
+      - name: Install dependencies and playwright
         run: |
           export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
-          ./gradlew bootRun -x :test & sleep 10; ./gradlew test
+          ./gradlew build
 
+      - name: Test with gradle
+        run: |
+          export POSTGRES_URL="postgresql://localhost:5432/productivity_dev_db"
+          ./gradlew test
