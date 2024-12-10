@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS event_attendees;
 
-CREATE TABLE event_attendee (
+CREATE TABLE event_attendees (
     id BIGSERIAL PRIMARY KEY,
     event_id BIGSERIAL,
           CONSTRAINT fk_event
