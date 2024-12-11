@@ -1,18 +1,24 @@
 package com.example.productivity.controller;
 
+import com.example.productivity.model.CustomField;
 import com.example.productivity.model.User;
 import com.example.productivity.model.UserProfile;
+import com.example.productivity.repository.CustomFieldRepository;
 import com.example.productivity.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+
 @RestController
 public class UserProfileController {
 
     @Autowired
     UserProfileRepository userProfileRepository;
+    @Autowired
+    CustomFieldRepository customFieldRepository;
     @Autowired
     CurrentUserController currentUser;
 
@@ -21,6 +27,7 @@ public class UserProfileController {
 
         ModelAndView modelAndView = new ModelAndView("profile/show");
         UserProfile userProfile = userProfileRepository.findByUserId(id);
+        List<CustomField> customFields = customFieldRepository.findByUserId(id);
 
         if (userProfile == null){
             modelAndView = new ModelAndView("core/error");
@@ -33,7 +40,6 @@ public class UserProfileController {
         modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
 
         return modelAndView;
-
     }
 
 
@@ -41,7 +47,7 @@ public class UserProfileController {
     public RedirectView create(@ModelAttribute UserProfile userProfile){
 
         UserProfile currentUserProfile = userProfileRepository.findByUserId(currentUser.getCurrentUser().getId());
-        userProfile.setId(currentUserProfile.getId());
+        userProfile.setUserId(currentUserProfile.getUserId());
         userProfile.setUserId(currentUser.getCurrentUser().getId());
         userProfileRepository.save(userProfile);
 
