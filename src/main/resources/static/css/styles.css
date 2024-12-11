@@ -24,6 +24,7 @@ nav {
     grid-template-columns: 48px 48px 48px 48px 48px;
     justify-content: space-between;
     background: var(--popup-background);
+    filter: drop-shadow(3px 3px 6px #00000080);
     z-index: 100;
 }
 

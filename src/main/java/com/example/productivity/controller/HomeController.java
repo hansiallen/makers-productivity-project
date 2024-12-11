@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class HelloWorldController {
-    @GetMapping("/example")
-    public ModelAndView examplePage() {
-        return new ModelAndView("core/example_template.html");
+public class HomeController {
+
+    @GetMapping("/")
+    public ModelAndView userProfile() {
+        ModelAndView modelAndView = new ModelAndView("/page/contacts.html");
+        return modelAndView;
     }
 }
