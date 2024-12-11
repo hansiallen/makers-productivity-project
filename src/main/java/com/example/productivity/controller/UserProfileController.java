@@ -19,7 +19,7 @@ public class UserProfileController {
     CurrentUserController currentUser;
 
 
-    @GetMapping("/profile")
+    @GetMapping("/profile/update")
     public ModelAndView profile(){
 
         Long currentUserId = currentUser.getCurrentUser().getId();
@@ -48,7 +48,7 @@ public class UserProfileController {
         userProfileRepository.save(userProfile);
 
         System.out.println(userProfile.getUserId());
-        return new RedirectView("/profile");
+        return new RedirectView("/profile/update");
     }
 
 
