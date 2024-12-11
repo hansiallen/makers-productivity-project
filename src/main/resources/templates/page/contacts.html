@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<head><link rel="stylesheet" href="/css/contacts.css"></head>
+<body>
+    <div class="main-cont">
+        <div class="static-cont">
+            <div class="personal-cont">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png">
+                <div>
+                    <h2>Bob Smith</h2>
+                    <p>124 Contacts</p>
+                </div>
+                <span>></span>
+            </div>
+            <input type="search" placeholder=" 🔍 Search for a contact">
+        </div>
+        <div class="results-cont">
+            <div class="divider">Favorites</div>
+            <a class="user-cont" href="${i}" th:each="i : ${#numbers.sequence( 1, 100)}">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png">
+                <h3>Adam Adamson</h3>
+                <span>></span>
+            </a>
+        </div>
+    </div>
+    <div th:replace="~{core/navbar}"></div>
+</body>
+</html>
