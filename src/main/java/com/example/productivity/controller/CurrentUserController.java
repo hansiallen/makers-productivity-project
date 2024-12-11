@@ -2,6 +2,8 @@ package com.example.productivity.controller;
 
 
 import com.example.productivity.model.User;
+import com.example.productivity.model.UserProfile;
+import com.example.productivity.repository.UserProfileRepository;
 import com.example.productivity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,8 @@ public class CurrentUserController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserProfileRepository userProfileRepository;
     private final User currentUser = new User();
 
     @GetMapping("users/after-login")
@@ -37,6 +41,14 @@ public class CurrentUserController {
             user.setEmail(currentUser.getEmail());
             userRepository.save(user);
         }
+
+        UserProfile userProfile = userProfileRepository.findByUserId(user.getId());
+        if (userProfile == null){
+            userProfile = new UserProfile();
+            userProfile.setUserId(user.getId());
+            userProfileRepository.save(userProfile);
+        }
+
         this.currentUser.setId(user.getId());
         return new RedirectView("/");
     }
