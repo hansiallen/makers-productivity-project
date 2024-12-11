@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<head><link rel="stylesheet" href="/css/home.css"></head>
+<body>
+    <div th:replace="~{core/navbar}"></div>
+    <div th:replace="~{core/header}"></div>
+
+    <section class="homepage-section">
+        <h2>Notifications</h2>
+    </section>
+
+    <section class="homepage-section">
+        <h2>Favourite Contacts</h2>
+    </section>
+
+    <section class="homepage-section">
+        <h2>Upcoming Events</h2>
+        <div th:each="event: ${upcomingEvents}" >
+            <div class="upcoming-event-card homepage-card">
+                <h3 th:text="${event.title}"></h3>
+                <div class="upcoming-event-details">
+                    <div class="upcoming-event-detail">
+                        <i class="fa-solid fa-clock"></i>
+                        <p th:text="${#temporals.dayOfWeekNameShort(event.date)} + ' ' + ${#temporals.format(event.date, 'dd MMM')} + ' ' + ${event.startTime}"></p>
+                    </div>
+                    <div class="upcoming-event-detail">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>Event location?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
