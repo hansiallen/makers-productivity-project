@@ -26,6 +26,15 @@
           <label for="preferredName">Preferred name</label>
           <div id = "preferredName" th:text="*{preferredName}"></div>
         </div>
+
+        <p>Custom Fields</p>
+        <div th:each = "customField : ${customFields}">
+          <div class="profile-field">
+            <label th:for="${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoKey()}"></label>
+            <div th:id = "${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoContent()}"></div>
+          </div>
+        </div>
+
       </div>
     </div>
 </div>

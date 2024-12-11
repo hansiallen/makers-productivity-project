@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<body>
+<div th:replace="~{core/navbar}"></div>
+<div class="profile-page">
+<form class="update-profile-container" th:action="@{/customField/add}" th:object="${customField}" method="post">
+  <div class="profile-fields">
+    <div class="profile-field">
+      <label for="customInfoKey">Field name</label>
+      <input id="customInfoKey" type="text" th:field="*{customInfoKey}" placeholder="ex."/>
+    </div>
+    <div class="profile-field">
+      <label for="customInfoContent">Field value</label>
+      <input id="customInfoContent" type="text" th:field="*{customInfoContent}" required/>
+    </div>
+  </div>
+  <button type="submit" class="submit-btn">Add new field</button>
+</form>
+</div>
+</body>
+</html>
