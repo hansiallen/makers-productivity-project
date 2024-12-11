@@ -62,7 +62,6 @@ public class CurrentUserController {
 
     @PostMapping("uploadProfileImage")
     public ModelAndView uploadProfileImage(@RequestParam("profilePhoto") MultipartFile profilePhoto) {
-        System.out.println("****UPLOADER****");
         try {
             Long currentUserId = this.currentUser.getId();
             UserProfile userProfile = userProfileRepository.findByUserId(currentUserId);
