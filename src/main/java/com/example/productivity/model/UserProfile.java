@@ -16,7 +16,7 @@ public class UserProfile {
     private String lastName;
     private String profilePhotoUrl;
     private String preferredName;
-
+  
     public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName) {
         this.userId = userId;
         this.firstName = firstName;
@@ -30,7 +30,6 @@ public class UserProfile {
     }
 
     public Long getId() { return this.id; }
-
     public void setId(Long id) { this.id = id; }
 
     public Long getUserId() {
