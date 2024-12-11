@@ -24,6 +24,8 @@ nav {
     grid-template-columns: 48px 48px 48px 48px 48px;
     justify-content: space-between;
     background: var(--popup-background);
+    filter: drop-shadow(3px 3px 6px #00000080);
+    z-index: 100;
 }
 
 nav img {
@@ -95,4 +97,94 @@ nav input:checked ~ #toggleable-add-menu {
         /* Would have used transform-translate, but created bug for the invisible input selector inheriting a form of absolute positioning, css is weird! */
         left: calc(50% - 220px);
     }
+}
+
+.profile-container,
+.update-profile-container{
+    background-color: var(--popup-background);
+    min-width: 12em;
+    padding: 1em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.profile-page{
+    display:flex;
+    justify-content:center;
+}
+
+.profile-fields{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.profile-field {
+  position: relative;
+  font-size: inherit;
+  margin-bottom: 1em;
+}
+
+.profile-field input,
+.profile-field div{
+  outline: none;
+  background-color: var(--page-background);
+  border-radius: 0.75em;
+  padding: 1.8em 0.75em 0.75em;
+  border-color: var(--primary-accent);
+  color: var(--primary-accent);
+  border-style: none;
+  font-size: inherit;
+  transition: 0.1s;
+}
+
+.profile-field input:hover,
+.profile-field input:focus {
+  border-bottom-width: 2px;
+  padding-bottom: calc(0.75em - 1px);
+}
+
+.profile-field input:hover {
+  border-color: var(--secondary-accent);
+}
+
+.profile-field input:focus {
+  border-color: var(--secondary-accent);
+}
+
+.profile-field label {
+  position: absolute;
+  top: 1.4em;
+  left: 1em;
+  pointer-events: none;
+  transition: 0.2s;
+  color: var(--primary-accent);
+}
+
+.profile-field:has(input:focus) label {
+  color: var(--primary-accent);
+}
+
+.profile-field:has(input:focus) label,
+.profile-field:not(:has(input:placeholder-shown)) label {
+  top: 0.75em;
+  font-size: 0.8em;
+}
+
+.profile-field input::placeholder {
+  opacity: 0;
+  transition: 0.2s;
+  color: var(--primary-accent);
+}
+
+.profile-field input:focus::placeholder {
+  opacity: 1;
+}
+
+.submit-btn{
+    background-color: var(--secondary-accent);
+    padding: 1em 3em;
+    border-radius: 1em;
 }
