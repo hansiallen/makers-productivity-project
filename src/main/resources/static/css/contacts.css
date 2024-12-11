@@ -1,4 +1,4 @@
-* {margin: 0; padding: 0;}
+* {margin: 0; padding: 0; text-decoration: none;}
 
 body {
     display: flex;
@@ -26,6 +26,7 @@ body {
     flex-direction: row;
     align-items: center;
     gap: 20px;
+    color: white;
 }
 
 .personal-cont img {
@@ -55,6 +56,12 @@ body {
 .results-cont {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
     gap: 7px;
 }
 
@@ -67,15 +74,20 @@ body {
 .user-cont {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
     background-color: var(--popup-background);
     padding: 15px;
     border-radius: 10px;
+    color: white;
 }
 
 .user-cont img{
     height: 32px;
     aspect-ratio: 1/1;
     border-radius: 100%;
+}
+
+.user-cont h3 {
+    width: 100%;
 }
