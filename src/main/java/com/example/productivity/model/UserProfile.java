@@ -3,8 +3,8 @@ package com.example.productivity.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "USERS_PROFILES")
-public class UserProfiles {
+@Table(name = "USER_PROFILES")
+public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class UserProfiles {
     private String lastName;
     private String profilePhotoUrl;
     private String preferredName;
-    public UserProfiles(Long userId, String firstName,String middleName,String lastName, String profilePhotoUrl, String preferredName) {
+    public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName) {
         this.userId = userId;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -24,7 +24,7 @@ public class UserProfiles {
         this.preferredName = preferredName;
     }
 
-    public UserProfiles() {
+    public UserProfile() {
     }
 
     public Long getId() {return this.id;}
