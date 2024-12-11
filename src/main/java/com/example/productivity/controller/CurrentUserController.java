@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 public class CurrentUserController {
@@ -63,16 +62,10 @@ public class CurrentUserController {
 
     @PostMapping("uploadProfileImage")
     public ModelAndView uploadProfileImage(@RequestParam("profilePhoto") MultipartFile profilePhoto) {
+        System.out.println("****UPLOADER****");
         try {
             Long currentUserId = this.currentUser.getId();
-            Optional<UserProfile> optionalUserProfile = userProfileRepository.findByUserId(currentUserId);
-
-            if (optionalUserProfile.isEmpty()) {
-                return new ModelAndView("error").addObject("message", "User profile not found.");
-            }
-
-            UserProfile userProfile = optionalUserProfile.get();
-
+            UserProfile userProfile = userProfileRepository.findByUserId(currentUserId);
             String uploadedUrl = cloudinaryService.uploadImage(profilePhoto);
             userProfile.setProfilePhotoUrl(uploadedUrl);
             userProfileRepository.save(userProfile);
