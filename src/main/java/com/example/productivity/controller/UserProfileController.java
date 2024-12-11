@@ -37,6 +37,7 @@ public class UserProfileController {
 
         boolean currUserIsViewingOwnProfile = id.equals(currentUser.getCurrentUser().getId());
         modelAndView.addObject("userProfile",userProfile);
+        modelAndView.addObject("customFields",customFields);
         modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
 
         return modelAndView;
