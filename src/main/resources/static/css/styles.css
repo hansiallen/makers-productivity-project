@@ -3,6 +3,7 @@
     --primary-accent: #FFF;
     --secondary-accent: #F2D492;
     --popup-background: #202C39;
+    --header-font: "Lilita One";
 }
 
 body {
@@ -97,6 +98,14 @@ nav input:checked ~ #toggleable-add-menu {
         /* Would have used transform-translate, but created bug for the invisible input selector inheriting a form of absolute positioning, css is weird! */
         left: calc(50% - 220px);
     }
+}
+
+.page-header {
+    color: var(--secondary-accent);
+    font-family: var(--header-font);
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 .profile-container,
