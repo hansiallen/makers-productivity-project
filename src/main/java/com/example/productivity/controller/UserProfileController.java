@@ -43,7 +43,7 @@ public class UserProfileController {
     public RedirectView create(@ModelAttribute UserProfile userProfile){
 
         UserProfile currentUserProfile = userProfileRepository.findByUserId(currentUser.getCurrentUser().getId());
-        userProfile.setId(currentUserProfile.getId());
+        userProfile.setUserId(currentUserProfile.getUserId());
         userProfile.setUserId(currentUser.getCurrentUser().getId());
         userProfileRepository.save(userProfile);
 

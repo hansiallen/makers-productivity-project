@@ -8,8 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserProfile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private Long userId;
     private String firstName;
     private String middleName;
@@ -28,9 +26,6 @@ public class UserProfile {
 
     public UserProfile() {
     }
-
-    public Long getId() { return this.id; }
-    public void setId(Long id) { this.id = id; }
 
     public Long getUserId() {
         return userId;
