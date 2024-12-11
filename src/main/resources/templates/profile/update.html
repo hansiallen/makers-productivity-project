@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
-<head th:replace="~{core/head}"></head>
-<body>
-<div th:replace="~{core/navbar}"></div>
 
-<div class="update-profile-form">
-  <h3>Update profile</h3>
+  <form class="update-profile-container" th:action="@{/profile/update}" th:object="${userProfile}" method="post" th:fragment="update">
+    <div class="profile-fields">
+      <div class="profile-field">
+        <label for="firstName">First name</label>
+        <input id="firstName" type="text" th:field="*{firstName}" placeholder="First name"/>
+      </div>
+      <div class="profile-field">
+        <label for="middleName">Middle name</label>
+        <input id="middleName" type="text" th:field="*{middleName}" />
+      </div>
+      <div class="profile-field">
+        <label for="lastName">Last name</label>
+        <input id="lastName" type="text" th:field="*{lastName}" />
+      </div>
+      <div class="profile-field">
+        <label for="preferredName">Preferred name</label>
+        <input id="preferredName" type="text" th:field="*{preferredName}" />
+      </div>
+    </div>
+    <button type="submit" class="submit-btn">Update profile</button>
+</form>
 
-  <form th:action="@{/profile/update}" th:object="${userProfile}" method="post">
-    <p>First name: <input type="text" th:field="*{firstName}"/></p>
-    <p>Middle name: <input type="text" th:field="*{middleName}" /></p>
-    <p>Last name: <input type="text" th:field="*{lastName}" /></p>
-    <p>Preferred name: <input type="text" th:field="*{preferredName}" /></p>
-    <button type="submit">Update profile</button>
-  </form>
-</div>
-
-</body>
-</html>
