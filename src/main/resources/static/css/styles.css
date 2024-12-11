@@ -98,8 +98,10 @@ nav input:checked ~ #toggleable-add-menu {
     }
 }
 
-.update-profile-form{
+.profile-container,
+.update-profile-container{
     background-color: var(--popup-background);
+    min-width: 12em;
     padding: 1em;
     border-radius: 1em;
     display: flex;
@@ -112,19 +114,20 @@ nav input:checked ~ #toggleable-add-menu {
     justify-content:center;
 }
 
-.text-fields{
+.profile-fields{
     display: flex;
     flex-direction: column;
 
 }
 
-.text-box-input {
+.profile-field {
   position: relative;
   font-size: inherit;
   margin-bottom: 1em;
 }
 
-.text-box-input input {
+.profile-field input,
+.profile-field div{
   outline: none;
   background-color: var(--page-background);
   border-radius: 0.75em;
@@ -136,21 +139,21 @@ nav input:checked ~ #toggleable-add-menu {
   transition: 0.1s;
 }
 
-.text-box-input input:hover,
-.text-box-input input:focus {
+.profile-field input:hover,
+.profile-field input:focus {
   border-bottom-width: 2px;
   padding-bottom: calc(0.75em - 1px);
 }
 
-.text-box-input input:hover {
+.profile-field input:hover {
   border-color: var(--secondary-accent);
 }
 
-.text-box-input input:focus {
+.profile-field input:focus {
   border-color: var(--secondary-accent);
 }
 
-.text-box-input label {
+.profile-field label {
   position: absolute;
   top: 1.4em;
   left: 1em;
@@ -159,23 +162,23 @@ nav input:checked ~ #toggleable-add-menu {
   color: var(--primary-accent);
 }
 
-.text-box-input:has(input:focus) label {
+.profile-field:has(input:focus) label {
   color: var(--primary-accent);
 }
 
-.text-box-input:has(input:focus) label,
-.text-box-input:not(:has(input:placeholder-shown)) label {
+.profile-field:has(input:focus) label,
+.profile-field:not(:has(input:placeholder-shown)) label {
   top: 0.75em;
   font-size: 0.8em;
 }
 
-.text-box-input input::placeholder {
+.profile-field input::placeholder {
   opacity: 0;
   transition: 0.2s;
   color: var(--primary-accent);
 }
 
-.text-box-input input:focus::placeholder {
+.profile-field input:focus::placeholder {
   opacity: 1;
 }
 
