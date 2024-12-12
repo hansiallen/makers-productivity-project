@@ -19,12 +19,13 @@
       </div>
     </div>
     <p>Custom Fields</p>
-    <div th:each = "customField : ${customFields}">
+    <div th:each = "customField : ${customFields}" class="profile-fields">
       <div class="profile-field">
         <label th:for="${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoKey()}"></label>
         <div th:id = "${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoContent()}"></div>
       </div>
     </div>
     <button type="submit" class="submit-btn">Update profile</button>
+    <a href="/customField/add" class="submit-btn">Add custom field</a>
 </form>
 
