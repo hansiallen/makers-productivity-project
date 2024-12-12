@@ -26,9 +26,6 @@ public class HomeController {
     @Autowired
     UserProfileRepository userProfileRepository;
 
-    @Autowired
-    UserProfileRepository userProfileRepository;
-
     @GetMapping("/")
     public ModelAndView userProfile() {
         ModelAndView modelAndView = new ModelAndView("/page/contacts.html");
