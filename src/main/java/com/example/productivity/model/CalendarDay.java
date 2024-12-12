@@ -2,17 +2,23 @@ package com.example.productivity.model;
 
 import jakarta.persistence.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-@Entity
 public class CalendarDay {
 
-    private Date date;
+    private LocalDate date;
 
     CalendarDay(){
     }
-    CalendarDay(Date date){
-        this.date  =date;
+    public CalendarDay(LocalDate date){
+        this.date  = date;
+    }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
