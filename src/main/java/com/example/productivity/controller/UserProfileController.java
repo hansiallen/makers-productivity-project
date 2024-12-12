@@ -32,7 +32,7 @@ public class UserProfileController {
         ModelAndView modelAndView = new ModelAndView("profile/show");
         UserProfile userProfile = userProfileRepository.findByUserId(id);
         List<CustomField> customFields = customFieldRepository.findByUserId(id);
-        Boolean inContacts = contactRepository.usersInContacts(currentUserId,id) == 1;
+        Boolean inContacts = contactRepository.usersInContacts(currentUserId,id);
 
         if (userProfile == null){
             modelAndView = new ModelAndView("core/error");
