@@ -55,6 +55,7 @@ public class CurrentUserController {
             userProfile = new UserProfile();
             userProfile.setUserId(user.getId());
             userProfileRepository.save(userProfile);
+            return new RedirectView("/profile/" + userProfile.getUserId());
         }
 
         this.currentUser.setId(user.getId());

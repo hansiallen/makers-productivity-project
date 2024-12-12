@@ -2,9 +2,11 @@ package com.example.productivity.controller;
 
 import com.example.productivity.model.CustomField;
 import com.example.productivity.model.User;
+import com.example.productivity.model.UserLink;
 import com.example.productivity.model.UserProfile;
 import com.example.productivity.repository.ContactRepository;
 import com.example.productivity.repository.CustomFieldRepository;
+import com.example.productivity.repository.UserLinkRepository;
 import com.example.productivity.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,8 @@ public class UserProfileController {
     CurrentUserController currentUser;
     @Autowired
     ContactRepository contactRepository;
+    @Autowired
+    UserLinkRepository userLinkRepository;
 
     @GetMapping("/profile/{id}")
     public ModelAndView viewProfile(@PathVariable Long id){
@@ -32,6 +36,7 @@ public class UserProfileController {
         ModelAndView modelAndView = new ModelAndView("profile/show");
         UserProfile userProfile = userProfileRepository.findByUserId(id);
         List<CustomField> customFields = customFieldRepository.findByUserId(id);
+        List<UserLink> userLinks = userLinkRepository.findByUserId(id);
         Boolean inContacts = contactRepository.usersInContacts(currentUserId,id);
 
         if (userProfile == null){
@@ -43,6 +48,8 @@ public class UserProfileController {
         boolean currUserIsViewingOwnProfile = id.equals(currentUser.getCurrentUser().getId());
         modelAndView.addObject("userProfile",userProfile);
         modelAndView.addObject("customFields",customFields);
+        modelAndView.addObject("userLinks",userLinks);
+        modelAndView.addObject("userLink",new UserLink());
         modelAndView.addObject("customField", new CustomField());
         modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
         modelAndView.addObject("userInContacts",inContacts);
