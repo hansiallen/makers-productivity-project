@@ -11,7 +11,9 @@ public class Contact {
 
     // Attributes
     @Id
+    // The user who is adding the contact
     private Long user_id1;
+    // The contact who is being added
     private Long user_id2;
 
     // Constructors

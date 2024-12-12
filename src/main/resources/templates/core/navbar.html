@@ -4,7 +4,7 @@
     <div>
         <input type="checkbox" name="toggle-add-menu" id="nav-toggle-add-menu">
         <div id="toggleable-add-menu">
-            <a onclick="showQrCodeScanner();"><img src="/img/icon/nav/qr-code.svg" alt="" />Scan</a>
+            <a onclick="initiateQRCodeInterface();"><img src="/img/icon/nav/qr-code.svg" alt="" />Scan</a>
             <a onclick="addContactThroughCode();"><img src="/img/icon/nav/code-input.svg" alt="" />Code</a>
             <a href="/contact/add-manually"><img src="/img/icon/nav/manual-entry.svg" alt="" />Manual entry</a>
         </div>
@@ -12,4 +12,5 @@
     </div>
     <a onclick="showSearch();"><img src="/img/icon/nav/search.svg" alt="Search for contact" /></a>
     <a href="/profile/me"><img src="/img/icon/nav/default-profile.png" alt="View my profile" /></a>
+    <div id="popup-div" class="hidden"></div>
 </nav>
