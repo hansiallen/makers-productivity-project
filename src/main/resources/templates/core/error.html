@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<body>
+<div th:replace="~{core/navbar}"></div>
+    There has been an error:
+    <div th:text="${errorMessage}"></div>
+</body>
+</html>

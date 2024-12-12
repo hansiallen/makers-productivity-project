@@ -1,20 +1,20 @@
 package com.example.productivity.model;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "USER_PROFILES")
 public class UserProfile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private Long userId;
     private String firstName;
     private String middleName;
     private String lastName;
     private String profilePhotoUrl;
     private String preferredName;
+  
     public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName) {
         this.userId = userId;
         this.firstName = firstName;
@@ -26,9 +26,6 @@ public class UserProfile {
 
     public UserProfile() {
     }
-
-    public Long getId() {return this.id;}
-    public void setId(Long id) {this.id = id;}
 
     public Long getUserId() {
         return userId;

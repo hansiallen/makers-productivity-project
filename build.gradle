@@ -37,6 +37,11 @@ dependencies {
 
 	// .env files
 	implementation "me.paulschwarz:spring-dotenv:4.0.0"
+
+	// cloudinary image upload
+	implementation 'com.cloudinary:cloudinary-http44:1.30.0'
+	implementation 'org.imgscalr:imgscalr-lib:4.2'
+	implementation 'org.json:json:20210307'
 }
 
 tasks.named('test') {

@@ -4,34 +4,27 @@ package com.example.productivity.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Custom_Field")
+@Table(name = "Custom_Fields")
 public class CustomField {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userProfileId;
+    private Long userId;
     private String customInfoKey;
-    private String customInfoValue;
+    private String customInfoContent;
 
-    CustomField(Long userProfileId,String customInfoKey,String customInfoValue){
-        this.userProfileId = userProfileId;
+    CustomField(Long userProfileId,String customInfoKey,String customInfoContent){
+        this.userId = userProfileId;
         this.customInfoKey = customInfoKey;
-        this.customInfoValue = customInfoValue;
+        this.customInfoContent = customInfoContent;
     }
 
-    CustomField(){
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public CustomField(){
     }
 
     public Long getUserProfileId() {
-        return userProfileId;
+        return userId;
     }
 
     public void setCustomInfoKey(String customInfoKey) {
@@ -42,15 +35,15 @@ public class CustomField {
         return customInfoKey;
     }
 
-    public void setCustomInfoValue(String customInfoValue) {
-        this.customInfoValue = customInfoValue;
+    public void setCustomInfoContent(String customInfoValue) {
+        this.customInfoContent = customInfoValue;
     }
 
-    public String getCustomInfoValue() {
-        return customInfoValue;
+    public String getCustomInfoContent() {
+        return customInfoContent;
     }
 
-    public void setUserProfileId(Long userProfileId) {
-        this.userProfileId = userProfileId;
+    public void setUserProfileId(Long userId) {
+        this.userId = userId;
     }
 }
