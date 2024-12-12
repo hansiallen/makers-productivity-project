@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:replace="~{core/head}"></head>
-<head><link rel="stylesheet" href="/css/contacts.css"></head>
+<head>
+    <link rel="stylesheet" href="/css/contacts.css">
+    <script src="/js/search.js"></script>
+</head>
 <body>
     <div class="main-cont">
         <div class="static-cont">
@@ -14,7 +17,7 @@
                 </div>
                 <span>></span>
             </a>
-            <input type="search" placeholder=" 🔍 Search for a contact">
+            <input id="search-box" type="search" placeholder=" 🔍 Search for a contact">
         </div>
         <div th:if="${contacts.size() > 0}" class="results-cont">
             <div class="section" th:with="letters='abcdefghijklmnopqrstuvwxyz'" th:each="num : ${#numbers.sequence(0, 25)}">
