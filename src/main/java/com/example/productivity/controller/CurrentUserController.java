@@ -23,6 +23,7 @@ public class CurrentUserController {
 
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     UserProfileRepository userProfileRepository;
     private final User currentUser = new User();
@@ -30,15 +31,13 @@ public class CurrentUserController {
     @Autowired
     CloudinaryService cloudinaryService;
 
-    @Autowired
-    UserProfileRepository userProfileRepository;
-
     @GetMapping("users/after-login")
     public RedirectView handleLogin(){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
         Map<String, Object> userDetails = principal.getAttributes();
+        System.out.println(userDetails);
 
         this.currentUser.setEmail(userDetails.get("email").toString());
         this.currentUser.setAuth0Id(userDetails.get("sub").toString());
