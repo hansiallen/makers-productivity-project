@@ -3,6 +3,7 @@ package com.example.productivity.controller;
 import com.example.productivity.model.CustomField;
 import com.example.productivity.model.User;
 import com.example.productivity.model.UserProfile;
+import com.example.productivity.repository.ContactRepository;
 import com.example.productivity.repository.CustomFieldRepository;
 import com.example.productivity.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,17 @@ public class UserProfileController {
     CustomFieldRepository customFieldRepository;
     @Autowired
     CurrentUserController currentUser;
+    @Autowired
+    ContactRepository contactRepository;
 
     @GetMapping("/profile/{id}")
     public ModelAndView viewProfile(@PathVariable Long id){
 
+        Long currentUserId = currentUser.getCurrentUser().getId();
         ModelAndView modelAndView = new ModelAndView("profile/show");
         UserProfile userProfile = userProfileRepository.findByUserId(id);
         List<CustomField> customFields = customFieldRepository.findByUserId(id);
+        Boolean inContacts = contactRepository.usersInContacts(currentUserId,id) == 1;
 
         if (userProfile == null){
             modelAndView = new ModelAndView("core/error");
@@ -40,7 +45,9 @@ public class UserProfileController {
         modelAndView.addObject("customFields",customFields);
         modelAndView.addObject("customField", new CustomField());
         modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
+        modelAndView.addObject("userInContacts",inContacts);
 
+        System.out.println(inContacts);
         return modelAndView;
     }
 
@@ -50,6 +57,8 @@ public class UserProfileController {
         return new RedirectView("/profile/"+currentUser.getCurrentUser().getId());
 
     }
+
+
 
 
     @PostMapping("/profile/update")
