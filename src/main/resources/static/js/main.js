@@ -1,26 +1,83 @@
 function initiateQRCodeInterface() {
     let popup = document.getElementById('popup-div')
-    popup.innerHTML = '<div class="hide-popup-button"></div><div id="reader" class="cam-view"></div><div id="qr-code-area" class="qr-code-area"></div>';
+    popup.innerHTML = '<button class="hide-popup-button" onclick="closeQRCodeInterface();"></button><div id="reader" class="cam-view"></div><div id="qr-code-area" class="qr-code-area"></div>';
     popup.classList.remove('hidden');
     generateQRCode();
-    showScannerInterface();
+    loadScannerLibrary();
 }
 
 function closeQRCodeInterface() {
+    html5QrCode.stop().then((ignore) => {
+      // QR Code scanning is stopped.
+    }).catch((err) => {
+      // Stop failed, handle it.
+      alert("QR code scanner stop failed, please reload page");
+    });
     let popup = document.getElementById('popup-div');
     popup.innerHTML = '';
     popup.classList.add('hidden');
 }
 
-function generateQRCode() {
+var QRGenerateScriptLoaded = false;
 
+function generateQRCode() {
+    if (!QRScriptLoaded) {
+        loadScript("/js/qr-generate.js");
+    } else {
+        fetchIdAndGenerateQRCode();
+    }
 }
 
-function showScannerInterface() {
-    loadScript('https://unpkg.com/html5-qrcode');
+function fetchIdAndGenerateQRCode() {
 
-    const height = innerHeight;
-    const width = innerWidth;
+    // create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // set up the request
+    xhr.open('GET', '/get-share-code');
+    xhr.withCredentials = true;
+
+    // handle the response
+    xhr.onreadystatechange = function() {
+        // parse the JSON response
+        var response = JSON.parse(xhr.responseText);
+
+        var qrcode = new QRCode("qr-code-area", {
+            text: "https://networks.hansiallen.me/CAR/" + response,
+            width: 200,
+            height: 200,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.M
+        });
+    }
+
+    xhr.send();
+}
+
+QRScriptLoaded = false;
+
+function loadScannerLibrary() {
+    if (!QRScriptLoaded) {
+        QRScriptLoaded = true;
+        loadScript('https://unpkg.com/html5-qrcode');
+    } else {
+        showScannerInterface();
+    }
+}
+
+var html5QrCode;
+
+function showScannerInterface() {
+    let height = innerHeight - 332;
+    let width = Math.floor(innerWidth * 0.8) - 40;
+
+    console.log(width);
+    console.log(height);
+
+    if (width < 432) {
+        width = 432;
+    }
 
     if (height > width) {
         smallestDimension = width;
@@ -36,7 +93,22 @@ function showScannerInterface() {
 
     const config = { fps: 2, aspectRatio: aspectRatio, qrbox: { width: smallestDimension * 0.8, height: smallestDimension * 0.8 } };
 
+    html5QrCode = new Html5Qrcode("reader");
+    html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess);
+}
 
+function onScanSuccess(decodedText, decodedResult) {
+  // handle the scanned code as you like, for example:
+  console.log(`Code matched = ${decodedText}`, decodedResult);
+  console.log(decodedText.slice(35))
+  addContact(decodedText.slice(35));
+}
+
+// Not currently in use, as from pre-built scanner (switched to custom)
+function onScanFailure(error) {
+  // handle scan failure, usually better to ignore and keep scanning.
+  // for example:
+  console.warn(`Code scan error = ${error}`);
 }
 
 function addContactThroughCode() {
@@ -104,6 +176,11 @@ function loadScript(url) {
     // Optionally, handle script loading completion
     script.onload = function() {
         console.log(`Script loaded successfully from: ${url}`);
+        if (url == 'https://unpkg.com/html5-qrcode') {
+            showScannerInterface();
+        } else if (url == '/js/qr-generate.js') {
+            fetchIdAndGenerateQRCode();
+        }
     };
 
     script.onerror = function() {

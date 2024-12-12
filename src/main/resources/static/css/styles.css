@@ -25,7 +25,7 @@ nav {
     grid-template-columns: 48px 48px 48px 48px 48px;
     justify-content: space-between;
     background: var(--popup-background);
-    filter: drop-shadow(3px 3px 6px #00000080);
+    box-shadow: 3px 3px 9px 0px #00000080;
     z-index: 100;
 }
 
@@ -198,6 +198,45 @@ nav input:checked ~ #toggleable-add-menu {
     border-radius: 1em;
 }
 
+#popup-div {
+    position: fixed;
+    width: 80%;
+    top: 20px;
+    margin-left: 10%;
+    left: 0%;
+    z-index: 998;
+    padding: 20px;
+    background: var(--popup-background);
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.hide-popup-button {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    top: 0;
+    left: 0;
+}
+
+#qr-code-area img {
+    width: 200px;
+    height: 200px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.cam-view {
+    width: 100%;
+}
 
 .square {
     display: grid;
@@ -209,12 +248,14 @@ nav input:checked ~ #toggleable-add-menu {
     background-color:#666;
     overflow:hidden;
 }
+
 .month-buttons {
    float: left;
    width: 33%;
    text-align: center;
    margin: auto;
-   }
+}
+
 .separate-menu{
    float: auto;
    align :center;
