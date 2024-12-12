@@ -20,4 +20,7 @@ public class CalendarDay {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+    public int getDay() {
+        return this.date.getDayOfMonth();
+    }
 }

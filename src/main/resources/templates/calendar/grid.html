@@ -12,7 +12,7 @@
 </th:block>
 
 <th:block th:each="day: ${days}">
-    <div class="square grid" th:text="${day}"></div>
+    <div class="square grid" th:text="${day.getDay()}"></div>
 </th:block>
 
 <div th:replace="~{core/navbar}"></div>
