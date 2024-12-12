@@ -1,6 +1,5 @@
 package com.example.productivity.model;
 
-import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
 
