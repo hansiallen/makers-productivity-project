@@ -30,9 +30,6 @@ public class CurrentUserController {
     @Autowired
     CloudinaryService cloudinaryService;
 
-    @Autowired
-    UserProfileRepository userProfileRepository;
-
     @GetMapping("users/after-login")
     public RedirectView handleLogin(){
 
