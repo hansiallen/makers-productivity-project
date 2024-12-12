@@ -13,6 +13,16 @@
 
     <section class="homepage-section">
         <h2>Favourite Contacts</h2>
+        <div th:if="${favouriteContacts.size() > 0}" class="homepage-contacts-container">
+            <div th:each="contact: ${favouriteContacts}">
+                <div class="contact-card homepage-card">
+                    <p th:text="${contact.firstName} + ' ' + ${contact.lastName}"></p>
+                </div>
+            </div>
+        </div>
+        <p th:if="${favouriteContacts.size() == 0}" class="homepage-empty-msg">
+            No favourite contacts.
+        </p>
     </section>
 
     <section class="homepage-section">
