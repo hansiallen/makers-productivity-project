@@ -191,9 +191,21 @@ nav input:checked ~ #toggleable-add-menu {
     display: grid;
     grid-template-columns: auto auto auto;
     float:left;
-    position: relative;
     width: 12%;
     height: 9vh;
     margin:1%;
     background-color:#666;
     overflow:hidden;
+}
+.month-buttons {
+   float: left;
+   width: 33%;
+   text-align: center;
+   margin: auto;
+   }
+.separate-menu{
+   float: auto;
+   align :center;
+   margin: auto;
+    padding-bottom: 2em;
+}

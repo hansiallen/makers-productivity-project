@@ -3,10 +3,10 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:replace="~{core/head}"></head>
 <body>
-<a th:href="@{'/calendar/'+ ${lastMonth}}">last Month</a>
-<h3 th:text = "${month}"></h3>
-<a th:href="@{'/calendar/'+ ${nextMonth}}">next Month</a>
-<br>
+<a th:href="@{'/calendar/'+ ${lastMonth}}"><button class = "month-buttons">last Month</button> </a>
+<h3 th:text = "${month}" class = "month-buttons"></h3>
+<a th:href="@{'/calendar/'+ ${nextMonth}}"><button class = "month-buttons">next Month</button> </a>
+<div class="separate-menu"></div>
 <th:block th:each="i: ${#numbers.sequence(1, startDay)}">
     <div class="square grid"></div>
 </th:block>

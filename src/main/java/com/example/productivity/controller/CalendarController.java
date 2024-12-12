@@ -19,7 +19,17 @@ public class CalendarController {
         LocalDate currentTime =LocalDate.now();
         return new RedirectView("/calendar/"+currentTime.getMonth().getValue()+"_"+currentTime.getYear());
     }
+    @GetMapping("/calendar/{day}_{month}_{year}")
+    public ModelAndView dayPage(@PathVariable Integer day, @PathVariable Integer month, @PathVariable Integer year) {
+        ModelAndView model = new ModelAndView("calendar/day");
+        LocalDate currentTime =LocalDate.of(year,month,1);
+        //adds white spaces so you start on the correct day of the month
+        model.addObject("startDay", currentTime.withDayOfMonth(1).getDayOfWeek().getValue()-1);
 
+        model.addObject("month", currentTime.getMonth().name());
+        model.addObject("days", currentTime.getMonth().length(currentTime.isLeapYear()));
+        return model;
+    }
 
     @GetMapping("/calendar/{month}_{year}")
     public ModelAndView calendarPage(@PathVariable Integer month, @PathVariable Integer year) {
