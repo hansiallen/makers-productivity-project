@@ -56,7 +56,7 @@ body {
 .results-cont {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
 }
 
 .section {
@@ -69,6 +69,10 @@ body {
     padding: 5px 15px;
     border-radius: 10px;
     background-color: var(--popup-background);
+}
+
+.section:has(.divider:only-child) {
+    display: none;
 }
 
 .user-cont {

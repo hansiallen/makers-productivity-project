@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<body>
+<a th:href="@{'/calendar/'+ ${lastMonth}}"><button class = "month-buttons">last Month</button> </a>
+<h3 th:text = "${month}" class = "month-buttons"></h3>
+<a th:href="@{'/calendar/'+ ${nextMonth}}"><button class = "month-buttons">next Month</button> </a>
+<div class="separate-menu"></div>
+<th:block th:each="i: ${#numbers.sequence(1, startDay)}">
+    <div class="square grid"></div>
+</th:block>
+
+<th:block th:each="day: ${days}">
+    <div class="square grid" th:text="${day.getDay()}"></div>
+</th:block>
+
+<div th:replace="~{core/navbar}"></div>
+</body>
+</html>
