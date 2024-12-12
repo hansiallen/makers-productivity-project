@@ -1,6 +1,7 @@
 package com.example.productivity.model;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "USER_PROFILES")
@@ -13,6 +14,7 @@ public class UserProfile {
     private String lastName;
     private String profilePhotoUrl;
     private String preferredName;
+  
     public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName) {
         this.userId = userId;
         this.firstName = firstName;
