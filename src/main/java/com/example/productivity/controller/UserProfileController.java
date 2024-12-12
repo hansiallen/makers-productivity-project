@@ -43,6 +43,13 @@ public class UserProfileController {
         return modelAndView;
     }
 
+    @GetMapping("/profile/me")
+    public RedirectView viewMyProfile(){
+
+        return new RedirectView("/profile/"+currentUser.getCurrentUser().getId());
+
+    }
+
 
     @PostMapping("/profile/update")
     public RedirectView create(@ModelAttribute UserProfile userProfile){
