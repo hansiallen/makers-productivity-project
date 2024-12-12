@@ -7,7 +7,6 @@ import com.example.productivity.model.Event;
 import com.example.productivity.model.UserProfile;
 import com.example.productivity.repository.ContactRepository;
 import com.example.productivity.repository.EventRepository;
-import com.example.productivity.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
