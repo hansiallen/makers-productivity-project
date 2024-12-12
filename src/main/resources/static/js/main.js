@@ -1,4 +1,5 @@
 function initiateQRCodeInterface() {
+    document.getElementById('nav-toggle-add-menu').checked = false;
     let popup = document.getElementById('popup-div')
     popup.innerHTML = '<button class="hide-popup-button" onclick="closeQRCodeInterface();"></button><div id="reader" class="cam-view"></div><div id="qr-code-area" class="qr-code-area"></div>';
     popup.classList.remove('hidden');
