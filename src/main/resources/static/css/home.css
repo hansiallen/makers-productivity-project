@@ -1,8 +1,5 @@
 .homepage-section {
     margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 }
 
 .homepage-section h2 {
@@ -46,3 +43,16 @@
 .upcoming-event-details p {
     margin: 0;
  }
+
+.homepage-empty-msg {
+    text-align: center;
+    margin-top: 0;
+}
+
+.homepage-line-break {
+    background-color: var(--secondary-accent);
+    height: 1px;
+    width: 80%;
+    margin: 0 auto;
+    border: 0;
+}
