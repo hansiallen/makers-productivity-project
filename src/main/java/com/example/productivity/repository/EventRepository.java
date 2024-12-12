@@ -1,7 +1,20 @@
 package com.example.productivity.repository;
 
 import com.example.productivity.model.Event;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface EventRepository extends CrudRepository<Event, Long> {
+    @Query(value = """
+        SELECT *
+        FROM events e
+        WHERE (e.date > CURRENT_DATE)
+           OR (e.date = CURRENT_DATE AND e.start_time > CURRENT_TIME)
+        ORDER BY e.date ASC, e.start_time ASC
+        LIMIT :limit
+    """, nativeQuery = true)
+    List<Event> findNextUpcomingEventsNative(@Param("limit") int limit);
 }

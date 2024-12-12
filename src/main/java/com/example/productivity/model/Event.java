@@ -30,59 +30,59 @@ public class Event {
         this.userId = userId;
     }
 
-    private Long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    private void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    private LocalDate getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
-    private void setDate(LocalDate date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    private LocalTime getStartTime() {
+    public LocalTime getStartTime() {
         return this.startTime;
     }
 
-    private void setStartTime(LocalTime startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    private LocalTime getEndTime() {
+    public LocalTime getEndTime() {
         return this.endTime;
     }
 
-    private void setEndTime(LocalTime endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 
-    private String getTitle() {
+    public String getTitle() {
         return this.title;
     }
 
-    private void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    private String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    private Long getUserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    private void setUserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

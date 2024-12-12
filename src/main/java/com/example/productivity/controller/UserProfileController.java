@@ -1,14 +1,16 @@
 package com.example.productivity.controller;
 
+import com.example.productivity.model.CustomField;
+import com.example.productivity.model.User;
 import com.example.productivity.model.UserProfile;
+import com.example.productivity.repository.CustomFieldRepository;
 import com.example.productivity.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @RestController
 public class UserProfileController {
@@ -16,24 +18,27 @@ public class UserProfileController {
     @Autowired
     UserProfileRepository userProfileRepository;
     @Autowired
+    CustomFieldRepository customFieldRepository;
+    @Autowired
     CurrentUserController currentUser;
 
+    @GetMapping("/profile/{id}")
+    public ModelAndView viewProfile(@PathVariable Long id){
 
-    @GetMapping("/profile/update")
-    public ModelAndView profile(){
+        ModelAndView modelAndView = new ModelAndView("profile/show");
+        UserProfile userProfile = userProfileRepository.findByUserId(id);
+        List<CustomField> customFields = customFieldRepository.findByUserId(id);
 
-        Long currentUserId = currentUser.getCurrentUser().getId();
-        UserProfile currentUserProfile = userProfileRepository.findByUserId(currentUserId);
-
-        ModelAndView modelAndView = new ModelAndView("profile/update");
-        modelAndView.addObject("currentUser",currentUser.getCurrentUser());
-        modelAndView.addObject("userProfile", currentUserProfile);
-
-        if(currentUserProfile == null){
-            currentUserProfile = new UserProfile();
-            currentUserProfile.setUserId(currentUserId);
-            userProfileRepository.save(currentUserProfile);
+        if (userProfile == null){
+            modelAndView = new ModelAndView("core/error");
+            modelAndView.addObject("errorMessage","User does not exist");
+            return modelAndView;
         }
+
+        boolean currUserIsViewingOwnProfile = id.equals(currentUser.getCurrentUser().getId());
+        modelAndView.addObject("userProfile",userProfile);
+        modelAndView.addObject("customFields",customFields);
+        modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
 
         return modelAndView;
     }
@@ -43,12 +48,12 @@ public class UserProfileController {
     public RedirectView create(@ModelAttribute UserProfile userProfile){
 
         UserProfile currentUserProfile = userProfileRepository.findByUserId(currentUser.getCurrentUser().getId());
-        userProfile.setId(currentUserProfile.getId());
+        userProfile.setUserId(currentUserProfile.getUserId());
         userProfile.setUserId(currentUser.getCurrentUser().getId());
         userProfileRepository.save(userProfile);
 
         System.out.println(userProfile.getUserId());
-        return new RedirectView("/profile/update");
+        return new RedirectView("/profile/"+userProfile.getUserId().toString());
     }
 
 
