@@ -14,4 +14,5 @@ public interface ContactRepository extends CrudRepository<Contact,Long> {
 
     @Query(value = "SELECT user_id2 FROM contacts WHERE user_id1 = :userId AND is_favourite = true", nativeQuery = true)
     List<Long> findFavouritesUserIdsByUser1Id(Long userId);
+
 }
