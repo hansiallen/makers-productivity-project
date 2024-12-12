@@ -127,7 +127,6 @@ nav input:checked ~ #toggleable-add-menu {
 .profile-fields{
     display: flex;
     flex-direction: column;
-
 }
 
 .profile-field {
@@ -190,6 +189,45 @@ nav input:checked ~ #toggleable-add-menu {
 
 .profile-field input:focus::placeholder {
   opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+.profile-field-photo-container {
+    position: relative;
+    font-size: inherit;
+    margin-bottom: 1em;
+}
+
+.profile-field-photo {
+    outline: none;
+    background-color: var(--page-background);
+    border-radius: 0.75em;
+    padding: 0.75em 0.75em 0.75em;
+    border-color: var(--primary-accent);
+    color: var(--primary-accent);
+    border-style: none;
+    font-size: inherit;
+}
+
+.profile-field-photo-label {
+    font-size: 0.8em;
+    margin-bottom: 1em;
+}
+
+.profile-field-photo-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-field-photo-select {
+    border: 0.5px solid var(--secondary-accent);
+    padding: 0.5em;
+    border-radius: 0.75em;
+    font-size: 0.8em;
 }
 
 .submit-btn{
