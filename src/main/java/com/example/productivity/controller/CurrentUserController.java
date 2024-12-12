@@ -23,6 +23,8 @@ public class CurrentUserController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserProfileRepository userProfileRepository;
     private final User currentUser = new User();
 
     @Autowired
@@ -48,6 +50,14 @@ public class CurrentUserController {
             user.setEmail(currentUser.getEmail());
             userRepository.save(user);
         }
+
+        UserProfile userProfile = userProfileRepository.findByUserId(user.getId());
+        if (userProfile == null){
+            userProfile = new UserProfile();
+            userProfile.setUserId(user.getId());
+            userProfileRepository.save(userProfile);
+        }
+
         this.currentUser.setId(user.getId());
         return new RedirectView("/");
     }

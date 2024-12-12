@@ -6,7 +6,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Custom_Fields")
 public class CustomField {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long userId;
     private String customInfoKey;
     private String customInfoContent;
