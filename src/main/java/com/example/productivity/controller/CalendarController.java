@@ -2,6 +2,7 @@ package com.example.productivity.controller;
 
 
 import com.example.productivity.model.CalendarDay;
+import com.example.productivity.model.Event;
 import com.example.productivity.repository.EventRepository;
 import com.example.productivity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,8 @@ import java.util.List;
 public class CalendarController {
     @Autowired
     EventRepository eventRepository;
-
     @Autowired
-    UserRepository userRepository;
+    CurrentUserController currentUser;
 
     @GetMapping("/calendar")
     public RedirectView calendarPageRedirect() {
@@ -66,10 +66,16 @@ public class CalendarController {
     }
 
     private ArrayList<CalendarDay> CreateArrayOfDates(LocalDate date,Boolean greyedOut){
-        eventRepository.findEventsInTimePeriodForUser()
+        List<Event> events= eventRepository.findEventsInTimePeriodForUser(currentUser.getCurrentUser().getId(),date,date.plusMonths(1));
         ArrayList<CalendarDay> days= new ArrayList<>();
         for (int day=1;day< date.getMonth().length(date.isLeapYear());day++){
-            days.add(new CalendarDay(LocalDate.of(date.getYear(),date.getMonthValue(),day),greyedOut));
+            CalendarDay calendarDay = new CalendarDay(LocalDate.of(date.getYear(),date.getMonthValue(),day),greyedOut);
+            for (Event event : events){
+                if (event.getDate().toString().equals(calendarDay.getDate().toString())){
+                    calendarDay.addEvent(event.getTitle());
+                }
+            }
+            days.add(calendarDay);
         }
         return days;
     }

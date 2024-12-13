@@ -28,8 +28,6 @@ public class CalendarDay {
         return this.date.getDayOfMonth();
     }
     public List<String> getEvents(){
-        this.events.add("item");
-        this.events.add("item");
         return events;
     }
     public void addEvent(String Event){
