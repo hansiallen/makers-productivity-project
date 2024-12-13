@@ -3,45 +3,51 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       lang="en">
 <head th:replace="~{core/head}"></head>
+<head><script src="/js/photoUpload.js" defer></script></head>
 <body>
   <div th:replace="~{core/navbar}"></div>
   <div class="profile-page">
     <div th:if="${currUserIsViewingOwnProfile}"><div th:replace="~{profile/update :: update}"></div></div>
 
-    <div class="profile-container" th:if="${!currUserIsViewingOwnProfile}" th:object="${userProfile}">
-      <div class="profile-fields">
-        <div class="profile-field">
-          <label for="firstName">First name</label>
-          <div id = "firstName" th:text="*{firstName}"></div>
-        </div>
-        <div class="profile-field">
-          <label for="middleName">Middle Name</label>
-          <div id = "middleName" th:text="*{middleName}"></div>
-        </div>
-        <div class="profile-field">
-          <label for="lastName">Last name</label>
-          <div id = "lastName" th:text="*{lastName}"></div>
-        </div>
-        <div class="profile-field">
-          <label for="preferredName">Preferred name</label>
-          <div id = "preferredName" th:text="*{preferredName}"></div>
+      <div class="profile-container" th:if="${!currUserIsViewingOwnProfile && userInContacts}" th:object="${userProfile}">
+          <div class="profile-fields">
+            <div class="profile-field">
+              <label for="firstName">First name</label>
+              <div id = "firstName" th:text="*{firstName}"></div>
+            </div>
+            <div class="profile-field">
+              <label for="middleName">Middle Name</label>
+              <div id = "middleName" th:text="*{middleName}"></div>
+            </div>
+            <div class="profile-field">
+              <label for="lastName">Last name</label>
+              <div id = "lastName" th:text="*{lastName}"></div>
+            </div>
+            <div class="profile-field">
+              <label for="preferredName">Preferred name</label>
+              <div id = "preferredName" th:text="*{preferredName}"></div>
+            </div>
+            <p>Custom Fields</p>
+            <div th:replace="~{profile/customField/show :: show}"></div>
+
+            <p>Links</p>
+            <div th:replace="~{profile/userLink/show :: show}"></div>
+
         </div>
 
-        <p>Custom Fields</p>
-        <div th:each = "customField : ${customFields}">
-          <div class="profile-field">
-            <label th:for="${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoKey()}"></label>
-            <div th:id = "${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoContent()}"></div>
-          </div>
-        </div>
+
 
       </div>
+
+    <div th:if="${!userInContacts && !currUserIsViewingOwnProfile}" class="profile-container">
+      <div class="profile-field">
+        <label for="firstName2">First name</label>
+        <div id = "firstName2" th:text="*{firstName}"></div>
+      </div>
+      <a th:href="@{/contact/add/{id}(id=${userProfile.userId})}" class="submit-btn">Add contact</a>
     </div>
-</div>
+
+    </div>
 </body>
 </html>
-
-
-
-
 

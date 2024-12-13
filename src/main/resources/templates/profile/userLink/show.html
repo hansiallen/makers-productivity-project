@@ -1,0 +1,7 @@
+
+<div th:each = "userLink : ${userLinks}" class="profile-fields" th:fragment="show">
+  <div class="profile-field">
+    <label th:for="${userLink.getWebsiteLinkName()}" th:text="${userLink.getWebsiteLinkName()}"></label>
+    <div th:id = "${userLink.getWebsiteLinkName()}" th:text="${userLink.getWebsiteLinkUrl()}"></div>
+  </div>
+</div>

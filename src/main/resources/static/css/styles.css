@@ -25,7 +25,7 @@ nav {
     grid-template-columns: 48px 48px 48px 48px 48px;
     justify-content: space-between;
     background: var(--popup-background);
-    filter: drop-shadow(3px 3px 6px #00000080);
+    box-shadow: 3px 3px 9px 0px #00000080;
     z-index: 100;
 }
 
@@ -116,6 +116,7 @@ nav input:checked ~ #toggleable-add-menu {
     border-radius: 1em;
     display: flex;
     flex-direction: column;
+    align-items:center;
 
 }
 
@@ -127,14 +128,9 @@ nav input:checked ~ #toggleable-add-menu {
 .profile-fields{
     display: flex;
     flex-direction: column;
-
+    width: 100%;
 }
 
-.profile-field {
-  position: relative;
-  font-size: inherit;
-  margin-bottom: 1em;
-}
 
 .profile-field input,
 .profile-field div{
@@ -147,7 +143,17 @@ nav input:checked ~ #toggleable-add-menu {
   border-style: none;
   font-size: inherit;
   transition: 0.1s;
+  width: 100%;
 }
+
+.profile-field {
+  position: relative;
+  font-size: inherit;
+  margin-bottom: 1em;
+  display: flex;
+  width: 100%;
+}
+
 
 .profile-field input:hover,
 .profile-field input:focus {
@@ -192,32 +198,135 @@ nav input:checked ~ #toggleable-add-menu {
   opacity: 1;
 }
 
+.hidden {
+    display: none;
+}
+
+.profile-field-photo-container {
+    position: relative;
+    font-size: inherit;
+    margin-bottom: 1em;
+}
+
+.profile-field-photo {
+    outline: none;
+    background-color: var(--page-background);
+    border-radius: 0.75em;
+    padding: 0.75em 0.75em 0.75em;
+    border-color: var(--primary-accent);
+    color: var(--primary-accent);
+    border-style: none;
+    font-size: inherit;
+}
+
+.profile-field-photo-label {
+    font-size: 0.8em;
+    margin-bottom: 1em;
+}
+
+.profile-field-photo-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-field-photo-select {
+    border: 0.5px solid var(--secondary-accent);
+    padding: 0.5em;
+    border-radius: 0.75em;
+    font-size: 0.8em;
+}
+
 .submit-btn{
     background-color: var(--secondary-accent);
     padding: 1em 3em;
     border-radius: 1em;
+    font-size: 1em;
+    margin: 0.25em;
+
 }
 
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+#popup-div {
+    position: fixed;
+    width: 80%;
+    top: 20px;
+    margin-left: 10%;
+    left: 0%;
+    z-index: 998;
+    padding: 20px;
+    background: var(--popup-background);
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.hide-popup-button {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    top: 0;
+    left: 0;
+}
+
+#qr-code-area img {
+    width: 200px;
+    height: 200px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.cam-view {
+    width: 100%;
+}
 
 .square {
     display: grid;
-    grid-template-columns: auto auto auto;
     float:left;
     width: 12%;
     height: 9vh;
     margin:1%;
     background-color:#666;
     overflow:hidden;
+    white-space: pre-wrap;
 }
+.dark-square {
+    display: grid;
+    float:left;
+    width: 12%;
+    height: 9vh;
+    margin:1%;
+    background-color: rgba(50, 50, 50, 0.4);
+    overflow:hidden;
+    white-space: pre-wrap;
+}
+
 .month-buttons {
    float: left;
    width: 33%;
    text-align: center;
    margin: auto;
-   }
+}
+
 .separate-menu{
    float: auto;
    align :center;
    margin: auto;
     padding-bottom: 2em;
+}
+
+.add-custom-btns{
+    display:flex;
+    flex-direction:row;
 }

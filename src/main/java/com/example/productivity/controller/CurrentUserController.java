@@ -55,6 +55,7 @@ public class CurrentUserController {
             userProfile = new UserProfile();
             userProfile.setUserId(user.getId());
             userProfileRepository.save(userProfile);
+            return new RedirectView("/profile/" + userProfile.getUserId());
         }
 
         this.currentUser.setId(user.getId());
@@ -62,24 +63,4 @@ public class CurrentUserController {
     }
 
     public User getCurrentUser(){return this.currentUser;}
-
-    @GetMapping("/photoupload")
-    public ModelAndView examplePage(Model model) {
-        model.addAttribute("userProfile", new UserProfile());
-        return new ModelAndView("core/upload_photo.html");
-    }
-
-    @PostMapping("uploadProfileImage")
-    public ModelAndView uploadProfileImage(@RequestParam("profilePhoto") MultipartFile profilePhoto) {
-        try {
-            Long currentUserId = this.currentUser.getId();
-            UserProfile userProfile = userProfileRepository.findByUserId(currentUserId);
-            String uploadedUrl = cloudinaryService.uploadImage(profilePhoto);
-            userProfile.setProfilePhotoUrl(uploadedUrl);
-            userProfileRepository.save(userProfile);
-            return new ModelAndView("core/upload_photo.html");
-        } catch (Exception e) {
-            return new ModelAndView("core/upload_photo.html");
-        }
-    }
 }
