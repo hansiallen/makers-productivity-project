@@ -27,9 +27,11 @@ public class HomeController {
     UserProfileRepository userProfileRepository;
 
     @GetMapping("/")
-    public ModelAndView userProfile() {
+    public ModelAndView contactsPage() {
         ModelAndView modelAndView = new ModelAndView("/page/contacts.html");
-        Iterable<UserProfile> contacts = userProfileRepository.findAll();
+//        Iterable<UserProfile> contacts = userProfileRepository.findAll();
+        Iterable<Long> contactIds = contactRepository.findUserIdsByUser1Id(currentUser.getCurrentUser().getId());
+        Iterable<UserProfile> contacts = userProfileRepository.findAllById(contactIds);
         modelAndView.addObject("contacts", contacts);
         return modelAndView;
     }
