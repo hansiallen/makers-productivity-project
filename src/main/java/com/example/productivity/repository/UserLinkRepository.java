@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface UserLinkRepository extends CrudRepository<UserLink,Long> {
     List<UserLink> findByUserId(Long id);
-
 }
