@@ -59,7 +59,7 @@ public class CalendarController {
         if(m.size()!=7){
             l.addAll(m);
         }
-
+        model.addObject("year", currentTime.getYear());
         model.addObject("month", currentTime.getMonth().name());
         model.addObject("days", l);
         return model;
