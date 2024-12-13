@@ -28,8 +28,6 @@ public class CalendarDay {
         return this.date.getDayOfMonth();
     }
     public List<String> getEvents(){
-        this.events.add("item");
-        this.events.add("item");
         return events;
     }
     public void addEvent(String Event){
@@ -42,5 +40,9 @@ public class CalendarDay {
 
     public boolean isGreyedOut() {
         return greyedOut;
+    }
+
+    public String getURL(){
+        return "/calendar/day/"+this.date.getDayOfMonth()+"_"+this.date.getMonthValue()+"_"+this.date.getYear();
     }
 }

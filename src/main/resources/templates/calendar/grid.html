@@ -2,20 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:replace="~{core/head}"></head>
+<link rel="stylesheet" href="/css/calendar.css">
 <body>
 <a th:href="@{'/calendar/'+ ${lastMonth}}"><button class = "month-buttons">last Month</button> </a>
-<h3 th:text = "${month}" class = "month-buttons"></h3>
+<h3 th:text = "${month} +'  ' + ${year}" class = "month-buttons"></h3>
 <a th:href="@{'/calendar/'+ ${nextMonth}}"><button class = "month-buttons">next Month</button> </a>
 <div class="separate-menu"></div>
 
-
 <th:block th:each="day: ${days}">
+    <a th:href="${day.getURL()}">
     <div th:if = ${day.isGreyedOut()} class="dark-square">
         <div th:replace="~{calendar/dayElement}"></div>
     </div>
     <div th:if = ${!day.isGreyedOut()} class="square grid">
         <div th:replace="~{calendar/dayElement}"></div>
     </div>
+    </a>
 </th:block>
 
 <div th:replace="~{core/navbar}"></div>
