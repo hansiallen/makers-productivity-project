@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -40,6 +41,13 @@ public class ContactsController {
             err.addObject("errorMessage","failed to add contact");
             return err;
         }
+    }
+
+    @PostMapping("/contact/remove/{id}")
+    public RedirectView removeContact(@PathVariable int id) {
+        Long currentUserId = currentUser.getCurrentUser().getId();
+        contactRepository.deleteByUserId1AndUserId2(currentUserId, (long) id);
+        return new RedirectView("/");
     }
 
     @GetMapping("/get-share-code")
