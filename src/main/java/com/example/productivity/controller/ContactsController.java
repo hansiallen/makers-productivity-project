@@ -45,6 +45,24 @@ public class ContactsController {
         }
     }
 
+    @GetMapping("/contact/add/json/{id}")
+    public String addContactReturnJSON(@PathVariable int id) {
+        Long idToAdd = (long) id;
+        Long currentUserId = currentUser.getCurrentUser().getId();
+        System.out.println(idToAdd);
+        System.out.println(userProfileRepository.existsById(idToAdd));
+        System.out.println(!idToAdd.equals(currentUserId));
+        if (userProfileRepository.existsById(idToAdd) && !idToAdd.equals(currentUserId)) {
+            Contact contact = new Contact(currentUserId, idToAdd);
+            contact.setUserId1(currentUserId);
+            contact.setUserId2(idToAdd);
+            contactRepository.save(contact);
+            return "{\"success\": true, \"id\": " + idToAdd + '}';
+        } else {
+            return "{\"success\": false}";
+        }
+    }
+
     @GetMapping("/get-share-code")
     public String getShareCode() {
         Long currentUserId = currentUser.getCurrentUser().getId();

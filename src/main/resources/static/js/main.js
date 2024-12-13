@@ -128,7 +128,7 @@ function addContact(code) {
     var xhr = new XMLHttpRequest();
 
     // set up the request
-    xhr.open('GET', '/contact/add/' + code);
+    xhr.open('GET', '/contact/add/json/' + code);
     xhr.withCredentials = true;
 
     // handle the response
