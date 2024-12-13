@@ -53,12 +53,12 @@ public class LoginTest {
 
         page.getByText("Accept").click();
         TimeUnit.SECONDS.sleep(1);
-        System.out.println(page.url());
+//        System.out.println(page.url());
 //        page.screenshot(new Page.ScreenshotOptions()
 //                .setPath(Paths.get("screenshot1.png"))
 //                .setFullPage(true));
 
-        System.out.println(page.content().toLowerCase());
+//        System.out.println(page.content().toLowerCase());
         if (page.content().toLowerCase().contains("error")){
             throw new AssertionError();
         }
