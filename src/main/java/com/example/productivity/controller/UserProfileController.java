@@ -50,6 +50,12 @@ public class UserProfileController {
         }
 
         boolean currUserIsViewingOwnProfile = id.equals(currentUser.getCurrentUser().getId());
+
+        boolean isFavouriteContact = false;
+        if (!currUserIsViewingOwnProfile && inContacts) {
+            isFavouriteContact = contactRepository.isContactFavourite(currentUserId, id);
+        }
+
         modelAndView.addObject("userProfile",userProfile);
 
         modelAndView.addObject("customFields",customFields);
@@ -61,7 +67,8 @@ public class UserProfileController {
         modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
         modelAndView.addObject("userInContacts",inContacts);
 
-        System.out.println(inContacts);
+        modelAndView.addObject("isFavouriteContact", isFavouriteContact);
+
         return modelAndView;
     }
 
