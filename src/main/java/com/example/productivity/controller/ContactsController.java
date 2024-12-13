@@ -31,6 +31,8 @@ public class ContactsController {
         System.out.println(!idToAdd.equals(currentUserId));
         if (userProfileRepository.existsById(idToAdd) && !idToAdd.equals(currentUserId)) {
             Contact contact = new Contact(currentUserId, idToAdd);
+            contact.setUserId1(currentUserId);
+            contact.setUserId2(idToAdd);
             contactRepository.save(contact);
             return new ModelAndView("redirect:/profile/"+idToAdd);
         } else {

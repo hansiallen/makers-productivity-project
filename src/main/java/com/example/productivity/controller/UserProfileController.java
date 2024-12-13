@@ -51,10 +51,13 @@ public class UserProfileController {
 
         boolean currUserIsViewingOwnProfile = id.equals(currentUser.getCurrentUser().getId());
         modelAndView.addObject("userProfile",userProfile);
+
         modelAndView.addObject("customFields",customFields);
+        modelAndView.addObject("customField", new CustomField());
+
         modelAndView.addObject("userLinks",userLinks);
         modelAndView.addObject("userLink",new UserLink());
-        modelAndView.addObject("customField", new CustomField());
+
         modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
         modelAndView.addObject("userInContacts",inContacts);
 
