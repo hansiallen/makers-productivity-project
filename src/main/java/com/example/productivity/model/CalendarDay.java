@@ -43,4 +43,8 @@ public class CalendarDay {
     public boolean isGreyedOut() {
         return greyedOut;
     }
+
+    public String getURL(){
+        return "/calendar/day/"+this.date.getDayOfMonth()+"_"+this.date.getMonthValue()+"_"+this.date.getYear();
+    }
 }

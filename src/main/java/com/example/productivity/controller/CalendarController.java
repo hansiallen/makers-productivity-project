@@ -2,7 +2,6 @@ package com.example.productivity.controller;
 
 
 import com.example.productivity.model.CalendarDay;
-import net.datafaker.providers.base.Bool;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +11,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class CalendarController {
+
 
     @GetMapping("/calendar")
     public RedirectView calendarPageRedirect() {
@@ -43,11 +42,16 @@ public class CalendarController {
         //adds white spaces so you start on the correct day of the month
         List<CalendarDay> l = CreateArrayOfDates(lastMonth,true);
         l= l.reversed().subList(0,currentTime.withDayOfMonth(1).getDayOfWeek().getValue()-1).reversed();//gets greyed out days
+
+        //main list
         l.addAll(CreateArrayOfDates(currentTime,false));//gets non greyed out days
 
         //adds dates of the next month
         List<CalendarDay> m = CreateArrayOfDates(nextMonth,true);
-        l.addAll(m.subList(0,7-(currentTime.withDayOfMonth(currentTime.getMonth().length(currentTime.isLeapYear())).getDayOfWeek().getValue()-1)));
+        m = m.subList(0,7-(currentTime.withDayOfMonth(currentTime.getMonth().length(currentTime.isLeapYear())).getDayOfWeek().getValue()-1));
+        if(m.size()!=7){
+            l.addAll(m);
+        }
 
         model.addObject("month", currentTime.getMonth().name());
         model.addObject("days", l);
