@@ -1,9 +1,7 @@
 package com.example.productivity.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CONTACTS")
@@ -11,12 +9,13 @@ public class Contact {
 
     // Attributes
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // The user who is adding the contact
     private Long user_id1;
     // The contact who is being added
     private Long user_id2;
-    private boolean isFavourite;
+    private boolean isFavourite = false; //False by default
 
     // Constructors
     public Contact(){}
