@@ -22,7 +22,7 @@ public class CustomFieldController {
     @GetMapping("/customField/add")
     public ModelAndView newCustomFieldForm(){
 
-        ModelAndView modelAndView = new ModelAndView("profile/addCustomField");
+        ModelAndView modelAndView = new ModelAndView("profile/customField/add");
         modelAndView.addObject("customField", new CustomField());
 
         return modelAndView;
