@@ -40,19 +40,11 @@ public class HomeController {
     @GetMapping("/home")
     public ModelAndView userHome() {
         ModelAndView modelAndView = new ModelAndView("/page/home.html");
-        List<Event> upcomingEvents = eventRepository.findNextUpcomingEventsNative(3);
+        List<Event> upcomingEvents = eventRepository.findNextUpcomingEvents(3, currentUser.getCurrentUser().getId());
         List<Long> favouriteContactIds = contactRepository.findFavouritesUserIdsByUser1Id(currentUser.getCurrentUser().getId());
         List<UserProfile> favouriteContactsProfiles = userProfileRepository.findAllById(favouriteContactIds);
         modelAndView.addObject("upcomingEvents", upcomingEvents);
         modelAndView.addObject("favouriteContacts", favouriteContactsProfiles);
         return modelAndView;
-    }
-
-    @PostMapping("/favourites/{id}")
-    public RedirectView removeContactAsFavourite(@PathVariable Long id) {
-        Contact contactToRemoveAsFavourite = contactRepository.findContactByUserId1AndUserId2(currentUser.getCurrentUser().getId(), id);
-        contactToRemoveAsFavourite.setIsFavourite(false);
-        contactRepository.save(contactToRemoveAsFavourite);
-        return new RedirectView("/home");
     }
 }
