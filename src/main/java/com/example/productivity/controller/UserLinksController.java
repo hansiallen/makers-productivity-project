@@ -22,7 +22,7 @@ public class UserLinksController {
     @GetMapping("/userLink/add")
     public ModelAndView newUserLink(){
 
-        ModelAndView modelAndView = new ModelAndView("profile/addUserLink");
+        ModelAndView modelAndView = new ModelAndView("profile/userLink/add");
         modelAndView.addObject("userLink", new UserLink());
 
         return modelAndView;

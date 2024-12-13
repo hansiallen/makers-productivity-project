@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:replace="~{core/head}"></head>
-<head><link rel="stylesheet" href="/css/home.css"></head>
+<head>
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="/js/removeContact.js" defer></script>
+</head>
 <body>
     <div th:replace="~{core/navbar}"></div>
     <div th:replace="~{core/header}"></div>
@@ -13,13 +16,16 @@
 
     <hr class="homepage-line-break">
 
-    <section class="homepage-section">
+    <section class="homepage-section homepage-contacts-section">
         <h2>Favourite Contacts</h2>
         <div th:if="${favouriteContacts.size() > 0}" class="homepage-contacts-container">
-            <div th:each="contact: ${favouriteContacts}">
-                <div class="contact-card homepage-card">
+            <div th:each="contact: ${favouriteContacts}" class="contact-card homepage-card">
+<!--                <div class="contact-card homepage-card">-->
                     <p th:text="${contact.firstName} + ' ' + ${contact.lastName}"></p>
-                </div>
+<!--                    <form th:action="@{/favourites/{id}(id=${contact.userId})}" method="post">-->
+                        <a class="fa-solid fa-square-minus contact-remove" th:data-contact-id="${contact.userId}"></a>
+<!--                    </form>-->
+<!--                </div>-->
             </div>
         </div>
         <p th:if="${favouriteContacts.size() == 0}" class="homepage-empty-msg">

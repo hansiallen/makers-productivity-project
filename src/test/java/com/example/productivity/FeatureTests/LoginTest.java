@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 
 @SpringBootTest
@@ -34,7 +35,7 @@ public class LoginTest {
     }
 
     @Test
-    public void successfulSignUpAlsoLogsInUser(){
+    public void successfulSignUpAlsoLogsInUser() throws InterruptedException {
         page.setDefaultTimeout(5000);
         page.getByText("Sign up").click();
         String email = faker.name().firstName() + faker.name().lastName() + "@email.com";
@@ -49,18 +50,17 @@ public class LoginTest {
 
         page.getByText("Continue").nth(1).click();
 
+
+        page.getByText("Accept").click();
+        TimeUnit.SECONDS.sleep(1);
+//        System.out.println(page.url());
 //        page.screenshot(new Page.ScreenshotOptions()
 //                .setPath(Paths.get("screenshot1.png"))
 //                .setFullPage(true));
-        page.getByText("Accept").click();
 
-
-
-//        page.screenshot(new Page.ScreenshotOptions()
-//                .setPath(Paths.get("screenshot2.png"))
-//                .setFullPage(true));
-
-        Assert.hasText("http://localhost:8080/",page.url());
-        Assert.hasText("this should break","opps");
+//        System.out.println(page.content().toLowerCase());
+        if (page.content().toLowerCase().contains("error")){
+            throw new AssertionError();
+        }
     }
 }

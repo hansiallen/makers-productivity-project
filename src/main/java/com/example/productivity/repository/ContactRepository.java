@@ -17,4 +17,7 @@ public interface ContactRepository extends CrudRepository<Contact,Long> {
 
     @Query(value = "SELECT user_id2 FROM contacts WHERE user_id1 = :userId", nativeQuery = true)
     List<Long> findUserIdsByUser1Id(Long userId);
+
+    @Query(value = "SELECT * FROM contacts WHERE user_id1 = :userId1 AND user_id2 = :userId2", nativeQuery = true)
+    Contact findContactByUserId1AndUserId2(Long userId1, Long userId2);
 }
