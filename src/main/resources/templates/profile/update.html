@@ -1,5 +1,5 @@
 
-  <form class="update-profile-container" th:action="@{/profile/update}" th:object="${userProfile}" method="post" th:fragment="update">
+  <form class="update-profile-container" th:action="@{/profile/update}" th:object="${userProfile}" method="post" th:fragment="update" enctype="multipart/form-data">
     <div class="profile-fields">
       <div class="profile-field">
         <label for="firstName">First name</label>
@@ -16,6 +16,22 @@
       <div class="profile-field">
         <label for="preferredName">Preferred name</label>
         <input id="preferredName" type="text" th:field="*{preferredName}" />
+      </div>
+      <div class="profile-field-photo-container">
+        <div class="profile-field-photo">
+          <div class="profile-field-photo-label">Profile Photo</div>
+          <div class="profile-field-photo-input">
+            <label for="profilePhoto" class="profile-field-photo-select">Select File</label>
+            <input
+                type="file"
+                id="profilePhoto"
+                name="profilePhoto"
+                class="hidden"
+                placeholder="Upload new photo"
+              />
+            <span class="photo-tick hidden"><i class="fa-solid fa-circle-check"></i></span>
+          </div>
+        </div>
       </div>
 
 

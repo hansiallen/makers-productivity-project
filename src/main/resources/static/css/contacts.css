@@ -71,10 +71,6 @@ body {
     background-color: var(--popup-background);
 }
 
-.section:has(.divider:only-child) {
-    display: none;
-}
-
 .user-cont {
     display: flex;
     flex-direction: row;
