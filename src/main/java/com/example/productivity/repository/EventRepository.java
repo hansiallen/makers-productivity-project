@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EventRepository extends CrudRepository<Event, Long> {
@@ -17,4 +18,13 @@ public interface EventRepository extends CrudRepository<Event, Long> {
         LIMIT :limit
     """, nativeQuery = true)
     List<Event> findNextUpcomingEventsNative(@Param("limit") int limit);
+
+    @Query(value = """
+        SELECT *
+        FROM events e
+        WHERE (e.date >= :earliest)
+           and (e.date < :latest) and (:userId = e.user_id)
+        ORDER BY e.date ASC, e.start_time ASC
+    """, nativeQuery = true)
+    List<Event> findEventsInTimePeriodForUser(Long userId, LocalDate earliest, LocalDate latest);
 }

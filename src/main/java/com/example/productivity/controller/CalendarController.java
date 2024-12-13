@@ -66,7 +66,7 @@ public class CalendarController {
     }
 
     private ArrayList<CalendarDay> CreateArrayOfDates(LocalDate date,Boolean greyedOut){
-        eventRepository.
+        eventRepository.findEventsInTimePeriodForUser()
         ArrayList<CalendarDay> days= new ArrayList<>();
         for (int day=1;day< date.getMonth().length(date.isLeapYear());day++){
             days.add(new CalendarDay(LocalDate.of(date.getYear(),date.getMonthValue(),day),greyedOut));
