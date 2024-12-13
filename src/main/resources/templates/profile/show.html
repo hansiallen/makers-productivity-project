@@ -5,15 +5,14 @@
 <head th:replace="~{core/head}"></head>
 <head>
   <link rel="stylesheet" href="/css/profile.css">
-  <script src="/js/photoUpload.js" defer></script>
   <script src="/js/addRemoveFavourite.js" defer></script>
 </head>
 <body>
   <div th:replace="~{core/navbar}"></div>
   <div class="profile-page">
-    <div th:if="${currUserIsViewingOwnProfile}"><div th:replace="~{profile/update :: update}"></div></div>
+<!--    <div th:if="${currUserIsViewingOwnProfile}"><div th:replace="~{profile/update :: update}"></div></div>-->
 
-    <div class="profile-container" th:if="${!currUserIsViewingOwnProfile && userInContacts}" th:object="${userProfile}">
+    <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}" th:object="${userProfile}">
       <div class="profile-fields">
         <div class="profile-field">
           <label for="firstName">First name</label>
@@ -49,7 +48,11 @@
 
   </div>
 
-  <div th:if="${!currUserIsViewingOwnProfile}" class="profile-favourite-icon" th:data-contact-id="${userProfile.userId}">
+  <div th:if="${currUserIsViewingOwnProfile}" class="profile-edit-btn">
+    <a th:href="@{/profile/{id}/update(id=${userProfile.userId})}" class="profile-edit-btn">Edit Profile</a>
+  </div>
+
+  <div th:if="${!currUserIsViewingOwnProfile && userInContacts}" class="profile-favourite-icon" th:data-contact-id="${userProfile.userId}">
     <i th:if="${isFavouriteContact}" class="fa-solid fa-star"></i>
     <i th:if="${!isFavouriteContact}" class="fa-regular fa-star"></i>
   </div>
