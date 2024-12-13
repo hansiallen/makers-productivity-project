@@ -4,9 +4,12 @@ import com.example.productivity.model.Contact;
 import com.example.productivity.repository.ContactRepository;
 import com.example.productivity.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -68,5 +71,27 @@ public class ContactsController {
     public ModelAndView showProfileNotExistsErrorPage() {
         ModelAndView modelAndView = new ModelAndView("/profile/notFound.html");
         return modelAndView;
+    }
+
+    @PostMapping("/favourites/remove/{id}")
+    public ResponseEntity<?> removeContactAsFavourite(@PathVariable Long id) {
+        Contact contactToRemoveAsFavourite = contactRepository.findContactByUserId1AndUserId2(currentUser.getCurrentUser().getId(), id);
+        if (contactToRemoveAsFavourite != null) {
+            contactToRemoveAsFavourite.setIsFavourite(false);
+            contactRepository.save(contactToRemoveAsFavourite);
+            return ResponseEntity.ok().build(); // Return 200 OK
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error removing favourite");
+    }
+
+    @PostMapping("/favourites/add/{id}")
+    public ResponseEntity<?> addContactAsFavourite(@PathVariable Long id) {
+        Contact contactToAddAsFavourite = contactRepository.findContactByUserId1AndUserId2(currentUser.getCurrentUser().getId(), id);
+        if (contactToAddAsFavourite != null) {
+            contactToAddAsFavourite.setIsFavourite(true);
+            contactRepository.save(contactToAddAsFavourite);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error adding favourite");
     }
 }

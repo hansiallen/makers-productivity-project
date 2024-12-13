@@ -45,12 +45,4 @@ public class HomeController {
         modelAndView.addObject("favouriteContacts", favouriteContactsProfiles);
         return modelAndView;
     }
-
-    @PostMapping("/favourites/{id}")
-    public RedirectView removeContactAsFavourite(@PathVariable Long id) {
-        Contact contactToRemoveAsFavourite = contactRepository.findContactByUserId1AndUserId2(currentUser.getCurrentUser().getId(), id);
-        contactToRemoveAsFavourite.setIsFavourite(false);
-        contactRepository.save(contactToRemoveAsFavourite);
-        return new RedirectView("/home");
-    }
 }
