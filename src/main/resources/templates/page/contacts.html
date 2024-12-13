@@ -7,6 +7,10 @@
     <script src="/js/search.js"></script>
 </head>
 <body>
+    <span th:each="contact : ${tempContacts}">
+        <span th:text="${contact.firstName}"></span>
+    </span>
+
     <div class="main-cont">
         <div class="static-cont">
             <a href="/my-profile" class="personal-cont">
@@ -24,7 +28,7 @@
                 <div class="section" th:each="num : ${#numbers.sequence(0, 25)}">
                     <div class="divider" th:text="${#strings.substring(letters, num, num+1).toUpperCase()}"></div>
                     <div th:each="contact : ${contacts}" th:if="${contact.lastName != null and contact.lastName.length() > 0 and contact.lastName[0].toLowerCase() == #strings.substring(letters, num, num+1)}">
-                        <a class="user-cont" href="#">
+                        <a class="user-cont" th:href="@{profile/{id}(id=${contact.userId})}">
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="Profile Picture">
                             <h3 th:text="${contact?.firstName} + ' ' + ${contact?.lastName}"></h3>
                             <span>></span>
