@@ -19,7 +19,7 @@
             </a>
             <input id="search-box" type="search" placeholder=" 🔍 Search for a contact">
         </div>
-        <div th:if="${contacts.size() > 0}" class="results-cont">
+        <div th:if="${contacts?.size() > 0}" class="results-cont">
             <div class="section" th:with="letters='abcdefghijklmnopqrstuvwxyz'" th:each="num : ${#numbers.sequence(0, 25)}">
                 <div class="divider" th:text="${#strings.substring(letters, num, num+1).toUpperCase()}"></div>
                 <a class="user-cont" href="" th:each="contact : ${contacts}" th:if="${contact.lastName[0].toLowerCase() == #strings.substring(letters, num, num+1)}">
