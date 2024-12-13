@@ -40,7 +40,7 @@ public class HomeController {
     @GetMapping("/home")
     public ModelAndView userHome() {
         ModelAndView modelAndView = new ModelAndView("/page/home.html");
-        List<Event> upcomingEvents = eventRepository.findNextUpcomingEventsNative(3);
+        List<Event> upcomingEvents = eventRepository.findNextUpcomingEvents(3, currentUser.getCurrentUser().getId());
         List<Long> favouriteContactIds = contactRepository.findFavouritesUserIdsByUser1Id(currentUser.getCurrentUser().getId());
         List<UserProfile> favouriteContactsProfiles = userProfileRepository.findAllById(favouriteContactIds);
         modelAndView.addObject("upcomingEvents", upcomingEvents);
