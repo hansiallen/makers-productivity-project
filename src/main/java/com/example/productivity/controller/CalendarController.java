@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class CalendarController {
@@ -19,47 +20,44 @@ public class CalendarController {
     @GetMapping("/calendar")
     public RedirectView calendarPageRedirect() {
         LocalDate currentTime =LocalDate.now();
-        return new RedirectView("/calendar/"+currentTime.getMonth().getValue()+"_"+currentTime.getYear());
+        return new RedirectView("/calendar/month/"+currentTime.getMonth().getValue()+"_"+currentTime.getYear());
     }
-    @GetMapping("/calendar/{day}_{month}_{year}")
+
+    @GetMapping("/calendar/day/{day}_{month}_{year}")
     public ModelAndView dayPage(@PathVariable Integer day, @PathVariable Integer month, @PathVariable Integer year) {
         ModelAndView model = new ModelAndView("calendar/day");
         LocalDate currentTime =LocalDate.of(year,month,day);
         return model;
     }
 
-    @GetMapping("/calendar/{month}_{year}")
+    @GetMapping("/calendar/month/{month}_{year}")
     public ModelAndView calendarPage(@PathVariable Integer month, @PathVariable Integer year) {
         ModelAndView model = new ModelAndView("calendar/grid");
         LocalDate currentTime =LocalDate.of(year,month,1);
-        model.addObject("nextMonth", changeDate(month,year,true));
-        model.addObject("lastMonth", changeDate(month,year,false));
+        LocalDate nextMonth = currentTime.plusMonths(1);
+        LocalDate lastMonth = currentTime.plusMonths(-1);
+        model.addObject("nextMonth", "month/"+nextMonth.getMonth().getValue()+"_"+nextMonth.getYear());
+        model.addObject("lastMonth","month/"+lastMonth.getMonth().getValue()+"_"+lastMonth.getYear());
 
 
         //adds white spaces so you start on the correct day of the month
-        model.addObject("startDay", currentTime.withDayOfMonth(1).getDayOfWeek().getValue()-1);
+        List<CalendarDay> l = CreateArrayOfDates(lastMonth,true);
+        l= l.reversed().subList(0,currentTime.withDayOfMonth(1).getDayOfWeek().getValue()-1).reversed();//gets greyed out days
+        l.addAll(CreateArrayOfDates(currentTime,false));//gets non greyed out days
+
+        //adds dates of the next month
+        List<CalendarDay> m = CreateArrayOfDates(nextMonth,true);
+        l.addAll(m.subList(0,7-(currentTime.withDayOfMonth(currentTime.getMonth().length(currentTime.isLeapYear())).getDayOfWeek().getValue()-1)));
 
         model.addObject("month", currentTime.getMonth().name());
-        model.addObject("days", CreateArrayOfDates(currentTime));
+        model.addObject("days", l);
         return model;
     }
 
-    private String changeDate(Integer month, Integer year, Boolean increase){
-        if (increase && month == 12){
-            return "1_"+(year+1);
-        }
-        else if(!increase && month == 1){
-            return "12_"+(year-1);
-        }
-        if (increase){month++;}
-        else{month--;}
-        return month+"_"+year;
-    }
-
-    private ArrayList<CalendarDay> CreateArrayOfDates(LocalDate date){
+    private ArrayList<CalendarDay> CreateArrayOfDates(LocalDate date,Boolean greyedOut){
         ArrayList<CalendarDay> days= new ArrayList<>();
         for (int day=1;day< date.getMonth().length(date.isLeapYear());day++){
-            days.add(new CalendarDay(LocalDate.of(date.getYear(),date.getMonthValue(),day)));
+            days.add(new CalendarDay(LocalDate.of(date.getYear(),date.getMonthValue(),day),greyedOut));
         }
         return days;
     }
