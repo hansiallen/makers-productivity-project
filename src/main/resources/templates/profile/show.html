@@ -18,7 +18,7 @@
           <label for="firstName">First name</label>
           <div id = "firstName" th:text="*{firstName}"></div>
         </div>
-        <div class="profile-field">
+        <div th:if="${middleName != null && middleName != ''}" class="profile-field">
           <label for="middleName">Middle Name</label>
           <div id = "middleName" th:text="*{middleName}"></div>
         </div>
@@ -26,7 +26,7 @@
           <label for="lastName">Last name</label>
           <div id = "lastName" th:text="*{lastName}"></div>
         </div>
-        <div class="profile-field">
+        <div th:if="${preferredName != null && preferredName != ''}" class="profile-field">
           <label for="preferredName">Preferred name</label>
           <div id = "preferredName" th:text="*{preferredName}"></div>
         </div>
