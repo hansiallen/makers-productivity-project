@@ -35,14 +35,16 @@
         </div>
 
 
-        <div th:if="${!userInContacts}" class="profile-container">
-          <div class="profile-field">
-            <label for="firstName2">First name</label>
-            <div id = "firstName2" th:text="*{firstName}"></div>
-          </div>
-          <a th:href="@{/contact/add/{id}(id=${userProfile.userId})}" class="submit-btn">Add contact</a>
-        </div>
+
       </div>
+
+    <div th:if="${!userInContacts && !currUserIsViewingOwnProfile}" class="profile-container">
+      <div class="profile-field">
+        <label for="firstName2">First name</label>
+        <div id = "firstName2" th:text="*{firstName}"></div>
+      </div>
+      <a th:href="@{/contact/add/{id}(id=${userProfile.userId})}" class="submit-btn">Add contact</a>
+    </div>
 
     </div>
 </body>
