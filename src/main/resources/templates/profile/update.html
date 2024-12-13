@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<head>
+  <link rel="stylesheet" href="/css/profile.css">
+  <script src="/js/photoUpload.js" defer></script>
+</head>
+<body>
+<div th:replace="~{core/navbar}"></div>
 
   <form class="update-profile-container" th:action="@{/profile/update}" th:object="${userProfile}" method="post" th:fragment="update" enctype="multipart/form-data">
     <div class="profile-fields">
@@ -11,7 +21,7 @@
       </div>
       <div class="profile-field">
         <label for="lastName">Last name</label>
-        <input id="lastName" type="text" th:field="*{lastName}" />
+        <input id="lastName" type="text" th:field="*{lastName}" required />
       </div>
       <div class="profile-field">
         <label for="preferredName">Preferred name</label>
@@ -34,7 +44,6 @@
         </div>
       </div>
 
-
       <p>Custom Fields</p>
       <div th:replace="~{profile/customField/show :: show}"></div>
 
@@ -48,5 +57,6 @@
       <a href="/customField/add" class="submit-btn">Fields</a>
       <a href="/userLink/add" class="submit-btn">Links</a>
     </div>
-</form>
-
+  </form>
+</body>
+</html>

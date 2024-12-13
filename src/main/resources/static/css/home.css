@@ -32,6 +32,7 @@
 
 .contact-card p {
     margin: 0;
+    color: var(--primary-accent);
 }
 
 .contact-remove {

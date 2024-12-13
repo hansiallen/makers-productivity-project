@@ -50,15 +50,16 @@ public class CurrentUserController {
             userRepository.save(user);
         }
 
+        this.currentUser.setId(user.getId());
+
         UserProfile userProfile = userProfileRepository.findByUserId(user.getId());
         if (userProfile == null){
             userProfile = new UserProfile();
             userProfile.setUserId(user.getId());
             userProfileRepository.save(userProfile);
-            return new RedirectView("/profile/" + userProfile.getUserId());
+            return new RedirectView("/profile/" + userProfile.getUserId() + "/update");
         }
 
-        this.currentUser.setId(user.getId());
         return new RedirectView("/");
     }
 

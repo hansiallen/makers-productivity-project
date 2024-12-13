@@ -50,6 +50,12 @@ public class UserProfileController {
         }
 
         boolean currUserIsViewingOwnProfile = id.equals(currentUser.getCurrentUser().getId());
+
+        boolean isFavouriteContact = false;
+        if (!currUserIsViewingOwnProfile && inContacts) {
+            isFavouriteContact = contactRepository.isContactFavourite(currentUserId, id);
+        }
+
         modelAndView.addObject("userProfile",userProfile);
 
         modelAndView.addObject("customFields",customFields);
@@ -61,19 +67,37 @@ public class UserProfileController {
         modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
         modelAndView.addObject("userInContacts",inContacts);
 
-        System.out.println(inContacts);
+        modelAndView.addObject("isFavouriteContact", isFavouriteContact);
+
         return modelAndView;
     }
 
     @GetMapping("/profile/me")
     public RedirectView viewMyProfile(){
-
         return new RedirectView("/profile/"+currentUser.getCurrentUser().getId());
-
     }
 
+    @GetMapping("/profile/{id}/update")
+    public ModelAndView updateMyProfile() {
+        Long currentUserId = currentUser.getCurrentUser().getId();
+        UserProfile userProfile = userProfileRepository.findByUserId(currentUserId);
 
+        if (userProfile == null){
+            ModelAndView modelAndView = new ModelAndView("core/error");
+            modelAndView.addObject("errorMessage","Profile not found.");
+            return modelAndView;
+        }
 
+        List<CustomField> customFields = customFieldRepository.findByUserId(currentUserId);
+        List<UserLink> userLinks = userLinkRepository.findByUserId(currentUserId);
+
+        ModelAndView modelAndView = new ModelAndView("profile/update");
+        modelAndView.addObject("userProfile", userProfile);
+        modelAndView.addObject("customFields", customFields);
+        modelAndView.addObject("userLinks", userLinks);
+
+        return modelAndView;
+    }
 
     @PostMapping("/profile/update")
     public RedirectView create(@ModelAttribute UserProfile userProfile, @RequestParam("profilePhoto") MultipartFile profilePhoto){
@@ -94,6 +118,4 @@ public class UserProfileController {
         System.out.println(userProfile.getUserId());
         return new RedirectView("/profile/"+userProfile.getUserId().toString());
     }
-
-
 }

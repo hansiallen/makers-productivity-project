@@ -4,7 +4,7 @@
 <head th:replace="~{core/head}"></head>
 <head>
     <link rel="stylesheet" href="/css/home.css">
-    <script src="/js/removeContact.js" defer></script>
+    <script src="/js/addRemoveFavourite.js" defer></script>
 </head>
 <body>
     <div th:replace="~{core/navbar}"></div>
@@ -20,12 +20,8 @@
         <h2>Favourite Contacts</h2>
         <div th:if="${favouriteContacts.size() > 0}" class="homepage-contacts-container">
             <div th:each="contact: ${favouriteContacts}" class="contact-card homepage-card">
-<!--                <div class="contact-card homepage-card">-->
-                    <p th:text="${contact.firstName} + ' ' + ${contact.lastName}"></p>
-<!--                    <form th:action="@{/favourites/{id}(id=${contact.userId})}" method="post">-->
-                        <a class="fa-solid fa-square-minus contact-remove" th:data-contact-id="${contact.userId}"></a>
-<!--                    </form>-->
-<!--                </div>-->
+                <a th:href="@{/profile/{id}(id=${contact.userId})}"><p th:text="${contact.firstName} + ' ' + ${contact.lastName}"></p></a>
+                <a class="fa-solid fa-square-minus contact-remove" th:data-contact-id="${contact.userId}"></a>
             </div>
         </div>
         <p th:if="${favouriteContacts.size() == 0}" class="homepage-empty-msg">
