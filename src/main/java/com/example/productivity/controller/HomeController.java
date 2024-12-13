@@ -1,17 +1,18 @@
 package com.example.productivity.controller;
 
 import com.example.productivity.model.Contact;
-import com.example.productivity.model.UserProfile;
-import com.example.productivity.repository.UserProfileRepository;
 import com.example.productivity.model.Event;
 import com.example.productivity.model.UserProfile;
+import com.example.productivity.repository.UserProfileRepository;
 import com.example.productivity.repository.ContactRepository;
 import com.example.productivity.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -43,5 +44,13 @@ public class HomeController {
         modelAndView.addObject("upcomingEvents", upcomingEvents);
         modelAndView.addObject("favouriteContacts", favouriteContactsProfiles);
         return modelAndView;
+    }
+
+    @PostMapping("/favourites/{id}")
+    public RedirectView removeContactAsFavourite(@PathVariable Long id) {
+        Contact contactToRemoveAsFavourite = contactRepository.findContactByUserId1AndUserId2(currentUser.getCurrentUser().getId(), id);
+        contactToRemoveAsFavourite.setIsFavourite(false);
+        contactRepository.save(contactToRemoveAsFavourite);
+        return new RedirectView("/home");
     }
 }
