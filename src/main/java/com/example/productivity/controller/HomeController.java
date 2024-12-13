@@ -27,7 +27,7 @@ public class HomeController {
     @Autowired
     UserProfileRepository userProfileRepository;
 
-    @GetMapping("/")
+    @GetMapping("/contacts")
     public ModelAndView contactsPage() {
         ModelAndView modelAndView = new ModelAndView("/page/contacts.html");
 //        Iterable<UserProfile> contacts = userProfileRepository.findAll();
@@ -37,7 +37,7 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public ModelAndView userHome() {
         ModelAndView modelAndView = new ModelAndView("/page/home.html");
         List<Event> upcomingEvents = eventRepository.findNextUpcomingEvents(3, currentUser.getCurrentUser().getId());
