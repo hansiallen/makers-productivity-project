@@ -140,8 +140,12 @@ function addContact(code) {
 
                 // check if response is valid
                 if (response.success) {
+                    document.getElementById('popup-div').innerHTML += '<div class="success-div"><p>Successfully added contact! Redirecting...</p></div>';
                     console.log("valid!" + response.id);
-                    window.location.href = '/profile/' + response.id;
+                    html5QrCode.stop();
+                    setTimeout(() => {
+                        window.location.href = '/profile/' + response.id;
+                    }, "3000");
                 } else {
                     // handle invalid response
                   	if (response.error) {
