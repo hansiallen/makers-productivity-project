@@ -50,6 +50,8 @@ public class CurrentUserController {
             userRepository.save(user);
         }
 
+        this.currentUser.setId(user.getId());
+
         UserProfile userProfile = userProfileRepository.findByUserId(user.getId());
         if (userProfile == null){
             userProfile = new UserProfile();
@@ -58,7 +60,6 @@ public class CurrentUserController {
             return new RedirectView("/profile/" + userProfile.getUserId());
         }
 
-        this.currentUser.setId(user.getId());
         return new RedirectView("/");
     }
 
