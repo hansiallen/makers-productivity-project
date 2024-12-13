@@ -23,7 +23,7 @@ public class ContactsController {
     CurrentUserController currentUser;
 
     @GetMapping("/contact/add/{id}")
-    public String addContact(@PathVariable int id) {
+    public ModelAndView addContact(@PathVariable int id) {
         Long idToAdd = (long) id;
         Long currentUserId = currentUser.getCurrentUser().getId();
         System.out.println(idToAdd);
@@ -32,9 +32,11 @@ public class ContactsController {
         if (userProfileRepository.existsById(idToAdd) && !idToAdd.equals(currentUserId)) {
             Contact contact = new Contact(currentUserId, idToAdd);
             contactRepository.save(contact);
-            return "{\"success\": true, \"id\": " + idToAdd + '}';
+            return new ModelAndView("redirect:/profile/"+idToAdd);
         } else {
-            return "{\"success\": false}";
+            ModelAndView err = new ModelAndView("core/error");
+            err.addObject("errorMessage","failed to add contact");
+            return err;
         }
     }
 

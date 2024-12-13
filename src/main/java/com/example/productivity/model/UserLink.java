@@ -3,27 +3,27 @@ package com.example.productivity.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "USERS_LINKS")
+@Table(name = "USER_LINKS")
 public class UserLink {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userProfileId;
+    private Long userId;
     private String websiteLinkName;
-    private String WebsiteLinkUrl;
+    private String websiteLinkUrl;
 
-    UserLink(){
+    public UserLink(){
 
     }
-    UserLink(Long userProfileId, String websiteLinkName, String websiteLinkUrl){
-        this.userProfileId=userProfileId;
+    public UserLink(Long userId, String websiteLinkName, String websiteLinkUrl){
+        this.userId=userId;
         this.websiteLinkName=websiteLinkName;
-        this.WebsiteLinkUrl = websiteLinkUrl;
+        this.websiteLinkUrl = websiteLinkUrl;
     }
 
-    public Long getuserProfileId() {
-        return userProfileId;
+    public Long getUserId() {
+        return userId;
     }
 
     public Long getId() {
@@ -35,11 +35,11 @@ public class UserLink {
     }
 
     public String getWebsiteLinkUrl() {
-        return WebsiteLinkUrl;
+        return websiteLinkUrl;
     }
 
-    public void setuserProfileId(Long userProfileId) {
-        this.userProfileId = userProfileId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setId(Long id) {
@@ -51,6 +51,6 @@ public class UserLink {
     }
 
     public void setWebsiteLinkUrl(String websiteLinkUrl) {
-        WebsiteLinkUrl = websiteLinkUrl;
+        this.websiteLinkUrl = websiteLinkUrl;
     }
 }

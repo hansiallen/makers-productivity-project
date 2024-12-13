@@ -3,7 +3,7 @@
     <div class="profile-fields">
       <div class="profile-field">
         <label for="firstName">First name</label>
-        <input id="firstName" type="text" th:field="*{firstName}" placeholder="First name"/>
+        <input id="firstName" type="text" th:field="*{firstName}" placeholder="First name" required/>
       </div>
       <div class="profile-field">
         <label for="middleName">Middle name</label>
@@ -33,14 +33,20 @@
           </div>
         </div>
       </div>
+
+
+      <p>Custom Fields</p>
+      <div th:replace="~{profile/customField/show :: show}"></div>
+
+      <p>Links</p>
+      <div th:replace="~{profile/userLink/show :: show}"></div>
     </div>
-    <p>Custom Fields</p>
-    <div th:each = "customField : ${customFields}">
-      <div class="profile-field">
-        <label th:for="${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoKey()}"></label>
-        <div th:id = "${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoContent()}"></div>
-      </div>
-    </div>
+
     <button type="submit" class="submit-btn">Update profile</button>
+    <p>Add Custom </p>
+    <div class="add-custom-btns">
+      <a href="/customField/add" class="submit-btn">Fields</a>
+      <a href="/userLink/add" class="submit-btn">Links</a>
+    </div>
 </form>
 
