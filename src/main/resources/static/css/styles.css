@@ -240,13 +240,23 @@ nav input:checked ~ #toggleable-add-menu {
 
 .square {
     display: grid;
-    grid-template-columns: auto auto auto;
     float:left;
     width: 12%;
     height: 9vh;
     margin:1%;
     background-color:#666;
     overflow:hidden;
+    white-space: pre-wrap;
+}
+.dark-square {
+    display: grid;
+    float:left;
+    width: 12%;
+    height: 9vh;
+    margin:1%;
+    background-color: rgba(50, 50, 50, 0.4);
+    overflow:hidden;
+    white-space: pre-wrap;
 }
 
 .month-buttons {

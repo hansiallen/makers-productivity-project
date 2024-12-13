@@ -7,12 +7,15 @@
 <h3 th:text = "${month}" class = "month-buttons"></h3>
 <a th:href="@{'/calendar/'+ ${nextMonth}}"><button class = "month-buttons">next Month</button> </a>
 <div class="separate-menu"></div>
-<th:block th:each="i: ${#numbers.sequence(1, startDay)}">
-    <div class="square grid"></div>
-</th:block>
+
 
 <th:block th:each="day: ${days}">
-    <div class="square grid" th:text="${day.getDay()}"></div>
+    <div th:if = ${day.isGreyedOut()} class="dark-square">
+        <div th:replace="~{calendar/dayElement}"></div>
+    </div>
+    <div th:if = ${!day.isGreyedOut()} class="square grid">
+        <div th:replace="~{calendar/dayElement}"></div>
+    </div>
 </th:block>
 
 <div th:replace="~{core/navbar}"></div>
