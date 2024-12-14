@@ -2,4 +2,5 @@
 <div th:each = "customField : ${customFields}" class="profile-field" th:fragment ="show">
         <label th:for="${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoKey()}"></label>
         <div th:id = "${customField.getCustomInfoKey()}" th:text="${customField.getCustomInfoContent()}"></div>
+        <a th:href="@{/customField/delete/{id}(id=${customField.getId()})}" th:if="${currUserIsViewingOwnProfile}" class="delete-btn">X</a>
 </div>

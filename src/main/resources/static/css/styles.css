@@ -3,6 +3,7 @@
     --primary-accent: #FFF;
     --secondary-accent: #F2D492;
     --popup-background: #202C39;
+    --red-dark-mode: #B22222;
     --header-font: "Lilita One";
 }
 
@@ -151,4 +152,13 @@ a {
 
 .cam-view {
     width: 100%;
+}
+
+.delete-btn{
+    background-color: var(--red-dark-mode);
+    padding: 1em;
+    border-radius: 1em;
+    font-size: 1em;
+    margin: 0.5em;
+    color: white;
 }

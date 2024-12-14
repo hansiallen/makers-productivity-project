@@ -23,8 +23,12 @@ public class CustomField {
     public CustomField(){
     }
 
-    public Long getUserProfileId() {
+    public Long getUserId() {
         return userId;
+    }
+
+    public Long getId(){
+        return id;
     }
 
     public void setCustomInfoKey(String customInfoKey) {
@@ -43,7 +47,7 @@ public class CustomField {
         return customInfoContent;
     }
 
-    public void setUserProfileId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }
