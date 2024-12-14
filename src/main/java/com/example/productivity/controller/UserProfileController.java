@@ -77,10 +77,11 @@ public class UserProfileController {
         return new RedirectView("/profile/"+currentUser.getCurrentUser().getId());
     }
 
-    @GetMapping("/profile/{id}/update")
+    @GetMapping("/profile/update")
     public ModelAndView updateMyProfile() {
         Long currentUserId = currentUser.getCurrentUser().getId();
         UserProfile userProfile = userProfileRepository.findByUserId(currentUserId);
+        boolean currUserIsViewingOwnProfile = true;
 
         if (userProfile == null){
             ModelAndView modelAndView = new ModelAndView("core/error");
@@ -95,6 +96,7 @@ public class UserProfileController {
         modelAndView.addObject("userProfile", userProfile);
         modelAndView.addObject("customFields", customFields);
         modelAndView.addObject("userLinks", userLinks);
+        modelAndView.addObject("currUserIsViewingOwnProfile",currUserIsViewingOwnProfile);
 
         return modelAndView;
     }
