@@ -5,6 +5,14 @@
     --popup-background: #202C39;
     --red-dark-mode: #B22222;
     --header-font: "Lilita One";
+
+    /*Light mode scheme
+    --page-background: #F9F9F9;
+    --primary-accent: #1A232E;
+    --secondary-accent: #D1B583;
+    --popup-background: #FFFFFF;
+    --red-light-mode: #D93829;
+    */
 }
 
 body {
