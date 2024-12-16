@@ -91,3 +91,34 @@ body {
 .user-cont h3 {
     width: 100%;
 }
+
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 20px;
+    border: none;
+    background: var(--popup-background);
+    transform: translate(-50%, -50%);
+    color: var(--primary-accent);
+}
+
+.modal button {
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background: var(--secondary-accent);
+    margin-top: 5px;
+}
+
+.remove-connection {
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    background: var(--secondary-accent);
+}
