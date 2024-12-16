@@ -15,7 +15,7 @@
     <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}">
 
       <div class="profile-fields">
-        <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl}">
+        <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl != null ? userProfile.profilePhotoUrl : '/img/icon/default-profile.png'}">
         <div class="profile-field">
           <label for="firstName">First name</label>
           <div id = "firstName" th:text="*{firstName}"></div>
@@ -32,16 +32,18 @@
           <label for="preferredName">Preferred name</label>
           <div id = "preferredName" th:text="*{preferredName}"></div>
         </div>
-        <p>Custom Fields</p>
+        <p th:if="${!customFields.isEmpty()}">Custom Fields</p>
         <div th:replace="~{profile/customField/show :: show}"></div>
 
-        <p>Links</p>
+        <p th:if="${!userLinks.isEmpty()}">Links</p>
         <div th:replace="~{profile/userLink/show :: show}"></div>
       </div>
+
+      <a th:if="${currUserIsViewingOwnProfile}" th:href="@{/profile/update}" class="submit-btn">Edit Profile</a>
     </div>
 
     <div th:if="${!userInContacts && !currUserIsViewingOwnProfile}" class="profile-container">
-      <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl}">
+      <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl != null ? userProfile.profilePhotoUrl : '/img/icon/default-profile.png'}">
       <div class="profile-field">
         <label for="firstName2">First name</label>
         <div id = "firstName2" th:text="*{firstName}"></div>
@@ -51,9 +53,6 @@
 
   </div>
 
-  <div th:if="${currUserIsViewingOwnProfile}" class="profile-edit-btn">
-    <a th:href="@{/profile/update}" class="profile-edit-btn">Edit Profile</a>
-  </div>
 
   <div th:if="${!currUserIsViewingOwnProfile && userInContacts}" class="profile-favourite-icon" th:data-contact-id="${userProfile.userId}">
     <i th:if="${isFavouriteContact}" class="fa-solid fa-star"></i>

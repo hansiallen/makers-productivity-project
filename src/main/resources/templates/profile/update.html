@@ -45,10 +45,10 @@
         </div>
       </div>
 
-      <p>Custom Fields</p>
+      <p th:if="${!customFields.isEmpty()}">Custom fields</p>
       <div th:replace="~{profile/customField/show :: show}"></div>
 
-      <p>Links</p>
+      <p th:if="${!userLinks.isEmpty()}">Links</p>
       <div th:replace="~{profile/userLink/show :: show}"></div>
     </div>
 
