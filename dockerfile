@@ -22,4 +22,4 @@ COPY --from=build /app/ ./
 EXPOSE 8080
 
 # Command to run the Spring Boot application
-CMD ["java", "-jar", "productivity-0.0.1-SNAPSHOT.jar"]
+CMD ["./gradlew", "bootRun"]
