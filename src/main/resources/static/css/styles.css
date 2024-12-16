@@ -5,6 +5,8 @@
     --popup-background: #202C39;
     --red-dark-mode: #B22222;
     --header-font: "Lilita One";
+    --success-color: #23F0C7;
+    --success-background-color: #127864;
 
     /*Light mode scheme
     --page-background: #F9F9F9;
@@ -162,6 +164,22 @@ a {
     width: 100%;
 }
 
+
+.success-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    background: var(--success-background-color);
+    text-align: center;
+}  
+ 
 .delete-btn{
     background-color: var(--red-dark-mode);
     padding: 1em;
