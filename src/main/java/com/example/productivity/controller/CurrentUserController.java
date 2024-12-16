@@ -32,9 +32,9 @@ public class CurrentUserController {
 
     @GetMapping("users/after-login")
     public RedirectView handleLogin() {
-        User user = getCurrentUser(); // Retrieve or create the user
+        User user = getCurrentUser();
 
-        // Ensure a UserProfile exists for this user
+
         UserProfile userProfile = userProfileRepository.findByUserId(user.getId());
         if (userProfile == null) {
             userProfile = new UserProfile();
@@ -47,7 +47,7 @@ public class CurrentUserController {
     }
 
     public User getCurrentUser() {
-        // Retrieve authentication details
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !(auth.getPrincipal() instanceof DefaultOidcUser)) {
             throw new IllegalStateException("No authenticated user found");
@@ -57,7 +57,6 @@ public class CurrentUserController {
         String auth0Id = principal.getAttributes().get("sub").toString();
         String email = principal.getAttributes().get("email").toString();
 
-        // Find the user or create them if they don't exist
         User user = userRepository.findByAuth0Id(auth0Id);
         if (user == null) {
             user = new User();
