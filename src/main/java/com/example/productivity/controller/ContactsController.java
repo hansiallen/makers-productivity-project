@@ -44,7 +44,7 @@ public class ContactsController {
             return err;
         }
     }
-
+  
     @GetMapping("/contact/add/json/{id}")
     public String addContactReturnJSON(@PathVariable int id) {
         Long idToAdd = (long) id;
@@ -61,6 +61,14 @@ public class ContactsController {
         } else {
             return "{\"success\": false}";
         }
+    }
+  
+    
+    @PostMapping("/contact/remove/{id}")
+    public RedirectView removeContact(@PathVariable int id) {
+        Long currentUserId = currentUser.getCurrentUser().getId();
+        contactRepository.deleteByUserId1AndUserId2(currentUserId, (long) id);
+        return new RedirectView("/");
     }
 
     @GetMapping("/get-share-code")
