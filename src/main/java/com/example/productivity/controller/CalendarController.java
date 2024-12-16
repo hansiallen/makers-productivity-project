@@ -6,13 +6,12 @@ import com.example.productivity.model.Event;
 import com.example.productivity.repository.EventRepository;
 import com.example.productivity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,4 +78,19 @@ public class CalendarController {
         }
         return days;
     }
+
+
+    @GetMapping("/event/create")
+    public ModelAndView createEventPage(){
+        return new ModelAndView("/calendar/createEvent");
+    }
+    @PostMapping("/event/create")
+    public RedirectView createEvent(@RequestParam String title, @RequestParam String description, @RequestParam LocalDate date, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime){
+
+        Event newEvent = new Event(date, startTime, endTime, title, description, currentUser.getCurrentUser().getId());
+        System.out.println(newEvent.getId());
+        eventRepository.save(newEvent);
+        return new RedirectView("/calendar");
+    }
+
 }
