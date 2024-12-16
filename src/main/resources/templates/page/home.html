@@ -5,13 +5,26 @@
 <head>
     <link rel="stylesheet" href="/css/home.css">
     <script src="/js/addRemoveFavourite.js" defer></script>
+    <script src="/js/removeNotification.js" defer></script>
 </head>
 <body>
     <div th:replace="~{core/navbar}"></div>
     <div th:replace="~{core/header}"></div>
 
-    <section class="homepage-section">
+    <section class="homepage-section homepage-notifications-section">
         <h2>Notifications</h2>
+        <div th:if="${notifications.size() > 0}" class="homepage-notifications-container">
+            <div th:each="notification: ${notifications}" class="notification-card homepage-card">
+                <p th:text="${notification.content}"></p>
+<!--                <form th:action="@{/notifications/{id}(id=${notification.id})}" method="post">-->
+<!--                    <button type="submit" class="fa-regular fa-circle-xmark notification-remove"></button>-->
+<!--                </form>-->
+                <a class="fa-regular fa-circle-xmark notification-remove" th:data-notification-id="${notification.id}"></a>
+            </div>
+        </div>
+        <p th:if="${notifications.size() == 0}" class="homepage-empty-msg">
+            No new notifications.
+        </p>
     </section>
 
     <hr class="homepage-line-break">
