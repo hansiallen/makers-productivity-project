@@ -13,7 +13,9 @@
 <!--    <div th:if="${currUserIsViewingOwnProfile}"><div th:replace="~{profile/update :: update}"></div></div>-->
 
     <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}" th:object="${userProfile}">
+
       <div class="profile-fields">
+        <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl}">
         <div class="profile-field">
           <label for="firstName">First name</label>
           <div id = "firstName" th:text="*{firstName}"></div>
