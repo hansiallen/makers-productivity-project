@@ -3,6 +3,7 @@ package com.example.productivity.controller;
 import com.example.productivity.model.Contact;
 import com.example.productivity.repository.ContactRepository;
 import com.example.productivity.repository.UserProfileRepository;
+import com.example.productivity.service.NotificationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,9 @@ public class ContactsController {
     @Autowired
     CurrentUserController currentUser;
 
+    @Autowired
+    NotificationsService notificationsService;
+
     @GetMapping("/contact/add/{id}")
     public ModelAndView addContact(@PathVariable int id) {
         Long idToAdd = (long) id;
@@ -37,6 +41,8 @@ public class ContactsController {
             contact.setUserId1(currentUserId);
             contact.setUserId2(idToAdd);
             contactRepository.save(contact);
+            notificationsService.userAddsContactNotification(currentUserId, idToAdd);
+            notificationsService.userIsAddedAsContactNotification(currentUserId, idToAdd);
             return new ModelAndView("redirect:/profile/"+idToAdd);
         } else {
             ModelAndView err = new ModelAndView("core/error");
@@ -57,6 +63,8 @@ public class ContactsController {
             contact.setUserId1(currentUserId);
             contact.setUserId2(idToAdd);
             contactRepository.save(contact);
+            notificationsService.userAddsContactNotification(currentUserId, idToAdd);
+            notificationsService.userIsAddedAsContactNotification(currentUserId, idToAdd);
             return "{\"success\": true, \"id\": " + idToAdd + '}';
         } else {
             return "{\"success\": false}";
