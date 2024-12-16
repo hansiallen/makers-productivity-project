@@ -12,7 +12,7 @@ public class UserProfile {
     private String firstName;
     private String middleName;
     private String lastName;
-    private String profilePhotoUrl;
+    private String profilePhotoUrl = "https://res.cloudinary.com/dls9qdz5e/image/upload/v1734345275/zqhhrjazmtrmmzmxmswt.png";
     private String preferredName;
   
     public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName) {
@@ -20,7 +20,9 @@ public class UserProfile {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.profilePhotoUrl = profilePhotoUrl;
+        if (profilePhotoUrl != null){
+            this.profilePhotoUrl = profilePhotoUrl;
+        }
         this.preferredName = preferredName;
     }
 
