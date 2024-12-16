@@ -23,6 +23,7 @@
 
 .profile-field input,
 .profile-field .custom-link,
+.profile-field a,
 .profile-field div {
   outline: none;
   background-color: var(--page-background);
