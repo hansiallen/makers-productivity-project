@@ -17,6 +17,7 @@
 .profile-fields {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
 }
 
@@ -38,6 +39,7 @@
   position: relative;
   font-size: inherit;
   margin-bottom: 1em;
+  margin-top: 1em;
   display: flex;
   width: 100%;
 }
@@ -90,6 +92,7 @@
     position: relative;
     font-size: inherit;
     margin-bottom: 1em;
+    width: 100%;
 }
 
 .profile-field-photo {
@@ -141,4 +144,19 @@
     text-align: center;
     margin-top: 2rem;
     color: var(--secondary-accent);
+}
+
+.profile-picture-big{
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 0.2em solid var(--page-background);
+}
+
+.profile-picture-small{
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }

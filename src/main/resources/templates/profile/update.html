@@ -11,6 +11,7 @@
 
   <form class="update-profile-container" th:action="@{/profile/update}" th:object="${userProfile}" method="post" th:fragment="update" enctype="multipart/form-data">
     <div class="profile-fields">
+      <img class="profile-picture-big" th:src="*{profilePhotoUrl}">
       <div class="profile-field">
         <label for="firstName">First name</label>
         <input id="firstName" type="text" th:field="*{firstName}" placeholder="First name" required/>

@@ -9,11 +9,13 @@
 </head>
 <body>
   <div th:replace="~{core/navbar}"></div>
-  <div class="profile-page">
+  <div class="profile-page" th:object="${userProfile}">
 <!--    <div th:if="${currUserIsViewingOwnProfile}"><div th:replace="~{profile/update :: update}"></div></div>-->
 
-    <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}" th:object="${userProfile}">
+    <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}">
+
       <div class="profile-fields">
+        <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl}">
         <div class="profile-field">
           <label for="firstName">First name</label>
           <div id = "firstName" th:text="*{firstName}"></div>
@@ -39,6 +41,7 @@
     </div>
 
     <div th:if="${!userInContacts && !currUserIsViewingOwnProfile}" class="profile-container">
+      <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl}">
       <div class="profile-field">
         <label for="firstName2">First name</label>
         <div id = "firstName2" th:text="*{firstName}"></div>
