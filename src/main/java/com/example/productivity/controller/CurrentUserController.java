@@ -32,22 +32,9 @@ public class CurrentUserController {
 
     @GetMapping("users/after-login")
     public RedirectView handleLogin() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
-        Map<String, Object> userDetails = principal.getAttributes();
+        User user = getCurrentUser(); // Retrieve or create the user
 
-        String email = userDetails.get("email").toString();
-        String auth0Id = userDetails.get("sub").toString();
-
-
-        User user = userRepository.findByAuth0Id(auth0Id);
-        if (user == null) {
-            user = new User();
-            user.setAuth0Id(auth0Id);
-            user.setEmail(email);
-            userRepository.save(user);
-        }
-
+        // Ensure a UserProfile exists for this user
         UserProfile userProfile = userProfileRepository.findByUserId(user.getId());
         if (userProfile == null) {
             userProfile = new UserProfile();
@@ -60,9 +47,25 @@ public class CurrentUserController {
     }
 
     public User getCurrentUser() {
+        // Retrieve authentication details
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !(auth.getPrincipal() instanceof DefaultOidcUser)) {
+            throw new IllegalStateException("No authenticated user found");
+        }
+
         DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
         String auth0Id = principal.getAttributes().get("sub").toString();
-        return userRepository.findByAuth0Id(auth0Id);
+        String email = principal.getAttributes().get("email").toString();
+
+        // Find the user or create them if they don't exist
+        User user = userRepository.findByAuth0Id(auth0Id);
+        if (user == null) {
+            user = new User();
+            user.setAuth0Id(auth0Id);
+            user.setEmail(email);
+            userRepository.save(user);
+        }
+
+        return user;
     }
 }
