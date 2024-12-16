@@ -9,9 +9,17 @@
 <a th:href="@{'/calendar/'+ ${nextMonth}}"><button class = "month-buttons">next Month</button> </a>
 <div class="separate-menu"></div>
 
+<div class="square day">Monday</div>
+<div class="square day">Tuesday</div>
+<div class="square day">Wednesday</div>
+<div class="square day">Thursday</div>
+<div class="square day">Friday</div>
+<div class="square day">Saturday</div>
+<div class="square day">Sunday</div>
+
 <th:block th:each="day: ${days}">
     <a th:href="${day.getURL()}">
-    <div th:if = ${day.isGreyedOut()} class="dark-square">
+    <div th:if = ${day.isGreyedOut()} class="square dark grid">
         <div th:replace="~{calendar/dayElement}"></div>
     </div>
     <div th:if = ${!day.isGreyedOut()} class="square grid">
@@ -19,7 +27,11 @@
     </div>
     </a>
 </th:block>
-
+    <a href="/event/create">
+    <button class="nav-button-large add-event-button navbar">
+        +
+    </button>
+    </a>
 <div th:replace="~{core/navbar}"></div>
 </body>
 </html>

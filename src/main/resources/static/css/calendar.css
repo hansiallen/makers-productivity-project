@@ -2,22 +2,15 @@
 .square {
     display: grid;
     float:left;
-    width: 12%;
+    width: 13%;
     height: 9vh;
-    margin:1%;
+    margin: 0.5%;
     background-color:#666;
     overflow:hidden;
     white-space: pre-wrap;
 }
-.dark-square {
-    display: grid;
-    float:left;
-    width: 12%;
-    height: 9vh;
-    margin:1%;
+.dark {
     background-color: rgba(50, 50, 50, 0.4);
-    overflow:hidden;
-    white-space: pre-wrap;
 }
 
 .month-buttons {
@@ -44,4 +37,27 @@ a{
 .text {
   padding: 5px;
   padding-top: 5px;
+}
+
+.add-event-button {
+   bottom: 20px;
+   right: 20px;
+   position: fixed;
+   background-color: #aaa;
+   border: none;              /* Remove default border */
+   color: white;              /* White text */
+   padding: 15px 32px;        /* Padding around the text */
+   text-align: center;        /* Center the text */
+   text-decoration: none;     /* Remove underline */
+   display: inline-block;     /* Inline-block behavior */
+   font-size: 16px;           /* Font size */
+   margin: 4px 2px;           /* Margin around the button */
+   cursor: pointer;          /* Pointer cursor on hover */
+   border-radius: 8px;        /* Rounded corners */
+   transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.day{
+    height: auto;
+
 }

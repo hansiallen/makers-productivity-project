@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<body>
+
+<h2>Create event</h2>
+<form method="POST" action="/event/create">
+    Title: <input type="text" name="title" placeholder="event name" required><br>
+    Description: <input type="text" name="description"><br>
+    Date of event: <input type="date" name = "date" required><br>
+    Start time: <input type="time" name="startTime" required><br>
+    End time: <input type="time" name="endTime" required><br>
+    <input type="submit" name="submit">
+</form>
+
+<div th:replace="~{core/navbar}"></div>
+</body>
+</html>
