@@ -1,7 +1,6 @@
 package com.example.productivity.controller;
 
 
-import com.example.productivity.model.User;
 import com.example.productivity.model.UserProfile;
 import com.example.productivity.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
