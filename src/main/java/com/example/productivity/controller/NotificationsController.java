@@ -21,5 +21,4 @@ public class NotificationsController {
         notificationRepository.save(notification);
         return new RedirectView("/");
     }
-
 }
