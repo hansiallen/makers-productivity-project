@@ -12,7 +12,7 @@
     </div>
     <a href="/contacts"><img src="/img/icon/nav/search.svg" alt="Search for contact" /></a>
     <a href="/profile/me">
-        <img class="profile-picture-small" th:src="${currentUser.profilePhotoUrl != null ? currentUser.profilePhotoUrl : 'static/img/icon/default-profile.png'}">
+        <img class="profile-picture-small" th:src="${currentUser.profilePhotoUrl != null ? currentUser.profilePhotoUrl : '/img/icon/default-profile.png'}">
     </a>
     <div id="popup-div" class="hidden"></div>
     <div id="screen-popup-div"></div>
