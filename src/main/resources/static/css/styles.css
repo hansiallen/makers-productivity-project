@@ -3,9 +3,18 @@
     --primary-accent: #FFF;
     --secondary-accent: #F2D492;
     --popup-background: #202C39;
+    --red-dark-mode: #B22222;
     --header-font: "Lilita One";
     --success-color: #23F0C7;
     --success-background-color: #127864;
+
+    /*Light mode scheme
+    --page-background: #F9F9F9;
+    --primary-accent: #1A232E;
+    --secondary-accent: #D1B583;
+    --popup-background: #FFFFFF;
+    --red-light-mode: #D93829;
+    */
 }
 
 body {
@@ -155,45 +164,6 @@ a {
     width: 100%;
 }
 
-.square {
-    display: grid;
-    float:left;
-    width: 12%;
-    height: 9vh;
-    margin:1%;
-    background-color:#666;
-    overflow:hidden;
-    white-space: pre-wrap;
-}
-.dark-square {
-    display: grid;
-    float:left;
-    width: 12%;
-    height: 9vh;
-    margin:1%;
-    background-color: rgba(50, 50, 50, 0.4);
-    overflow:hidden;
-    white-space: pre-wrap;
-}
-
-.month-buttons {
-   float: left;
-   width: 33%;
-   text-align: center;
-   margin: auto;
-}
-
-.separate-menu{
-   float: auto;
-   align :center;
-   margin: auto;
-    padding-bottom: 2em;
-}
-
-.add-custom-btns{
-    display:flex;
-    flex-direction:row;
-}
 
 .success-div {
     position: fixed;
@@ -208,4 +178,13 @@ a {
     font-size: 42px;
     background: var(--success-background-color);
     text-align: center;
+}  
+ 
+.delete-btn{
+    background-color: var(--red-dark-mode);
+    padding: 1em;
+    border-radius: 1em;
+    font-size: 1em;
+    margin: 0.5em;
+    color: white;
 }

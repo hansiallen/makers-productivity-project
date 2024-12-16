@@ -136,3 +136,9 @@
 .profile-favourite-icon {
     color: var(--secondary-accent);
 }
+
+.profile-edit-btn {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--secondary-accent);
+}

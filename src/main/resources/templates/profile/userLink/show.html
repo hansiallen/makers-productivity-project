@@ -3,5 +3,6 @@
   <div class="profile-field">
     <label th:for="${userLink.getWebsiteLinkName()}" th:text="${userLink.getWebsiteLinkName()}"></label>
     <div th:id = "${userLink.getWebsiteLinkName()}" th:text="${userLink.getWebsiteLinkUrl()}"></div>
+    <a th:href="@{/userLink/delete/{id}(id=${userLink.getId()})}" th:if="${currUserIsViewingOwnProfile}" class="delete-btn">X</a>
   </div>
 </div>
