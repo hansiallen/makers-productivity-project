@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Random;
+
 @RestController
 public class ContactsController {
     @Autowired
@@ -79,10 +81,16 @@ public class ContactsController {
         return new RedirectView("/");
     }
 
+    Integer generateShareCodeInt() {
+        Random random = new Random();
+        Integer randomCode = random.nextInt(99999999);
+        return randomCode;
+    }
+
     @GetMapping("/get-share-code")
     public String getShareCode() {
         Long currentUserId = currentUser.getCurrentUser().getId();
-        return currentUserId.toString();
+        return generateShareCodeInt().toString();
     }
 
     @GetMapping("/CAR/{id}")
