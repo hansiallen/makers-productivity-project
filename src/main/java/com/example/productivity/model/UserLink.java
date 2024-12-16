@@ -35,7 +35,11 @@ public class UserLink {
     }
 
     public String getWebsiteLinkUrl() {
-        return websiteLinkUrl;
+        String url = this.websiteLinkUrl;
+        if (url != null && !url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
+        return url;
     }
 
     public void setUserId(Long userId) {
