@@ -16,9 +16,6 @@
         <div th:if="${notifications.size() > 0}" class="homepage-notifications-container">
             <div th:each="notification: ${notifications}" class="notification-card homepage-card">
                 <p th:text="${notification.content}"></p>
-<!--                <form th:action="@{/notifications/{id}(id=${notification.id})}" method="post">-->
-<!--                    <button type="submit" class="fa-regular fa-circle-xmark notification-remove"></button>-->
-<!--                </form>-->
                 <a class="fa-regular fa-circle-xmark notification-remove" th:data-notification-id="${notification.id}"></a>
             </div>
         </div>
