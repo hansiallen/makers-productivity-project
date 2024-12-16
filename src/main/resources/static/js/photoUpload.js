@@ -11,4 +11,17 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+    // Message for delay whilst photo is uploading
+    const updateForm = document.querySelector(".update-profile-container");
+    const formSubmitBtn = document.querySelector(".submit-btn");
+
+    updateForm.addEventListener("submit", profileUpdating);
+
+    function profileUpdating(e) {
+        e.preventDefault();
+        formSubmitBtn.textContent = "Updating...";
+        formSubmitBtn.disabled = true;
+        this.submit();
+    }
 });
