@@ -16,10 +16,10 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file from the build stage
-COPY --from=build /app/build/libs/productivity-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=build /app/ ./
 
 # Expose the port the app will run on (default Spring Boot port is 8080)
 EXPOSE 8080
 
 # Command to run the Spring Boot application
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "productivity-0.0.1-SNAPSHOT.jar"]
