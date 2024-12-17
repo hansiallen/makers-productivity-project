@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @RestController
 public class HomeController {
@@ -32,7 +33,9 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("/page/contacts.html");
         Iterable<Long> contactIds = contactRepository.findUserIdsByUser1Id(currentUser.getCurrentUser().getId());
         Iterable<UserProfile> contacts = userProfileRepository.findAllById(contactIds);
+        long contactsCount = StreamSupport.stream(contactIds.spliterator(), false).count();
         modelAndView.addObject("contacts", contacts);
+        modelAndView.addObject("contactsCount", Long.toString(contactsCount));
         return modelAndView;
     }
 
