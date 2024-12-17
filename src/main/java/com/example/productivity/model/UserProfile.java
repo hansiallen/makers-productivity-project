@@ -1,7 +1,11 @@
 package com.example.productivity.model;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "USER_PROFILES")
@@ -15,8 +19,10 @@ public class UserProfile {
     private String profilePhotoUrl;
     private String preferredName;
     private String email;
+    private String phoneNumber;
+    private LocalDate birthday;
   
-    public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName, String email) {
+    public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName, String email, String phoneNumber, LocalDate birthday) {
         this.userId = userId;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -24,6 +30,8 @@ public class UserProfile {
         this.profilePhotoUrl = profilePhotoUrl;
         this.preferredName = preferredName;
         this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthday = birthday;
     }
 
     public UserProfile() {
@@ -80,4 +88,12 @@ public class UserProfile {
     public String getEmail(){return email;}
 
     public void setEmail(String email){this.email = email;}
+
+    public String getPhoneNumber(){ return phoneNumber;}
+
+    public void setPhoneNumber(String phoneNumber){this.phoneNumber = phoneNumber;}
+
+    public LocalDate getBirthday(){return birthday;}
+
+    public void setBirthday(LocalDate birthday){this.birthday = birthday;}
 }
