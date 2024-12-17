@@ -60,6 +60,7 @@ a{
 .day {
     height: auto;
 }
+}
 
 .create-event-container {
     background-color: var(--popup-background);
@@ -162,6 +163,21 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     display:block;
 }
 
+.hour-time {
+    left: 5vh;
+    display: grid;
+    height: 9.5vh;
+    margin: 0.5%;
+    white-space: pre-wrap;
+   margin:0;
+   border-top: 0.5vh solid #4588ba;
+}
+
+.event{
+   position : absolute;
+   left: 15%;
+   background: #666;
+   margin:0;
 .event-contacts {
     margin-top: 1em;
 }
