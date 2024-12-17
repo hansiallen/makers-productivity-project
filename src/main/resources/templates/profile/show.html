@@ -39,6 +39,17 @@
              th:text="${userProfile.email}">
           </a>
         </div>
+
+        <div th:if="${userProfile.phoneNumber != null && userProfile.phoneNumber != ''}" class="profile-field">
+          <label for="phoneNumber">Phone number</label>
+          <div id = "phoneNumber" th:text="*{phoneNumber}"></div>
+        </div>
+
+        <div th:if="${userProfile.birthday != null && userProfile.birthday != ''}" class="profile-field">
+          <label for="birthday">Birthday</label>
+          <div id = "birthday" th:text="*{birthday}"></div>
+        </div>
+
         <p th:if="${!customFields.isEmpty()}">Custom Fields</p>
         <div th:replace="~{profile/customField/show :: show}"></div>
 
