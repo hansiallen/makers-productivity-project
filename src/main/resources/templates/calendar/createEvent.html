@@ -3,18 +3,50 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:replace="~{core/head}"></head>
+<link rel="stylesheet" href="/css/calendar.css">
+<script src="/js/eventAddContact.js" defer></script>
 <body>
 
-<h2>Create event</h2>
-<form method="POST" action="/event/create">
-    Title: <input type="text" name="title" placeholder="event name" required><br>
-    Description: <input type="text" name="description"><br>
-    Date of event: <input type="date" name = "date" required><br>
-    Start time: <input type="time" name="startTime" required><br>
-    End time: <input type="time" name="endTime" required><br>
-    <input type="submit" name="submit">
-</form>
+    <div class="create-event-container">
+        <h2 class="page-header">Create Event</h2>
+        <form method="POST" action="/event/create" class="create-event-form">
+            <div class="create-event-field">
+                <label>Title</label>
+                <input type="text" name="title" placeholder="Event name" required>
+            </div>
+            <div class="create-event-field">
+                <label>Description</label>
+                <input type="text" name="description" placeholder="Event description">
+            </div>
+            <div class="create-event-field">
+                <label>Date</label>
+                <input type="date" name = "date" required>
+            </div>
+            <div class="create-event-field">
+                <label>Start Time</label>
+                <input type="time" name="startTime" required>
+            </div>
+            <div class="create-event-field">
+                <label>End Time</label>
+                <input type="time" name="endTime" required>
+            </div>
+            <div>
+                <p class="event-add-contacts">Add Contacts</p>
+            </div>
+            <div class="event-contact-search-container hidden">
+                <div id="contacts-dropdown" class="dropdown">
+                    <input type="text" placeholder="Search..." id="myInput" class="dropdown-input">
+                    <div id="myDropdown" class="dropdown-content">
+                    </div>
+                </div>
+                <div class="event-contacts"></div>
+            </div>
+            <div class="create-event-btn-container">
+                <button type="submit" class="create-event-btn">Create</button>
+            </div>
+        </form>
+    </div>
 
-<div th:replace="~{core/navbar}"></div>
+    <div th:replace="~{core/navbar}"></div>
 </body>
 </html>
