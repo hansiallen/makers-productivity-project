@@ -20,8 +20,8 @@
             <a href="/profile/me" class="personal-cont">
                 <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png">
                 <div>
-                    <h2>Bob Smith</h2>
-                    <p>124 Contacts</p>
+                    <h2><span th:text ="${currentUser.firstName} + ' ' + ${currentUser.lastName}"></span></h2>
+                    <p th:text ="${contactsCount} + ' contacts'"></p>
                 </div>
                 <span>></span>
             </a>

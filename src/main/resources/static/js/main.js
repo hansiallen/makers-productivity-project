@@ -30,7 +30,6 @@ function generateQRCode() {
 }
 
 function fetchIdAndGenerateQRCode() {
-
     // create a new XMLHttpRequest object
     var xhr = new XMLHttpRequest();
 
@@ -40,17 +39,21 @@ function fetchIdAndGenerateQRCode() {
 
     // handle the response
     xhr.onreadystatechange = function() {
-        // parse the JSON response
-        var response = JSON.parse(xhr.responseText);
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                // parse the JSON response
+                var response = JSON.parse(xhr.responseText);
 
-        var qrcode = new QRCode("qr-code-area", {
-            text: "https://networks.hansiallen.me/CAR/" + response,
-            width: 200,
-            height: 200,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.M
-        });
+                var qrcode = new QRCode("qr-code-area", {
+                    text: "https://networks.hansiallen.me/CAR/" + response,
+                    width: 200,
+                    height: 200,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.M
+                });
+            }
+        }
     }
 
     xhr.send();
@@ -113,7 +116,36 @@ function onScanFailure(error) {
 }
 
 function addContactThroughCode() {
-    addContact(prompt("Enter the code to add the contact!"));
+    document.getElementById('nav-toggle-add-menu').checked = false;
+    let popup = document.getElementById('popup-div')
+    popup.innerHTML = '<button class="hide-popup-button" onclick="closePopup();"></button><div class="outline-text-box"><input type="number" id="contact-add-input" placeholder="Code to add contact"></div><button onclick="addContact(document.getElementById(\'contact-add-input\').value);">Add contact by code</button><p style="margin-bottom: 0px;">Your short-term code:</p><div class="outline-text-box" id="one-time-code">Generating...</div>';
+    popup.classList.remove('hidden');
+    // create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // set up the request
+    xhr.open('GET', '/get-share-code');
+    xhr.withCredentials = true;
+
+    // handle the response
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                // parse the JSON response
+                var response = JSON.parse(xhr.responseText);
+
+                document.getElementById('one-time-code').innerHTML = response;
+            }
+        }
+    }
+
+    xhr.send();
+}
+
+function closePopup() {
+    let popup = document.getElementById('popup-div');
+    popup.innerHTML = '';
+    popup.classList.add('hidden');
 }
 
 function addContact(code) {
@@ -192,3 +224,13 @@ function loadScript(url) {
     };
 }
 
+// Register service worker for installability purposes
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/js/sw.js')
+    .then((registration) => {
+        console.log('Service Worker registered');
+    })
+    .catch((error) => {
+        console.error('Service Worker registration failed:', error);
+    });
+}

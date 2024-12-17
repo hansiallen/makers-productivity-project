@@ -21,8 +21,9 @@
     width: 100%;
 }
 
-.profile-field input,
+.profile-field .profile-update-input,
 .profile-field .custom-link,
+.profile-field .field-link,
 .profile-field div {
   outline: none;
   background-color: var(--page-background);
@@ -41,8 +42,7 @@
 .profile-field {
   position: relative;
   font-size: inherit;
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin: 1em;
   display: flex;
   width: 100%;
 }
@@ -127,12 +127,19 @@
     font-size: 0.8em;
 }
 
-.submit-btn {
+.submit-btn,
+.submit-btn-square{
     background-color: var(--secondary-accent);
     padding: 1em 3em;
     border-radius: 1em;
     font-size: 1em;
-    margin: 0.25em;
+    margin: 0 0.5em;
+}
+
+.submit-btn-square {
+    padding: 1em;
+    outline: none;
+    border-style:none;
 }
 
 .hidden {
