@@ -30,9 +30,10 @@ body {
 }
 
 .personal-cont img {
+    width: 4rem;
     height: 4rem;
-    aspect-ration: 1/1;
-    border-radius: 100%;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .personal-cont div {

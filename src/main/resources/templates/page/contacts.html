@@ -18,7 +18,7 @@
     <div class="main-cont">
         <div class="static-cont">
             <a href="/profile/me" class="personal-cont">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png">
+                <img class="profile-picture-small" th:src="${currentUser.profilePhotoUrl != null ? currentUser.profilePhotoUrl : '/img/icon/default-profile.png'}">
                 <div>
                     <h2><span th:text ="${currentUser.firstName} + ' ' + ${currentUser.lastName}"></span></h2>
                     <p th:text ="${contactsCount} + ' contacts'"></p>
