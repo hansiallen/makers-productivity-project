@@ -40,17 +40,21 @@ function fetchIdAndGenerateQRCode() {
 
     // handle the response
     xhr.onreadystatechange = function() {
-        // parse the JSON response
-        var response = JSON.parse(xhr.responseText);
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                // parse the JSON response
+                var response = JSON.parse(xhr.responseText);
 
-        var qrcode = new QRCode("qr-code-area", {
-            text: "https://networks.hansiallen.me/CAR/" + response,
-            width: 200,
-            height: 200,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.M
-        });
+                var qrcode = new QRCode("qr-code-area", {
+                    text: "https://networks.hansiallen.me/CAR/" + response,
+                    width: 200,
+                    height: 200,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.M
+                });
+            }
+        }
     }
 
     xhr.send();
