@@ -115,9 +115,12 @@ public class UserProfileController {
             userProfile.setProfilePhotoUrl(currentUserProfile.getProfilePhotoUrl());
         }
 
+        if(currentUserProfile.getBirthday() != null && userProfile.getBirthday() == null){
+            userProfile.setBirthday(currentUserProfile.getBirthday());
+        }
+
         userProfileRepository.save(userProfile);
 
-        System.out.println(userProfile.getUserId());
         return new RedirectView("/profile/"+userProfile.getUserId().toString());
     }
 }
