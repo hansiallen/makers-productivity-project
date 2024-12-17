@@ -41,7 +41,7 @@ public class ContactsController {
     @Autowired
     RollingCodeRepository rollingCodeRepository;
 
-    @GetMapping("/contact/add/{id}")
+    @GetMapping("/contact/add/{code}")
     public ModelAndView addContact(@PathVariable Long code) {
         boolean isValid = codeIsValid(code);
         if (!isValid) {
@@ -139,7 +139,7 @@ public class ContactsController {
         return rollingCode.getCode().toString();
     }
 
-    @GetMapping("/CAR/{id}")
+    @GetMapping("/CAR/{code}")
     public RedirectView addContactAndRedirect(@PathVariable Long code) {
         boolean isValid = codeIsValid(code);
         if (!isValid) {
