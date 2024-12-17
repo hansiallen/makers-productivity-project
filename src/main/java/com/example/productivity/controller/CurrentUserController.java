@@ -39,6 +39,7 @@ public class CurrentUserController {
         if (userProfile == null) {
             userProfile = new UserProfile();
             userProfile.setUserId(user.getId());
+            userProfile.setEmail(user.getEmail());
             userProfileRepository.save(userProfile);
             return new RedirectView("/profile/update");
         }

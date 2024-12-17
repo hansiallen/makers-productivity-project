@@ -32,6 +32,13 @@
           <label for="preferredName">Preferred name</label>
           <div id = "preferredName" th:text="*{preferredName}"></div>
         </div>
+        <div th:if="${userProfile != null && userProfile.email != null && userProfile.email != ''}" class="profile-field">
+          <label for="email">Email</label>
+          <a id="email"
+             th:href="'mailto:' + ${userProfile.email} + '?body=%0D%0A%0D%0A%0D%0AEmail sent from Networks!'"
+             th:text="${userProfile.email}">
+          </a>
+        </div>
         <p th:if="${!customFields.isEmpty()}">Custom Fields</p>
         <div th:replace="~{profile/customField/show :: show}"></div>
 

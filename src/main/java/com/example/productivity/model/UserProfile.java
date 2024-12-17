@@ -14,14 +14,16 @@ public class UserProfile {
     private String lastName;
     private String profilePhotoUrl;
     private String preferredName;
+    private String email;
   
-    public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName) {
+    public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName, String email) {
         this.userId = userId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.profilePhotoUrl = profilePhotoUrl;
         this.preferredName = preferredName;
+        this.email = email;
     }
 
     public UserProfile() {
@@ -74,4 +76,8 @@ public class UserProfile {
     public void setProfilePhotoUrl(String profilePhotoUrl) {
         this.profilePhotoUrl = profilePhotoUrl;
     }
+
+    public String getEmail(){return email;}
+
+    public void setEmail(String email){this.email = email;}
 }
