@@ -5,6 +5,7 @@ import com.example.productivity.model.CalendarDay;
 import com.example.productivity.model.Event;
 import com.example.productivity.repository.EventRepository;
 import com.example.productivity.repository.UserRepository;
+import com.example.productivity.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,8 @@ public class CalendarController {
     EventRepository eventRepository;
     @Autowired
     CurrentUserController currentUser;
+    @Autowired
+    CalendarService calendarService;
 
     @GetMapping("/calendar")
     public RedirectView calendarPageRedirect() {
@@ -81,15 +84,12 @@ public class CalendarController {
 
 
     @GetMapping("/event/create")
-    public ModelAndView createEventPage(){
-        return new ModelAndView("/calendar/createEvent");
-    }
-    @PostMapping("/event/create")
-    public RedirectView createEvent(@RequestParam String title, @RequestParam String description, @RequestParam LocalDate date, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime){
+    public ModelAndView createEventPage() {return new ModelAndView("/calendar/createEvent");}
 
-        Event newEvent = new Event(date, startTime, endTime, title, description, currentUser.getCurrentUser().getId());
-        System.out.println(newEvent.getId());
-        eventRepository.save(newEvent);
+    @PostMapping("/event/create")
+    public RedirectView createEvent(@RequestParam String title, @RequestParam String description, @RequestParam LocalDate date, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime, @RequestParam(required = false) List<Long> contactIds){
+        Long currentUserId = currentUser.getCurrentUser().getId();
+        calendarService.createEventWithAttendees(title, description, date, startTime, endTime, currentUserId, contactIds);
         return new RedirectView("/calendar");
     }
 

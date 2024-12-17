@@ -11,11 +11,11 @@ public class EventAttendee {
         private Long id;
         private Long eventId;
         private Long attendeeId;
-        private Long attendingStatus;
+        private String attendingStatus;
 
-        EventAttendee(){}
+        public EventAttendee() {}
 
-        EventAttendee(Long eventId, Long attendeeId, Long attendingStatus){
+        public EventAttendee(Long eventId, Long attendeeId, String attendingStatus) {
                 this.eventId = eventId;
                 this.attendeeId = attendeeId;
                 this.attendingStatus = attendingStatus;
@@ -38,11 +38,11 @@ public class EventAttendee {
                 this.attendeeId = attendeeId;
         }
 
-        public Long getAttendingStatus() {
+        public String getAttendingStatus() {
                 return attendingStatus;
         }
 
-        public void setAttendingStatus(Long attendingStatus) {
+        public void setAttendingStatus(String attendingStatus) {
                 this.attendingStatus = attendingStatus;
         }
 
