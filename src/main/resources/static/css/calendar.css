@@ -194,7 +194,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
  padding: 0;
  margin: 0 ;
  padding-left: 20px;
-
+}
 .hour-time {
     left: 5vh;
     display: grid;

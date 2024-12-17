@@ -6,7 +6,6 @@
 <body class="body">
 <div th:each="i : ${#numbers.sequence( 0, 24)}" class="hour-time">
     <div th:if="${i}<10" th:text="'0' + ${i} + ':00'" >
-
     </div>
     <div th:if="${i}>=10"th:text="${i} + ':00'">
     </div>
