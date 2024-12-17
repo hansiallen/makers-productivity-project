@@ -12,7 +12,7 @@
   <div class="profile-page" th:object="${userProfile}">
 <!--    <div th:if="${currUserIsViewingOwnProfile}"><div th:replace="~{profile/update :: update}"></div></div>-->
 
-    <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}">
+    <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}" >
 
       <div class="profile-fields">
         <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl != null ? userProfile.profilePhotoUrl : '/img/icon/default-profile.png'}">
@@ -34,7 +34,7 @@
         </div>
         <div th:if="${userProfile != null && userProfile.email != null && userProfile.email != ''}" class="profile-field">
           <label for="email">Email</label>
-          <a id="email"
+          <a class = "field-link" id="email"
              th:href="'mailto:' + ${userProfile.email} + '?body=%0D%0A%0D%0A%0D%0AEmail sent from Networks!'"
              th:text="${userProfile.email}">
           </a>
@@ -42,7 +42,7 @@
 
         <div th:if="${userProfile.phoneNumber != null && userProfile.phoneNumber != ''}" class="profile-field">
           <label for="phoneNumber">Phone number</label>
-          <a id="phoneNumber"
+          <a class ="field-link" id="phoneNumber"
              th:href="'tel:'+'*{phoneNumber}'"
              th:text="*{phoneNumber}">
           </a>
@@ -51,6 +51,14 @@
         <div th:if="${userProfile.birthday != null && userProfile.birthday != ''}" class="profile-field">
           <label for="birthday">Birthday</label>
           <div id = "birthday" th:text="*{birthday}"></div>
+          <form method="POST" action="/event/create">
+            <input type="hidden" name="title" th:value="|*{firstName}'s birthday!|">
+            <input type="hidden" name="description" th:value="|*{firstName} *{lastName}'s birthday!|">
+            <input type="hidden" name="date" th:value="*{birthday}">
+            <input type="hidden" name="startTime" value="00:00:01">
+            <input type="hidden" name="endTime" value="23:59:59">
+            <button type="submit" class="submit-btn-square" name="submit">add to calendar</button>
+          </form>
         </div>
 
         <p th:if="${!customFields.isEmpty()}">Custom Fields</p>
