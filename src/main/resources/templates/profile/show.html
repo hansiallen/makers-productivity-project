@@ -42,7 +42,10 @@
 
         <div th:if="${userProfile.phoneNumber != null && userProfile.phoneNumber != ''}" class="profile-field">
           <label for="phoneNumber">Phone number</label>
-          <div id = "phoneNumber" th:text="*{phoneNumber}"></div>
+          <a id="phoneNumber"
+             th:href="'tel:'+'*{phoneNumber}'"
+             th:text="*{phoneNumber}">
+          </a>
         </div>
 
         <div th:if="${userProfile.birthday != null && userProfile.birthday != ''}" class="profile-field">
