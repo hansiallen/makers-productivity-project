@@ -24,7 +24,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
-
 import static java.lang.System.currentTimeMillis;
 
 @RestController
