@@ -32,6 +32,8 @@ public class CalendarController {
     public ModelAndView dayPage(@PathVariable Integer day, @PathVariable Integer month, @PathVariable Integer year) {
         ModelAndView model = new ModelAndView("calendar/day");
         LocalDate currentTime =LocalDate.of(year,month,day);
+        List<Event> events= eventRepository.findEventsInTimePeriodForUser(currentUser.getCurrentUser().getId(),currentTime,currentTime.plusDays(1));
+        model.addObject("events", events);
         return model;
     }
 
@@ -86,7 +88,6 @@ public class CalendarController {
     }
     @PostMapping("/event/create")
     public RedirectView createEvent(@RequestParam String title, @RequestParam String description, @RequestParam LocalDate date, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime){
-
         Event newEvent = new Event(date, startTime, endTime, title, description, currentUser.getCurrentUser().getId());
         System.out.println(newEvent.getId());
         eventRepository.save(newEvent);

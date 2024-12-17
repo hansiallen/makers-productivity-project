@@ -57,7 +57,23 @@ a{
    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
 }
 
-.day{
+.day {
     height: auto;
+}
 
+.hour-time {
+    left: 5vh;
+    display: grid;
+    height: 9.5vh;
+    margin: 0.5%;
+    white-space: pre-wrap;
+   margin:0;
+   border-top: 0.5vh solid #4588ba;
+}
+
+.event{
+   position : absolute;
+   left: 15%;
+   background: #666;
+   margin:0;
 }
