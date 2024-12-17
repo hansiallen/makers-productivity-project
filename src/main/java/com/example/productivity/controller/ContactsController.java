@@ -42,8 +42,13 @@ public class ContactsController {
     RollingCodeRepository rollingCodeRepository;
 
     @GetMapping("/contact/add/{id}")
-    public ModelAndView addContact(@PathVariable int id) {
-        Long idToAdd = (long) id;
+    public ModelAndView addContact(@PathVariable Long code) {
+        boolean isValid = codeIsValid(code);
+        if (!isValid) {
+            ModelAndView err = new ModelAndView("core/error");
+            err.addObject("errorMessage", "Invalid code. Please regenerate code again and retry. The code may have expired.");
+        }
+        Long idToAdd = codeToId(code);
         Long currentUserId = currentUser.getCurrentUser().getId();
         System.out.println(idToAdd);
         System.out.println(userProfileRepository.existsById(idToAdd));
@@ -136,6 +141,10 @@ public class ContactsController {
 
     @GetMapping("/CAR/{id}")
     public RedirectView addContactAndRedirect(@PathVariable Long code) {
+        boolean isValid = codeIsValid(code);
+        if (!isValid) {
+            return new RedirectView("/profile/error#2");
+        }
         Long idToAdd = codeToId(code);
         Long currentUserId = currentUser.getCurrentUser().getId();
         System.out.println(idToAdd);
