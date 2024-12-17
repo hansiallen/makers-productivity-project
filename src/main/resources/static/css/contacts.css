@@ -32,7 +32,7 @@ body {
 .personal-cont img {
     height: 4rem;
     aspect-ratio: 1/1;
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .personal-cont div {
@@ -85,7 +85,7 @@ body {
 .user-cont img{
     height: 32px;
     aspect-ratio: 1/1;
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .user-cont h3 {
