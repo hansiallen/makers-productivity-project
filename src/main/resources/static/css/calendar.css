@@ -201,6 +201,14 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .event{
    position : absolute;
    left: 15%;
+   overflow-x: auto;
    background: #666;
    margin:0;
+   white-space: pre-wrap;
+   width: 5vh;
+}
+
+.event-text{
+  margin:10px;
+
 }
