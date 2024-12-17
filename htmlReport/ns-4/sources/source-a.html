@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserProfile</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.productivity.model</a>
+</div>
+
+<h1>Coverage Summary for Class: UserProfile (com.example.productivity.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserProfile</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.productivity.model;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import org.springframework.cglib.core.Local;
+&nbsp;import org.springframework.web.multipart.MultipartFile;
+&nbsp;
+&nbsp;import java.sql.Date;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;USER_PROFILES&quot;)
+&nbsp;public class UserProfile {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    private Long userId;
+&nbsp;    private String firstName;
+&nbsp;    private String middleName;
+&nbsp;    private String lastName;
+&nbsp;    private String profilePhotoUrl;
+&nbsp;    private String preferredName;
+&nbsp;    private String email;
+&nbsp;    private String phoneNumber;
+&nbsp;    private LocalDate birthday;
+&nbsp;  
+<b class="nc">&nbsp;    public UserProfile(Long userId, String firstName, String middleName, String lastName, String profilePhotoUrl, String preferredName, String email, String phoneNumber, LocalDate birthday) {</b>
+<b class="nc">&nbsp;        this.userId = userId;</b>
+<b class="nc">&nbsp;        this.firstName = firstName;</b>
+<b class="nc">&nbsp;        this.middleName = middleName;</b>
+<b class="nc">&nbsp;        this.lastName = lastName;</b>
+<b class="nc">&nbsp;        this.profilePhotoUrl = profilePhotoUrl;</b>
+<b class="nc">&nbsp;        this.preferredName = preferredName;</b>
+<b class="nc">&nbsp;        this.email = email;</b>
+<b class="nc">&nbsp;        this.phoneNumber = phoneNumber;</b>
+<b class="nc">&nbsp;        this.birthday = birthday;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public UserProfile() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long getUserId() {
+<b class="nc">&nbsp;        return userId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUserId(Long userId) {
+<b class="nc">&nbsp;        this.userId = userId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getFirstName() {
+<b class="nc">&nbsp;        return firstName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFirstName(String firstName) {
+<b class="nc">&nbsp;        this.firstName = firstName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getLastName() {
+<b class="nc">&nbsp;        return lastName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLastName(String lastName) {
+<b class="nc">&nbsp;        this.lastName = lastName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getMiddleName() {
+<b class="nc">&nbsp;        return middleName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMiddleName(String middleName) {
+<b class="nc">&nbsp;        this.middleName = middleName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPreferredName() {
+<b class="nc">&nbsp;        return preferredName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPreferredName(String preferredName) {
+<b class="nc">&nbsp;        this.preferredName = preferredName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getProfilePhotoUrl() {
+<b class="nc">&nbsp;        return profilePhotoUrl;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setProfilePhotoUrl(String profilePhotoUrl) {
+<b class="nc">&nbsp;        this.profilePhotoUrl = profilePhotoUrl;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public String getEmail(){return email;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public void setEmail(String email){this.email = email;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public String getPhoneNumber(){ return phoneNumber;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public void setPhoneNumber(String phoneNumber){this.phoneNumber = phoneNumber;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public LocalDate getBirthday(){return birthday;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public void setBirthday(LocalDate birthday){this.birthday = birthday;}</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-17 13:55</div>
+</div>
+</body>
+</html>

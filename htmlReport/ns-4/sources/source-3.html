@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CustomField</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.productivity.model</a>
+</div>
+
+<h1>Coverage Summary for Class: CustomField (com.example.productivity.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CustomField</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.productivity.model;
+&nbsp;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Custom_Fields&quot;)
+&nbsp;public class CustomField {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    private Long id;
+&nbsp;    private Long userId;
+&nbsp;    private String customInfoKey;
+&nbsp;    private String customInfoContent;
+&nbsp;
+<b class="fc">&nbsp;    CustomField(Long userProfileId,String customInfoKey,String customInfoContent){</b>
+<b class="fc">&nbsp;        this.userId = userProfileId;</b>
+<b class="fc">&nbsp;        this.customInfoKey = customInfoKey;</b>
+<b class="fc">&nbsp;        this.customInfoContent = customInfoContent;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public CustomField(){</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long getUserId() {
+<b class="fc">&nbsp;        return userId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long getId(){
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCustomInfoKey(String customInfoKey) {
+<b class="fc">&nbsp;        this.customInfoKey = customInfoKey;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getCustomInfoKey() {
+<b class="fc">&nbsp;        return customInfoKey;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCustomInfoContent(String customInfoValue) {
+<b class="fc">&nbsp;        this.customInfoContent = customInfoValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getCustomInfoContent() {
+<b class="fc">&nbsp;        return customInfoContent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUserId(Long userId) {
+<b class="fc">&nbsp;        this.userId = userId;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-17 13:55</div>
+</div>
+</body>
+</html>

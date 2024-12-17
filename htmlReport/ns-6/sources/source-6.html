@@ -1,0 +1,97 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ContactRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.productivity.repository</a>
+</div>
+
+<h1>Coverage Summary for Class: ContactRepository (com.example.productivity.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ContactRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.productivity.repository;
+&nbsp;
+&nbsp;import com.example.productivity.model.Contact;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.CrudRepository;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public interface ContactRepository extends CrudRepository&lt;Contact,Long&gt; {
+&nbsp;
+&nbsp;    @Query(&quot;SELECT CASE WHEN COUNT(*) &gt; 0 THEN TRUE ELSE FALSE END AS has_contact FROM Contact WHERE (user_id1 = :user_id1 AND user_id2 = :user_id2) OR (user_id1 = :user_id2 AND user_id2 = :user_id1)&quot;)
+&nbsp;    boolean usersInContacts(@Param(&quot;user_id1&quot;) Long userId1, @Param(&quot;user_id2&quot;) Long user_id2);
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT user_id2 FROM contacts WHERE user_id1 = :userId AND is_favourite = true&quot;, nativeQuery = true)
+&nbsp;    List&lt;Long&gt; findFavouritesUserIdsByUser1Id(Long userId);
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT user_id2 FROM contacts WHERE user_id1 = :userId&quot;, nativeQuery = true)
+&nbsp;    List&lt;Long&gt; findUserIdsByUser1Id(Long userId);
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT * FROM contacts WHERE user_id1 = :userId1 AND user_id2 = :userId2&quot;, nativeQuery = true)
+&nbsp;    Contact findContactByUserId1AndUserId2(Long userId1, Long userId2);
+&nbsp;
+&nbsp;    @Query(value = &quot;DELETE FROM contacts WHERE user_id1 = :userId1 AND user_id2 = :userId2&quot;, nativeQuery = true)
+&nbsp;    void deleteByUserId1AndUserId2(Long userId1, Long userId2);
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT COALESCE(is_favourite, false) FROM contacts WHERE user_id1 = :userId1 AND user_id2 = :userId2&quot;, nativeQuery = true)
+&nbsp;    Boolean isContactFavourite(Long userId1, Long userId2);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-17 13:55</div>
+</div>
+</body>
+</html>
