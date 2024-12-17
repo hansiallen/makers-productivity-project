@@ -1,7 +1,9 @@
 package com.example.productivity.controller;
 
 import com.example.productivity.model.Contact;
+import com.example.productivity.model.RollingCode;
 import com.example.productivity.repository.ContactRepository;
+import com.example.productivity.repository.RollingCodeRepository;
 import com.example.productivity.repository.UserProfileRepository;
 import com.example.productivity.service.NotificationsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Random;
+
+import static java.lang.System.currentTimeMillis;
 
 @RestController
 public class ContactsController {
@@ -28,6 +37,9 @@ public class ContactsController {
 
     @Autowired
     NotificationsService notificationsService;
+
+    @Autowired
+    RollingCodeRepository rollingCodeRepository;
 
     @GetMapping("/contact/add/{id}")
     public ModelAndView addContact(@PathVariable int id) {
@@ -50,10 +62,32 @@ public class ContactsController {
             return err;
         }
     }
-  
-    @GetMapping("/contact/add/json/{id}")
-    public String addContactReturnJSON(@PathVariable int id) {
-        Long idToAdd = (long) id;
+
+    boolean codeIsValid(Long code) {
+        boolean exists = rollingCodeRepository.existsByCode(code);
+        if (exists) {
+            System.out.println("Exists!");
+            Timestamp currentTime = Timestamp.from(Instant.now());
+            System.out.println(currentTime);
+            RollingCode codeObject = rollingCodeRepository.findById(code).get();
+            Timestamp comparisonTime = codeObject.getExpiryTime();
+            System.out.println(comparisonTime);
+            return comparisonTime.after(currentTime);
+        }
+        return false;
+    }
+
+    Long codeToId(Long code) {
+        return rollingCodeRepository.findById(code).get().getUserId();
+    }
+
+    @GetMapping("/contact/add/json/{code}")
+    public String addContactReturnJSON(@PathVariable Long code) {
+        boolean isValid = codeIsValid(code);
+        if (!isValid) {
+            return "{\"success\": false, \"error\": \"Invalid code. Please regenerate code again and retry. The code may have expired.\"}";
+        }
+        Long idToAdd = codeToId(code);
         Long currentUserId = currentUser.getCurrentUser().getId();
         System.out.println(idToAdd);
         System.out.println(userProfileRepository.existsById(idToAdd));
@@ -79,23 +113,42 @@ public class ContactsController {
         return new RedirectView("/");
     }
 
+    Long generateShareCodeInt() {
+        Random random = new Random();
+        Long randomCode = (long) random.nextInt(99999999);
+        if (rollingCodeRepository.existsById(randomCode)) {
+            randomCode = generateShareCodeInt();
+        }
+        return randomCode;
+    }
+
     @GetMapping("/get-share-code")
     public String getShareCode() {
         Long currentUserId = currentUser.getCurrentUser().getId();
-        return currentUserId.toString();
+        Instant currentInstant = Instant.now();
+        Instant expiryInstant = currentInstant.plus(1, ChronoUnit.HOURS);
+        Timestamp expiryTime = Timestamp.from(expiryInstant);
+        Long code = generateShareCodeInt();
+        RollingCode rollingCode = new RollingCode(code, currentUserId, expiryTime);
+        rollingCodeRepository.save(rollingCode);
+        return rollingCode.getCode().toString();
     }
 
     @GetMapping("/CAR/{id}")
-    public RedirectView addContactAndRedirect(@PathVariable int id) {
-        Long idToAdd = (long) id;
+    public RedirectView addContactAndRedirect(@PathVariable Long code) {
+        Long idToAdd = codeToId(code);
         Long currentUserId = currentUser.getCurrentUser().getId();
         System.out.println(idToAdd);
         System.out.println(userProfileRepository.existsById(idToAdd));
         System.out.println(!idToAdd.equals(currentUserId));
         if (userProfileRepository.existsById(idToAdd) && !idToAdd.equals(currentUserId)) {
             Contact contact = new Contact(currentUserId, idToAdd);
+            contact.setUserId1(currentUserId);
+            contact.setUserId2(idToAdd);
             contactRepository.save(contact);
-            return new RedirectView("/profile/" + id);
+            notificationsService.userAddsContactNotification(currentUserId, idToAdd);
+            notificationsService.userIsAddedAsContactNotification(currentUserId, idToAdd);
+            return new RedirectView("/profile/" + idToAdd);
         } else {
             return new RedirectView("/profile/error");
         }
