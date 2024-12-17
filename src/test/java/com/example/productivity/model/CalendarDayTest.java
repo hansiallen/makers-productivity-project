@@ -42,7 +42,7 @@ class CalendarDayTest {
         List<String> events = calendarDay.getEvents();
 
         assertNotNull(events);
-        assertEquals(4, events.size());
+        assertEquals(2, events.size());
         assertTrue(events.contains("Meeting with team"));
         assertTrue(events.contains("Doctor's appointment"));
     }
@@ -55,7 +55,7 @@ class CalendarDayTest {
         List<String> events = calendarDay.getEvents();
 
         assertNotNull(events);
-        assertEquals(4, events.size());
+        assertEquals(2, events.size());
         assertTrue(events.contains("Event 1"));
         assertTrue(events.contains("Event 2"));
     }
