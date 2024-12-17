@@ -15,6 +15,15 @@ public class RollingCode {
     private Long userId;
     private Timestamp expiryTime;
 
+    public RollingCode() {
+    }
+
+    public RollingCode(Long code, Long userId, Timestamp expiryTime) {
+        this.code = code;
+        this.userId = userId;
+        this.expiryTime = expiryTime;
+    }
+
     public Long getCode() { return this.code; }
     public void setCode(Long code) { this.code = code; }
 
