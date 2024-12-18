@@ -9,11 +9,11 @@
     <div class="profile-fields">
       <div class="profile-field">
         <label for="customInfoKey">Field name</label>
-        <input id="customInfoKey" type="text" th:field="*{customInfoKey}" placeholder="Field name"/>
+        <input class="profile-update-input" id="customInfoKey" type="text" th:field="*{customInfoKey}" placeholder="Field name"/>
       </div>
       <div class="profile-field">
         <label for="customInfoContent">Field value</label>
-        <input id="customInfoContent" type="text" th:field="*{customInfoContent}" placeholder="Field value" required/>
+        <input class="profile-update-input" id="customInfoContent" type="text" th:field="*{customInfoContent}" placeholder="Field value" required/>
       </div>
     </div>
     <button type="submit" class="submit-btn">Add new field</button>

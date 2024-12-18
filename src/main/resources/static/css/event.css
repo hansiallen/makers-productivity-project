@@ -91,3 +91,8 @@
     color: var(--red-dark-mode);
 }
 
+.event-error-msg {
+    margin-top: 12em;
+    text-align: center;
+}
+
