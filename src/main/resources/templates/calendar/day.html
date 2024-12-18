@@ -12,9 +12,9 @@
 </div>
 
 <div th:each="event, i : ${events}"><a th:href="'/events/'+${event.id}">
-<div class="event" th:style="'left: '+${i.index *6 + 10}+'%; top : ' + ${event.getTimeAsVH(event.startTime)} +'vh; height : ' + ${event.getTimeAsVH(event.endTime) - event.getTimeAsVH(event.startTime)} +'vh;'">
+<div class="event" th:style="'left: '+${i.index *15 + 5}+'%; top : ' + ${event.getTimeAsVH(event.startTime)} +'vh; height : ' + ${event.getTimeAsVH(event.endTime) - event.getTimeAsVH(event.startTime)} +'vh;'">
     <div th:text="${event.title}" class="event-text"></div>
-    <span th:text="${event.description}" class="event-text"></span>
+    <span th:text="${event.description}" class="event-text" th:if="${event.description} != ''"></span>
 </div>
 </a>
 </div>
