@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -46,9 +48,27 @@ public class HomeController {
         List<Event> upcomingEvents = eventRepository.findNextUpcomingEvents(3, currentUser.getCurrentUser().getId());
         List<Long> favouriteContactIds = contactRepository.findFavouritesUserIdsByUser1Id(currentUser.getCurrentUser().getId());
         List<UserProfile> favouriteContactsProfiles = userProfileRepository.findAllById(favouriteContactIds);
+
+        Map<Long, String> redirectMap = new HashMap<>();
+        for (Notification notification : notifications) {
+            String redirectUrl = "";
+            String type = notification.getType();
+
+            if (type.equals("event")) {
+                redirectUrl += "/events/" + notification.getEventId();
+            } else if (type.equals("contact")) {
+                redirectUrl += "/profile/" + notification.getSenderId();
+            } else {
+                redirectUrl += "/";
+            }
+
+            redirectMap.put(notification.getId(), redirectUrl);
+        }
+
         modelAndView.addObject("notifications", notifications);
         modelAndView.addObject("upcomingEvents", upcomingEvents);
         modelAndView.addObject("favouriteContacts", favouriteContactsProfiles);
+        modelAndView.addObject("redirectMap", redirectMap);
         return modelAndView;
     }
 }

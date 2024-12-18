@@ -1,0 +1,81 @@
+.event-container {
+    width: 90%;
+    max-width: 20em;
+    margin: 0 auto;
+    border: 1px solid var(--secondary-accent);
+    padding: 2em 1em;
+    border-radius: 0.75em;
+}
+
+.event-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+.event-description {
+    margin-bottom: 2em;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-left: 0.5em;
+    margin-bottom: 2em;
+}
+
+.event-detail {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
+.event-details p {
+    margin: 0;
+ }
+
+.attendee-status {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1em;
+    margin: 0 0.5em;
+}
+
+.attendees-header {
+    margin-bottom: 0;
+}
+
+.event-btns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2em;
+    margin-top: 2em;
+}
+
+.event-btn {
+    border-radius: 0.75em;
+    padding: 0.5em 0;
+    width: 6em;
+    text-align: center;
+}
+
+.organiser-event-btn {
+    background-color: var(--secondary-accent);
+    color: var(--page-background: #202C39);
+}
+
+.attendee-event-btn {
+    border: 1px solid var(--secondary-accent);
+    color: var(--secondary-accent);
+}
+
+.attendee-event-btn-selected {
+    background-color: var(--secondary-accent);
+    color: var(--page-background);
+}
+
+.dropdown-empty-msg {
+    padding: 1em;
+    border: 1px solid red;
+}

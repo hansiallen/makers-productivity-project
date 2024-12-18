@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<head>
+    <link rel="stylesheet" href="/css/event.css">
+    <script src="/js/event.js" defer></script>
+</head>
+<body>
+    <div th:replace="~{core/navbar}"></div>
+    <div th:if="${userIsEventAttendee || userIsEventOrganiser}">
+        <h1 class="page-header">networks</h1>
+        <div class="event-container">
+            <h2 th:text="${event.title}"></h2>
+            <p class="event-description" th:text="${event.description}"></p>
+            <div class="event-details">
+                <div class="event-detail">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p th:text="${#temporals.dayOfWeekNameShort(event.date)} + ' ' + ${#temporals.format(event.date, 'dd MMM')}"></p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-solid fa-clock"></i>
+                    <p th:text="${event.startTime} + ' - ' + ${event.endTime}"></p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Event location?</p>
+                </div>
+                <div th:if="${eventAttendees != null and eventAttendees.size() > 0}" class="event-detail">
+                    <i class="fa-regular fa-square-check"></i>
+                    <p th:if="${userIsEventOrganiser}">Organiser</p>
+                    <p th:if="${!userIsEventOrganiser}" th:text="${userEventStatus}" class="user-event-status"></p>
+                </div>
+            </div>
+            <h3 class="attendees-header">Attendees</h3>
+            <div th:if="${eventAttendees != null and eventAttendees.size() > 0}" th:each="attendee : ${eventAttendees}">
+                <div class="attendee-status">
+                    <p th:text="${attendee.firstName} + ' ' + ${attendee.lastName}"></p>
+                    <p class="attendee-event-status" th:data-contact-id="${attendee.userId}" th:text="${attendeeEventStatuses[attendee.userId]}"></p>
+                </div>
+            </div>
+            <div th:if="${userIsEventOrganiser}" class="event-btns">
+                <a class="event-btn organiser-event-btn">Edit</a>
+                <a class="event-btn organiser-event-btn">Cancel</a>
+            </div>
+            <div th:if="${!userIsEventOrganiser}" class="event-btns">
+                <a class="event-btn attendee-event-btn"
+                    id="event-decline"
+                    th:data-attendee-id="${currentUserId}"
+                    th:data-event-id="${event.id}"
+                    th:classappend="${userEventStatus == 'Declined' ? ' attendee-event-btn-selected' : ''}"
+                ><i class="fa-solid fa-xmark"></i></a>
+                <a class="event-btn attendee-event-btn"
+                    id="event-maybe"
+                    th:data-attendee-id="${currentUserId}"
+                    th:data-event-id="${event.id}"
+                    th:classappend="${userEventStatus == 'Maybe' ? ' attendee-event-btn-selected' : ''}"
+                ><i class="fa-solid fa-question"></i></a>
+                <a class="event-btn attendee-event-btn"
+                   id="event-accept"
+                   th:data-attendee-id="${currentUserId}"
+                   th:data-event-id="${event.id}"
+                   th:classappend="${userEventStatus == 'Accepted' ? ' attendee-event-btn-selected' : ''}"
+                ><i class="fa-solid fa-check"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${!userIsEventAttendee && !userIsEventOrganiser}">
+        <p>No event to view.</p>
+    </div>
+
+</body>
+</html>

@@ -15,7 +15,7 @@
         <h2>Notifications</h2>
         <div th:if="${notifications.size() > 0}" class="homepage-notifications-container">
             <div th:each="notification: ${notifications}" class="notification-card homepage-card">
-                <p th:text="${notification.content}"></p>
+                <a th:href="${redirectMap[notification.id]}" th:text="${notification.content}" class="notification-card-content"></a>
                 <a class="fa-regular fa-circle-xmark notification-remove" th:data-notification-id="${notification.id}"></a>
             </div>
         </div>

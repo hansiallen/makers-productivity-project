@@ -22,8 +22,6 @@ public class CalendarController {
     EventRepository eventRepository;
     @Autowired
     CurrentUserController currentUser;
-    @Autowired
-    CalendarService calendarService;
 
     @GetMapping("/calendar")
     public RedirectView calendarPageRedirect() {
@@ -83,16 +81,4 @@ public class CalendarController {
         }
         return days;
     }
-
-
-    @GetMapping("/event/create")
-    public ModelAndView createEventPage() {return new ModelAndView("/calendar/createEvent");}
-
-    @PostMapping("/event/create")
-    public RedirectView createEvent(@RequestParam String title, @RequestParam String description, @RequestParam LocalDate date, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime, @RequestParam(required = false) List<Long> contactIds){
-        Long currentUserId = currentUser.getCurrentUser().getId();
-        calendarService.createEventWithAttendees(title, description, date, startTime, endTime, currentUserId, contactIds);
-        return new RedirectView("/calendar");
-    }
-
 }
