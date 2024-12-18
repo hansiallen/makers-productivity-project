@@ -79,3 +79,8 @@
     padding: 1em;
     border: 1px solid red;
 }
+
+.event-error-msg {
+    margin-top: 12em;
+    text-align: center;
+}
