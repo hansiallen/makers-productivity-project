@@ -301,5 +301,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     border: var(--secondary-accent);
     border-radius: 4%;
     border-style: solid;
-
+    overflow-x: hidden;
+    padding: 0.2em;
 }
