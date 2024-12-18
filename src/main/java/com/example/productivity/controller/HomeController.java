@@ -44,7 +44,7 @@ public class HomeController {
     @GetMapping("/")
     public ModelAndView userHome() {
         ModelAndView modelAndView = new ModelAndView("/page/home.html");
-        List<Notification> notifications = notificationRepository.findByReceiverIdAndIsReadFalse(currentUser.getCurrentUser().getId());
+        List<Notification> notifications = notificationRepository.findByReceiverIdAndIsReadFalseOrderByCreatedAtDesc(currentUser.getCurrentUser().getId());
         List<Event> upcomingEvents = eventRepository.findNextUpcomingEvents(3, currentUser.getCurrentUser().getId());
         List<Long> favouriteContactIds = contactRepository.findFavouritesUserIdsByUser1Id(currentUser.getCurrentUser().getId());
         List<UserProfile> favouriteContactsProfiles = userProfileRepository.findAllById(favouriteContactIds);

@@ -1,6 +1,7 @@
 package com.example.productivity.controller;
 
 
+import ch.qos.logback.core.util.StringUtil;
 import com.example.productivity.model.CalendarDay;
 import com.example.productivity.model.Event;
 import com.example.productivity.repository.EventRepository;
@@ -62,7 +63,7 @@ public class CalendarController {
             l.addAll(m);
         }
         model.addObject("year", currentTime.getYear());
-        model.addObject("month", currentTime.getMonth().name());
+        model.addObject("month", StringUtil.capitalizeFirstLetter(currentTime.getMonth().name().toLowerCase())); //Converts 'MONTH' into 'Month'
         model.addObject("days", l);
         return model;
     }
