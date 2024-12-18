@@ -7,13 +7,6 @@
     <script src="/js/search.js"></script>
 </head>
 <body>
-    <dialog class="modal" data-modal>
-        <h3>Are you sure you want to remove this contact?</h3>
-        <form data-modal-form action="#" method="post">
-            <button type="submit">Remove Connection</button>
-        </form>
-        <button data-close-modal>Close</button>
-    </dialog>
 
     <div class="main-cont">
         <div class="static-cont">
@@ -35,7 +28,6 @@
                         <a class="user-cont" th:href="@{profile/{id}(id=${contact.userId})}">
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="Profile Picture">
                             <h3 th:text="${contact?.firstName} + ' ' + ${contact?.lastName}"></h3>
-                            <button class="remove-connection" th:onclick="|removeConnectionModal(event, ${contact.userId})|">Remove Connection</button>
                             <span>></span>
                         </a>
                     </div>
