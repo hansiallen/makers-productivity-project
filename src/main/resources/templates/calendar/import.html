@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:replace="~{core/head}"></head>
+<link rel="stylesheet" href="/css/calendar.css">
+<script type="text/javascript" src="/js/ical2json.js"></script>
+<script type="text/javascript" src="/js/import-calendar.js"></script>
+<div id="popup-div">
+    <h1>Bulk import events from ICS file</h1>
+    <input type="file" accept=".ics" onchange="(function(event) {
+    let file = event.target.files[0];
+    if (file && file.name.endsWith('.ics')) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            let icsContent = e.target.result;
+            let arr = processICSToARR(icsContent);
+            setICSFormContents(arr)
+        };
+        reader.readAsText(file);
+    } else {
+        alert('Please select a valid .ics file');
+    }
+})(event)">
+    <div class="hidden" id="ics-form">
+        <input type="text" name="array" id="ics-array-text-box">
+        <button onclick="sendEventsToAPI(document.getElementById('ics-array-text-box').value);">Import Calendar</button>
+    </div>
+</div>
+<div th:replace="~{core/navbar}"></div>
+</body>
+</html>

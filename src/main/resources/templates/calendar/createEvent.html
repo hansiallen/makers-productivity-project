@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/css/calendar.css">
 <script src="/js/eventAddContact.js" defer></script>
 <body>
-
     <div class="create-event-container">
         <h2 class="page-header">Create Event</h2>
         <form method="POST" action="/event/create" class="create-event-form">
@@ -45,6 +44,7 @@
                 <button type="submit" class="create-event-btn">Create</button>
             </div>
         </form>
+        <br><p><a href="/event/import" style="color: white; text-decoration: underline;">Bulk import from ICS file</a></p>
     </div>
 
     <div th:replace="~{core/navbar}"></div>
