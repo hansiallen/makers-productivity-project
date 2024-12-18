@@ -11,7 +11,7 @@ class EventAttendeeTest {
 
     @BeforeEach
     void setUp() {
-        eventAttendee = new EventAttendee(1L, 100L, 1L);
+        eventAttendee = new EventAttendee(1L, 100L, "pending");
     }
 
     @Test
@@ -19,18 +19,18 @@ class EventAttendeeTest {
         assertNotNull(eventAttendee);
         assertEquals(1L, eventAttendee.getEventId());
         assertEquals(100L, eventAttendee.getAttendeeId());
-        assertEquals(1L, eventAttendee.getAttendingStatus());
+        assertEquals("pending", eventAttendee.getAttendingStatus());
     }
 
     @Test
     void testSetters() {
         eventAttendee.setEventId(2L);
         eventAttendee.setAttendeeId(200L);
-        eventAttendee.setAttendingStatus(2L);
+        eventAttendee.setAttendingStatus("yes");
 
         assertEquals(2L, eventAttendee.getEventId());
         assertEquals(200L, eventAttendee.getAttendeeId());
-        assertEquals(2L, eventAttendee.getAttendingStatus());
+        assertEquals("yes", eventAttendee.getAttendingStatus());
     }
 
     @Test
@@ -47,11 +47,11 @@ class EventAttendeeTest {
         EventAttendee defaultEventAttendee = new EventAttendee();
         defaultEventAttendee.setEventId(3L);
         defaultEventAttendee.setAttendeeId(300L);
-        defaultEventAttendee.setAttendingStatus(3L);
+        defaultEventAttendee.setAttendingStatus("pending");
 
         assertEquals(3L, defaultEventAttendee.getEventId());
         assertEquals(300L, defaultEventAttendee.getAttendeeId());
-        assertEquals(3L, defaultEventAttendee.getAttendingStatus());
+        assertEquals("pending", defaultEventAttendee.getAttendingStatus());
     }
 
     @Test

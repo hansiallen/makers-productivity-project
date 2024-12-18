@@ -1,6 +1,7 @@
 package com.example.productivity.controller;
 
 import com.example.productivity.model.Contact;
+import com.example.productivity.model.UserProfile;
 import com.example.productivity.model.RollingCode;
 import com.example.productivity.repository.ContactRepository;
 import com.example.productivity.repository.RollingCodeRepository;
@@ -14,30 +15,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
-
 import static java.lang.System.currentTimeMillis;
 
 @RestController
 public class ContactsController {
     @Autowired
     ContactRepository contactRepository;
-
     @Autowired
     UserProfileRepository userProfileRepository;
-
     @Autowired
     CurrentUserController currentUser;
-
     @Autowired
     NotificationsService notificationsService;
-
     @Autowired
     RollingCodeRepository rollingCodeRepository;
 
@@ -109,8 +107,7 @@ public class ContactsController {
             return "{\"success\": false}";
         }
     }
-  
-    
+
     @PostMapping("/contact/remove/{id}")
     public RedirectView removeContact(@PathVariable int id) {
         Long currentUserId = currentUser.getCurrentUser().getId();
@@ -189,5 +186,13 @@ public class ContactsController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error adding favourite");
+    }
+
+    @GetMapping("/eventcontacts")
+    public List<UserProfile> getContacts(@RequestParam(value = "query", required = false) String query) {
+        if (query != null && !query.trim().isEmpty()) {
+            return userProfileRepository.searchByName(query, currentUser.getCurrentUser().getId());
+        }
+        return userProfileRepository.findContactsByUserId(currentUser.getCurrentUser().getId());
     }
 }
