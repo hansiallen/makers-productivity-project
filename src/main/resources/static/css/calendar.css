@@ -228,11 +228,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
    border-top: 0.5vh solid #4588ba;
 }
 
-.event{
-   position : absolute;
-   left: 15%;
-   background: #666;
-   margin:0;
 .event-contacts {
     margin-top: 1em;
 }

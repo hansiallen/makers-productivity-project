@@ -10,12 +10,13 @@
     <div th:if="${i}>=10"th:text="${i} + ':00'">
     </div>
 </div>
-<div th:each="event, i : ${events}">
-<div class="event" th:style="'left: '+${i.index *5 + 10}+'%; top : ' + ${event.getTimeAsVH(event.startTime)} +'vh; height : ' + ${event.getTimeAsVH(event.endTime) - event.getTimeAsVH(event.startTime)} +'vh;'">
+
+<div th:each="event, i : ${events}"><a th:href="'/events/'+${event.id}">
+<div class="event" th:style="'left: '+${i.index *6 + 10}+'%; top : ' + ${event.getTimeAsVH(event.startTime)} +'vh; height : ' + ${event.getTimeAsVH(event.endTime) - event.getTimeAsVH(event.startTime)} +'vh;'">
     <div th:text="${event.title}" class="event-text"></div>
     <span th:text="${event.description}" class="event-text"></span>
 </div>
-
+</a>
 </div>
 <div th:replace="~{core/navbar}"></div>
 </body>
