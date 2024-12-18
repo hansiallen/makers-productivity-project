@@ -69,6 +69,11 @@
     </div>
 
     <a th:if="${currUserIsViewingOwnProfile}" th:href="@{/profile/update}" class="submit-btn">Edit Profile</a>
+
+    <div th:if="${!currUserIsViewingOwnProfile && userInContacts}" class="profile-favourite-icon" th:data-contact-id="${userProfile.userId}">
+      <i th:if="${isFavouriteContact}" class="fa-solid fa-star"></i>
+      <i th:if="${!isFavouriteContact}" class="fa-regular fa-star"></i>
+    </div>
   </div>
 
   <div th:if="${!userInContacts && !currUserIsViewingOwnProfile}" class="profile-container">
@@ -78,15 +83,14 @@
       <div id = "firstName2" th:text="*{firstName}"></div>
     </div>
     <a th:href="@{/contact/add/{id}(id=${userProfile.userId})}" class="submit-btn">Add contact</a>
+
+
   </div>
 
 </div>
 
 
-<div th:if="${!currUserIsViewingOwnProfile && userInContacts}" class="profile-favourite-icon" th:data-contact-id="${userProfile.userId}">
-  <i th:if="${isFavouriteContact}" class="fa-solid fa-star"></i>
-  <i th:if="${!isFavouriteContact}" class="fa-regular fa-star"></i>
-</div>
+
 </body>
 </html>
 
