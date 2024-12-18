@@ -3,26 +3,29 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:replace="~{core/head}"></head>
 <link rel="stylesheet" href="/css/calendar.css">
-<body>
+<body class="calendar-body">
 <div th:replace="~{core/navbar}"></div>
 <div class="calendar-page">
     <div class="calendar-header">
-        <a th:href="@{'/calendar/'+ ${lastMonth}}"><button class = "month-buttons">last Month</button> </a>
-        <h3 th:text = "${month} +'  ' + ${year}" class = "month-buttons"></h3>
-        <a th:href="@{'/calendar/'+ ${nextMonth}}"><button class = "month-buttons">next Month</button> </a>
+        <a th:href="@{'/calendar/'+ ${lastMonth}}" class="submit-btn-square month-btn">prev</a>
+        <div class = "month-title">
+            <h1 class="year" th:text="${year}"></h1>
+            <h2 class="month" th:text="${month}"></h2>
+        </div>
+        <a th:href="@{'/calendar/'+ ${nextMonth}}" class="submit-btn-square month-btn">next</a>
     </div>
 
 
 
 <div class="calendar-container">
     <div class ="day-labels">
-        <div class="square day-label">Monday</div>
-        <div class="square day-label">Tuesday</div>
-        <div class="square day-label">Wednesday</div>
-        <div class="square day-label">Thursday</div>
-        <div class="square day-label">Friday</div>
-        <div class="square day-label">Saturday</div>
-        <div class="square day-label">Sunday</div>
+        <div class="day-label">Mon</div>
+        <div class="day-label">Tue</div>
+        <div class="day-label">Wed</div>
+        <div class="day-label">Thu</div>
+        <div class="day-label">Fri</div>
+        <div class="day-label">Sat</div>
+        <div class="day-label">Sun</div>
     </div>
 
     <div class="days">

@@ -1,20 +1,16 @@
 
+.calendar-body{
+    padding: 0;
+    margin: 1em 0;
+}
+
 .square {
     display: grid;
     float:left;
     margin: 0.5%;
-    background-color:#666;
-    overflow:hidden;
+    overflow-x: auto;
     white-space: pre-wrap;
-    border-radius: 10%;
-}
-
-
-.month-buttons {
-   float: left;
-   width: 33%;
-   text-align: center;
-   margin: auto;
+    border-radius: 7%;
 }
 
 .add-custom-btns{
@@ -60,38 +56,65 @@ a{
     flex-direction: column;
     align-items: center;
     background: var(--popup-background);
-    padding: 1em;
-    border-radius: 1em;
+    padding: 0.5em;
+    border-radius:0.5em;
 }
 
 .calendar-header{
-    width:100%;
+    width: 100%;
     margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.month-title{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.month-btn {
+    padding: 1.5em
+}
+.year{
+    margin:0.1em;
+}
+
+.month{
+    margin:0.1em;
 }
 
 .day-labels{
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: 0.6em;
 }
 
 .day-label{
-    height:auto;
+    height: auto;
+    background-color: transparent;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.3em;
 }
 
 .days{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: calc(100% / 6);
+    grid-auto-rows: 6.6em;
     width: 100%;
 }
 
 .day{
-    background-color: var(--page-background);
-}
-.day {
     height: auto;
+    background-color: var(--popup-overlay);
+}
+
+.dark{
+    background-color: var(--page-background);
 }
 
 .create-event-container {
@@ -243,9 +266,4 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .event-text{
   margin:10px;
-
-.dark {
-    background-color: rgba(50, 50, 50, 0.4);
 }
-
-
