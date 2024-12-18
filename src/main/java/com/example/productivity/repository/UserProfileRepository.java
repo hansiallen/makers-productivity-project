@@ -9,6 +9,8 @@ import java.util.List;
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
     UserProfile findByUserId(Long userId);
 
+    List<UserProfile> findByUserIdIn(List<Long> userIds);
+
     @Query(value = "SELECT up.* " +
             "FROM user_profiles up " +
             "JOIN contacts c ON up.user_id = c.user_id2 " +
