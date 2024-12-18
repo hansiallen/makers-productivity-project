@@ -58,6 +58,7 @@ a{
     background: var(--popup-background);
     padding: 0.5em;
     border-radius:0.5em;
+    width:100%;
 }
 
 .calendar-header{
@@ -110,7 +111,10 @@ a{
 
 .day{
     height: auto;
+    display:flex;
+    flex-direction: column;
     background-color: var(--popup-overlay);
+    padding:0.5em;
 }
 
 .dark{
@@ -238,6 +242,23 @@ input[type="time"]::-webkit-calendar-picker-indicator {
    border-top: 0.5vh solid #4588ba;
 }
 
+.event{
+   position : absolute;
+   left: 15%;
+   background: #666;
+   margin:0;
+}
+.event-contacts {
+    margin-top: 1em;
+}
+
+.event-contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .hour-time {
     left: 5vh;
     display: grid;
@@ -260,4 +281,25 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .event-text{
   margin:10px;
+}
+
+.day-number{
+}
+
+.events{
+    display: flex;
+    flex-direction: column;
+}
+
+.event-small{
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.85em;
+    padding: 0.1em;
+    margin-bottom: 0.3em;
+    border: var(--secondary-accent);
+    border-radius: 4%;
+    border-style: solid;
+
 }

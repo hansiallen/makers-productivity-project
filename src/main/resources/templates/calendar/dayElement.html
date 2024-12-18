@@ -1,5 +1,7 @@
 
-<span th:text="${day.getDay()}" class="day-number"></span>
-<th:block th:each="event: ${day.getEvents()}">
-    <span class="event-small" th:text="${event}" ></span>
-</th:block>
+<div th:text="${day.getDay()}" class="day-number"></div>
+
+<div class="events">
+    <div class="event-small" th:text="${event}" th:each="event: ${day.getEvents()}"></div>
+</div>
+
