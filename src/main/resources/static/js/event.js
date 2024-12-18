@@ -48,4 +48,40 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error updating status: ", error);
         });
     }
+
+    // Cancel event
+    const cancelBtn = document.querySelector(".event-cancel");
+    const editBtn = document.querySelector(".event-edit");
+    const eventBtns = document.querySelector(".event-btns");
+    const eventContainer = document.querySelector(".event-container");
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener("click", cancelEvent);
+    //    editBtn.addEventListener("click", editEvent);
+
+    }
+
+    function cancelEvent() {
+        const eventId = cancelBtn.getAttribute("data-event-id");
+
+        fetch(`/${eventId}/cancel`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ is_cancelled: true }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    eventBtns.classList.add("hidden");
+                    const cancelledDiv = document.createElement("div");
+                    cancelledDiv.textContent = "CANCELLED";
+                    cancelledDiv.classList.add("event-cancel-text");
+                    eventContainer.appendChild(cancelledDiv);
+                } else {
+                    console.error("Error updating status")
+                }
+            })
+            .catch(error => {
+                console.error("Error updating status: ", error);
+            });
+    }
 })

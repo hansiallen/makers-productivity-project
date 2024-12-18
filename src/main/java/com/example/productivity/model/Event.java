@@ -17,17 +17,20 @@ public class Event {
     private String title;
     private String description;
     private Long userId;
+    private boolean isCancelled = false;
 
     public Event() {
+        this.isCancelled = false;
     }
 
-    public Event(LocalDate date, LocalTime startTime, LocalTime endTime, String title, String description, Long userId) {
+    public Event(LocalDate date, LocalTime startTime, LocalTime endTime, String title, String description, Long userId, boolean isCancelled) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.title = title;
         this.description = description;
         this.userId = userId;
+        this.isCancelled = isCancelled;
     }
 
     public Long getId() {
@@ -85,6 +88,10 @@ public class Event {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public boolean getIsCancelled() { return this.isCancelled; }
+
+    public void setIsCancelled(boolean isCancelled) { this.isCancelled = isCancelled; }
 
 
     public int getTimeAsVH(LocalTime time){

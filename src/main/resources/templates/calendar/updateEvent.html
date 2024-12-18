@@ -6,45 +6,50 @@
 <link rel="stylesheet" href="/css/calendar.css">
 <script src="/js/eventAddContact.js" defer></script>
 <body>
+
     <div class="create-event-container">
-        <h2 class="page-header">New Event</h2>
-        <form method="POST" action="/event/create" class="create-event-form">
+        <h2 class="page-header">Edit Event</h2>
+        <form method="POST" th:action="@{'/event/update/' + ${event.id}}" class="create-event-form">
             <div class="create-event-field">
                 <label>Title</label>
-                <input type="text" name="title" placeholder="Event name" required>
+                <input th:value="${event.title}" type="text" name="title" placeholder="Event name" required>
             </div>
             <div class="create-event-field">
                 <label>Description</label>
-                <input type="text" name="description" placeholder="Event description">
+                <input th:value="${event.description}" type="text" name="description" placeholder="Event description">
             </div>
             <div class="create-event-field">
                 <label>Date</label>
-                <input type="date" name = "date" required>
+                <input th:value="${event.date}" type="date" name = "date" required>
             </div>
             <div class="create-event-field">
                 <label>Start Time</label>
-                <input type="time" name="startTime" required>
+                <input th:value="${event.startTime}" type="time" name="startTime" required>
             </div>
             <div class="create-event-field">
                 <label>End Time</label>
-                <input type="time" name="endTime" required>
+                <input th:value="${event.endTime}" type="time" name="endTime" required>
             </div>
             <div>
                 <p class="event-add-contacts">Add Contacts</p>
             </div>
-            <div class="event-contact-search-container hidden">
+            <div class="event-contact-search-container">
                 <div id="contacts-dropdown" class="dropdown">
                     <input type="text" placeholder="Search..." id="myInput" class="dropdown-input">
                     <div id="myDropdown" class="dropdown-content">
                     </div>
                 </div>
-                <div class="event-contacts"></div>
+                <div class="event-contacts" th:each="attendee : ${eventAttendees}">
+                    <div class="event-contact" th:data-event-contact-id="${attendee.userId}">
+                        <p th:text="${attendee.firstName}"></p>
+                        <i class="fa-regular fa-circle-xmark contact-remove"></i>
+                    </div>
+                </div>
             </div>
             <div class="create-event-btn-container">
-                <button type="submit" class="create-event-btn">Create</button>
+                <button type="submit" class="create-event-btn">Update</button>
             </div>
         </form>
-        <br><p><a href="/event/import" style="color: white; text-decoration: underline;">Bulk import from ICS file</a></p>
     </div>
 
     <div th:replace="~{core/navbar}"></div>

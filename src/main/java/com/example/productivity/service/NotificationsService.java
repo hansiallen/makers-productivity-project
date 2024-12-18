@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-
 @Service
 public class NotificationsService {
     @Autowired
@@ -80,6 +79,38 @@ public class NotificationsService {
             notification.setContent(user2Name + " responded with maybe to the event: " + event.getTitle());
         }
 
+        notification.setIsRead(false);
+        notification.setCreatedAt(LocalDateTime.now());
+
+        notificationRepository.save(notification);
+    }
+
+    public void eventIsCancelled(Long user1, Long user2, Event event) {
+        String user1Name = userProfileRepository.findById(user1)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + user1))
+                .getFirstName();
+        Notification notification = new Notification();
+        notification.setReceiverId(user2);
+        notification.setSenderId(user1);
+        notification.setEventId(event.getId());
+        notification.setType("event");
+        notification.setContent(user1Name + " cancelled the event: " + event.getTitle());
+        notification.setIsRead(false);
+        notification.setCreatedAt(LocalDateTime.now());
+
+        notificationRepository.save(notification);
+    }
+
+    public void eventIsUpdated(Long user1, Long user2, Event event) {
+        String user1Name = userProfileRepository.findById(user1)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + user1))
+                .getFirstName();
+        Notification notification = new Notification();
+        notification.setReceiverId(user2);
+        notification.setSenderId(user1);
+        notification.setEventId(event.getId());
+        notification.setType("event");
+        notification.setContent(user1Name + " updated the event: " + event.getTitle());
         notification.setIsRead(false);
         notification.setCreatedAt(LocalDateTime.now());
 
