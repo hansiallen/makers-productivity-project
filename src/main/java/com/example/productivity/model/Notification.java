@@ -18,7 +18,10 @@ public class Notification {
     private Long eventId;
     private LocalDateTime createdAt;
 
-    public Notification() {};
+    public Notification() {
+    }
+
+    ;
 
     public Notification(Long receiverId, Long senderId, String type, String content, boolean isRead, Long eventId, LocalDateTime createdAt) {
         this.receiverId = receiverId;
@@ -39,26 +42,63 @@ public class Notification {
         this.createdAt = createdAt;
     }
 
-    public Long getId() { return this.id; }
+    public Long getId() {
+        return this.id;
+    }
 
-    public Long getReceiverId() { return this.receiverId; }
-    public void setReceiverId(Long receiverId) { this.receiverId = receiverId; }
+    public Long getReceiverId() {
+        return this.receiverId;
+    }
 
-    public Long getSenderId() { return this.senderId; }
-    public void setSenderId(Long senderId) { this.senderId = senderId; }
+    public void setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
+    }
 
-    public String getType() { return this.type; }
-    public void setType(String type) { this.type = type; }
+    public Long getSenderId() {
+        return this.senderId;
+    }
 
-    public String getContent() { return this.content; }
-    public void setContent(String content) { this.content = content; }
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
+    }
 
-    public boolean getIsRead() { return this.isRead; }
-    public void setIsRead(boolean isRead) { this.isRead = isRead; }
+    public String getType() {
+        return this.type;
+    }
 
-    public Long getEventId() { return this.eventId; }
-    public void setEventId(Long eventId) { this.eventId = eventId; }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-    public LocalDateTime getCreatedAt() { return this.createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public String getContent() {
+        return this.content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean getIsRead() {
+        return this.isRead;
+    }
+
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public Long getEventId() {
+        return this.eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
