@@ -14,6 +14,15 @@
 
   <div class="profile-container" th:if="${currUserIsViewingOwnProfile || (!currUserIsViewingOwnProfile && userInContacts)}" >
 
+
+    <dialog class="modal" data-modal>
+      <h3>Are you sure you want to remove this contact?</h3>
+      <form data-modal-form action="#" method="post">
+        <button type="submit">Remove Connection</button>
+      </form>
+      <button data-close-modal>Close</button>
+    </dialog>
+
     <div class="profile-fields">
       <img class="profile-picture-big" th:src="${userProfile.profilePhotoUrl != null ? userProfile.profilePhotoUrl : '/img/icon/default-profile.png'}">
       <div class="profile-field">
@@ -51,12 +60,14 @@
       <div th:if="${userProfile.birthday != null && userProfile.birthday != ''}" class="profile-field">
         <label for="birthday">Birthday</label>
         <div id = "birthday" th:text="*{birthday}"></div>
-        <form method="POST" action="/event/create">
+        <form method="POST" action="/event/create/recur">
           <input type="hidden" name="title" th:value="|*{firstName}'s birthday!|">
           <input type="hidden" name="description" th:value="|*{firstName} *{lastName}'s birthday!|">
           <input type="hidden" name="date" th:value="*{birthday}">
           <input type="hidden" name="startTime" value="00:00:01">
           <input type="hidden" name="endTime" value="23:59:59">
+
+          <input type="hidden" name="recurCount" value=15>
           <button type="submit" class="submit-btn-square" name="submit">add to calendar</button>
         </form>
       </div>
@@ -69,6 +80,16 @@
     </div>
 
     <a th:if="${currUserIsViewingOwnProfile}" th:href="@{/profile/update}" class="submit-btn">Edit Profile</a>
+
+    <div class="profile-control-icons">
+      <div th:if="${!currUserIsViewingOwnProfile && userInContacts}" class="profile-favourite-icon" th:data-contact-id="${userProfile.userId}">
+        <i th:if="${isFavouriteContact}" class="fa-solid fa-star fa-2x"></i>
+        <i th:if="${!isFavouriteContact}" class="fa-regular fa-star fa-2x"></i>
+      </div>
+
+
+      <button class="remove-connection" th:onclick="|removeConnectionModal(event, ${userProfile.userId})|"><i class="fa-solid fa-trash fa-2x"></i></button>
+    </div>
   </div>
 
   <div th:if="${!userInContacts && !currUserIsViewingOwnProfile}" class="profile-container">
@@ -78,15 +99,14 @@
       <div id = "firstName2" th:text="*{firstName}"></div>
     </div>
     <a th:href="@{/contact/add/{id}(id=${userProfile.userId})}" class="submit-btn">Add contact</a>
+
+
   </div>
 
 </div>
 
 
-<div th:if="${!currUserIsViewingOwnProfile && userInContacts}" class="profile-favourite-icon" th:data-contact-id="${userProfile.userId}">
-  <i th:if="${isFavouriteContact}" class="fa-solid fa-star"></i>
-  <i th:if="${!isFavouriteContact}" class="fa-regular fa-star"></i>
-</div>
+
 </body>
 </html>
 
