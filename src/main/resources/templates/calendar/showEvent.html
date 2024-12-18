@@ -32,7 +32,7 @@
                     <p th:if="${!userIsEventOrganiser}" th:text="${userEventStatus}" class="user-event-status"></p>
                 </div>
             </div>
-            <h3 class="attendees-header">Attendees</h3>
+            <h3 th:if="${eventAttendees != null and eventAttendees.size() > 0}" class="attendees-header">Attendees</h3>
             <div th:if="${eventAttendees != null and eventAttendees.size() > 0}" th:each="attendee : ${eventAttendees}">
                 <div class="attendee-status">
                     <p th:text="${attendee.firstName} + ' ' + ${attendee.lastName}"></p>
