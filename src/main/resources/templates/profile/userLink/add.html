@@ -9,11 +9,11 @@
         <div class="profile-fields">
             <div class="profile-field">
                 <label for="websiteLinkName">Website name</label>
-                <input id="websiteLinkName" type="text" th:field="*{websiteLinkName}" placeholder="Website name"/>
+                <input class="profile-update-input" id="websiteLinkName" type="text" th:field="*{websiteLinkName}" placeholder="Website name"/>
             </div>
             <div class="profile-field">
                 <label for="websiteLinkUrl">Website URL</label>
-                <input id="websiteLinkUrl" type="text" th:field="*{websiteLinkUrl}" placeholder="Website URL" required/>
+                <input class="profile-update-input" id="websiteLinkUrl" type="text" th:field="*{websiteLinkUrl}" placeholder="Website URL" required/>
             </div>
         </div>
         <button type="submit" class="submit-btn">Add new field</button>
