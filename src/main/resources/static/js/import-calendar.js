@@ -1,3 +1,5 @@
+var calendarArrayFinal = '';
+
 function processICSToARR(source) {
     let calObject = convert(source);
     let calEvents = calObject['VCALENDAR']['0']['VEVENT'];
@@ -6,8 +8,12 @@ function processICSToARR(source) {
     for (let i = 0; i < calArr.length; i++) {
         if (calArr[i].length == 5) {
             calArrExcluded.push(calArr[i]);
+        } else {
+            console.log("Excluded 1 event");
         }
     }
+    console.log(calArrExcluded);
+    calendarArrayFinal = calArrExcluded;
     return calArrExcluded;
 }
 
@@ -75,4 +81,63 @@ function formatTime(dtvalue) {
 
   // Return time in HH:mm:ss format
   return `${hours}:${minutes}:${seconds}`;
+}
+
+function sendEventsToAPI(events) {
+    for (var i = 0; i < calendarArrayFinal.length; i++) {
+        var event = calendarArrayFinal[i];
+        var dateStr = event[0];
+        var startTimeStr = event[1];
+        var endTimeStr = event[2];
+        var title = event[3];
+        var description = event[4];
+
+        var dateParts = dateStr.split('-');
+        var day = parseInt(dateParts[0]);
+        var month = parseInt(dateParts[1]) - 1;
+        var year = parseInt(dateParts[2]);
+        var date = new Date(year, month, day);
+
+        var startTimeParts = startTimeStr.split(':');
+        var startHours = parseInt(startTimeParts[0]);
+        var startMinutes = parseInt(startTimeParts[1]);
+        var startTime = new Date(date);
+        startTime.setHours(startHours, startMinutes, 0, 0);
+
+        var endTimeParts = endTimeStr.split(':');
+        var endHours = parseInt(endTimeParts[0]);
+        var endMinutes = parseInt(endTimeParts[1]);
+        var endTime = new Date(date);
+        endTime.setHours(endHours, endMinutes, 0, 0);
+
+        var payload = "title=" + encodeURIComponent(title) +
+                      "&description=" + encodeURIComponent(description) +
+                      "&date=" + encodeURIComponent(date.toISOString().split('T')[0]) +
+                      "&startTime=" + encodeURIComponent(startTime.toISOString().split('T')[1].split('.')[0]) +
+                      "&endTime=" + encodeURIComponent(endTime.toISOString().split('T')[1].split('.')[0]);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/event/create", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log("Event created successfully: " + title);
+            } else {
+                console.error("Failed to create event: " + title);
+            }
+        };
+
+        xhr.onerror = function() {
+            console.error("Error while sending event to API");
+        };
+
+        xhr.send(payload);
+    }
+    alert('Successfully imported calendar events from file!');
+}
+
+function setICSFormContents(arr) {
+    document.getElementById('ics-array-text-box').value = arr;
+    document.getElementById('ics-form').classList.remove('hidden');
 }
