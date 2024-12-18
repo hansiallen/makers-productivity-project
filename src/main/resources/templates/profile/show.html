@@ -86,7 +86,7 @@
       </div>
 
 
-      <button th:if="${!currUserIsViewingOwnProfile}" class="remove-connection" th:onclick="|removeConnectionModal(event, ${userProfile.userId})|"><i class="fa-solid fa-trash fa-2x"></i></button>
+      <button th:if="${!currUserIsViewingOwnProfile && userInContacts}" class="remove-connection" th:onclick="|removeConnectionModal(event, ${userProfile.userId})|"><i class="fa-solid fa-trash fa-2x"></i></button>
     </div>
   </div>
 
