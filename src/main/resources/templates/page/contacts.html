@@ -11,7 +11,7 @@
     <div class="main-cont">
         <div class="static-cont">
             <a href="/profile/me" class="personal-cont">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png">
+                <img class="profile-picture-med" th:src="${currentUser.profilePhotoUrl != null ? currentUser.profilePhotoUrl : '/img/icon/default-profile.png'}">
                 <div>
                     <h2><span th:text ="${currentUser.firstName} + ' ' + ${currentUser.lastName}"></span></h2>
                     <p th:text ="${contactsCount} + ' contacts'"></p>
@@ -26,7 +26,7 @@
                     <div class="divider" th:text="${#strings.substring(letters, num, num+1).toUpperCase()}"></div>
                     <div th:each="contact : ${contacts}" th:if="${contact.lastName != null and contact.lastName.length() > 0 and contact.lastName[0].toLowerCase() == #strings.substring(letters, num, num+1)}">
                         <a class="user-cont" th:href="@{profile/{id}(id=${contact.userId})}">
-                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="Profile Picture">
+                            <img th:src="${contact.profilePhotoUrl != null ? contact.profilePhotoUrl : '/img/icon/default-profile.png'}">
                             <h3 th:text="${contact?.firstName} + ' ' + ${contact?.lastName}"></h3>
                             <span>></span>
                         </a>

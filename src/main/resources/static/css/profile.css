@@ -157,20 +157,6 @@
     color: var(--secondary-accent);
 }
 
-.profile-picture-big{
-    width: 10em;
-    height: 10em;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 0.2em solid var(--page-background);
-}
-
-.profile-picture-small{
-    width: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
 
 
 .modal {

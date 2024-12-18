@@ -224,3 +224,25 @@ a {
     padding: 8px 16px;
     border-radius: 4px;
 }
+
+.profile-picture-big{
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 0.2em solid var(--page-background);
+}
+
+.profile-picture-med{
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-picture-small{
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
