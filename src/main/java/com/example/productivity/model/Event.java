@@ -85,4 +85,10 @@ public class Event {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+
+    public int getTimeAsVH(LocalTime time){
+       float value = time.getHour()*10 + (float) time.getMinute() /6;
+       return Math.round(value);
+    }
 }

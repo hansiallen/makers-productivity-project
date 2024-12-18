@@ -17,18 +17,18 @@ class CustomFieldTest {
     @Test
     void testConstructorAndGetters() {
         assertNotNull(customField);
-        assertEquals(1L, customField.getUserProfileId());
+        assertEquals(1L, customField.getUserId());
         assertEquals("key1", customField.getCustomInfoKey());
         assertEquals("content1", customField.getCustomInfoContent());
     }
 
     @Test
     void testSetters() {
-        customField.setUserProfileId(2L);
+        customField.setUserId(2L);
         customField.setCustomInfoKey("key2");
         customField.setCustomInfoContent("content2");
 
-        assertEquals(2L, customField.getUserProfileId());
+        assertEquals(2L, customField.getUserId());
         assertEquals("key2", customField.getCustomInfoKey());
         assertEquals("content2", customField.getCustomInfoContent());
     }
@@ -39,17 +39,17 @@ class CustomFieldTest {
 
         assertNull(defaultCustomField.getCustomInfoKey());
         assertNull(defaultCustomField.getCustomInfoContent());
-        assertNull(defaultCustomField.getUserProfileId());
+        assertNull(defaultCustomField.getUserId());
     }
 
     @Test
     void testSettersAndGettersAfterDefaults() {
         CustomField defaultCustomField = new CustomField();
-        defaultCustomField.setUserProfileId(3L);
+        defaultCustomField.setUserId(3L);
         defaultCustomField.setCustomInfoKey("key3");
         defaultCustomField.setCustomInfoContent("content3");
 
-        assertEquals(3L, defaultCustomField.getUserProfileId());
+        assertEquals(3L, defaultCustomField.getUserId());
         assertEquals("key3", defaultCustomField.getCustomInfoKey());
         assertEquals("content3", defaultCustomField.getCustomInfoContent());
     }

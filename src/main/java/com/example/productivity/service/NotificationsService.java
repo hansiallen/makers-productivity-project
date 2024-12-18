@@ -1,5 +1,6 @@
 package com.example.productivity.service;
 
+import com.example.productivity.model.Event;
 import com.example.productivity.model.Notification;
 import com.example.productivity.repository.NotificationRepository;
 import com.example.productivity.repository.UserProfileRepository;
@@ -39,6 +40,46 @@ public class NotificationsService {
         notification.setSenderId(user1);
         notification.setType("contact");
         notification.setContent(user1Name + " added you as a contact");
+        notification.setIsRead(false);
+        notification.setCreatedAt(LocalDateTime.now());
+
+        notificationRepository.save(notification);
+    }
+
+    public void userIsInvitedToEvent(Long user1, Long user2, Event event) {
+        String user1Name = userProfileRepository.findById(user1)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + user1))
+                .getFirstName();
+        Notification notification = new Notification();
+        notification.setReceiverId(user2);
+        notification.setSenderId(user1);
+        notification.setEventId(event.getId());
+        notification.setType("event");
+        notification.setContent(user1Name + " invited you to the event: " + event.getTitle());
+        notification.setIsRead(false);
+        notification.setCreatedAt(LocalDateTime.now());
+
+        notificationRepository.save(notification);
+    }
+
+    public void userRespondsToEventInvitation(Long user1, Long user2, Event event, String status) {
+        String user2Name = userProfileRepository.findById(user2)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + user2))
+                .getFirstName();
+        Notification notification = new Notification();
+        notification.setReceiverId(user1);
+        notification.setSenderId(user2);
+        notification.setEventId(event.getId());
+        notification.setType("event");
+
+        if (status.equals("accepted")) {
+            notification.setContent(user2Name + " accepted invite to the event: " + event.getTitle());
+        } else if (status.equals("declined")) {
+            notification.setContent(user2Name + " declined invite to the event: " + event.getTitle());
+        } else {
+            notification.setContent(user2Name + " responded with maybe to the event: " + event.getTitle());
+        }
+
         notification.setIsRead(false);
         notification.setCreatedAt(LocalDateTime.now());
 

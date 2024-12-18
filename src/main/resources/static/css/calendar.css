@@ -1,30 +1,16 @@
 
+.calendar-body{
+    padding: 0;
+    margin: 1em 0;
+}
+
 .square {
     display: grid;
     float:left;
-    width: 13%;
-    height: 9vh;
     margin: 0.5%;
-    background-color:#666;
-    overflow:hidden;
+    overflow-x: auto;
     white-space: pre-wrap;
-}
-.dark {
-    background-color: rgba(50, 50, 50, 0.4);
-}
-
-.month-buttons {
-   float: left;
-   width: 33%;
-   text-align: center;
-   margin: auto;
-}
-
-.separate-menu{
-   float: auto;
-   align :center;
-   margin: auto;
-    padding-bottom: 2em;
+    border-radius: 7%;
 }
 
 .add-custom-btns{
@@ -57,7 +43,222 @@ a{
    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
 }
 
+.calendar-page{
+
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+
+}
+
+.calendar-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--popup-background);
+    padding: 0.5em;
+    border-radius:0.5em;
+}
+
+.calendar-header{
+    width: 100%;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.month-title{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.month-btn {
+    padding: 1.5em
+}
+.year{
+    margin:0.1em;
+}
+
+.month{
+    margin:0.1em;
+}
+
+.day-labels{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 0.6em;
+}
+
+.day-label{
+    height: auto;
+    background-color: transparent;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.3em;
+}
+
+.days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 6.6em;
+    width: 100%;
+}
+
 .day{
     height: auto;
+    background-color: var(--popup-overlay);
+}
 
+.dark{
+    background-color: var(--page-background);
+}
+
+.create-event-container {
+    background-color: var(--popup-background);
+    min-width: 12em;
+    padding: 1em;
+    border-radius: 1em;
+    margin-bottom: 4em;
+}
+
+.create-event-form {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 1em;
+}
+
+.create-event-field,
+.create-event-field input {
+      outline: none;
+      background-color: var(--page-background);
+      border-radius: 0.75em;
+      padding: 0.75em;
+      border-color: var(--primary-accent);
+      color: var(--primary-accent);
+      border-style: none;
+      font-size: inherit;
+      width: 100%;
+      box-sizing: border-box;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(0.9);
+}
+
+.create-event-btn {
+    background-color: var(--secondary-accent);
+    padding: 1em 3em;
+    border-radius: 1em;
+    font-size: 1em;
+}
+
+.create-event-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.hidden {
+    display: none;
+}
+
+.event-add-contacts {
+    color: var(--secondary-accent);
+}
+
+.dropdown-input {
+    box-sizing: border-box;
+    padding: 1em;
+    border: 1px solid #ddd;
+    width: 100%;
+    border-radius: 0.75em;
+    background-color: var(--page-background);
+    color: var(--primary-accent);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #f6f6f6;
+    width: 100%;
+    border: 1px solid #ddd;
+    z-index: 1;
+    display: none;
+    max-height: 9em;
+    overflow-y: auto;
+    background-color: var(--page-background);
+    font-size: inherit;
+    border-radius: 0.75em;
+
+}
+
+.dropdown-content p {
+    padding: 1em;
+    margin: 0;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display:block;
+}
+
+.hour-time {
+    left: 5vh;
+    display: grid;
+    height: 9.5vh;
+    margin: 0.5%;
+    white-space: pre-wrap;
+   margin:0;
+   border-top: 0.5vh solid #4588ba;
+}
+
+.event-contacts {
+    margin-top: 1em;
+}
+
+.event-contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.hour-time {
+    left: 5vh;
+    display: grid;
+    height: 9.5vh;
+    margin: 0.5%;
+    white-space: pre-wrap;
+    margin:0;
+    border-top: 0.5vh solid #4588ba;
+}
+
+.event{
+   position : absolute;
+   left: 15%;
+   overflow-x: auto;
+   background: #666;
+   margin:0;
+   white-space: pre-wrap;
+   width: 5vh;
+}
+
+.event-text{
+  margin:10px;
 }

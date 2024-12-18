@@ -30,7 +30,7 @@
     align-items: center;
 }
 
-.contact-card p, .notification-card p {
+.contact-card p, .notification-card-content {
     margin: 0;
     color: var(--primary-accent);
 }
@@ -43,7 +43,7 @@
     position: relative;
 }
 
-.notification-card p {
+.notification-card-content {
     padding-right: 2em;
 }
 

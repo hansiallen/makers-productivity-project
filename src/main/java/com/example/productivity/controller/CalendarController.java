@@ -1,11 +1,12 @@
 package com.example.productivity.controller;
 
 
+import ch.qos.logback.core.util.StringUtil;
 import com.example.productivity.model.CalendarDay;
 import com.example.productivity.model.Event;
 import com.example.productivity.repository.EventRepository;
 import com.example.productivity.repository.UserRepository;
-import org.imgscalr.Scalr;
+import com.example.productivity.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +34,8 @@ public class CalendarController {
     public ModelAndView dayPage(@PathVariable Integer day, @PathVariable Integer month, @PathVariable Integer year) {
         ModelAndView model = new ModelAndView("calendar/day");
         LocalDate currentTime =LocalDate.of(year,month,day);
+        List<Event> events= eventRepository.findEventsInTimePeriodForUser(currentUser.getCurrentUser().getId(),currentTime,currentTime.plusDays(1));
+        model.addObject("events", events);
         return model;
     }
 
@@ -60,7 +63,7 @@ public class CalendarController {
             l.addAll(m);
         }
         model.addObject("year", currentTime.getYear());
-        model.addObject("month", currentTime.getMonth().name());
+        model.addObject("month", StringUtil.capitalizeFirstLetter(currentTime.getMonth().name().toLowerCase())); //Converts 'MONTH' into 'Month'
         model.addObject("days", l);
         return model;
     }
@@ -80,23 +83,8 @@ public class CalendarController {
         return days;
     }
 
-
-    @GetMapping("/event/create")
-    public ModelAndView createEventPage(){
-        return new ModelAndView("/calendar/createEvent");
-    }
-    @PostMapping("/event/create")
-    public RedirectView createEvent(@RequestParam String title, @RequestParam String description, @RequestParam LocalDate date, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime){
-
-        Event newEvent = new Event(date, startTime, endTime, title, description, currentUser.getCurrentUser().getId());
-        System.out.println(newEvent.getId());
-        eventRepository.save(newEvent);
-        return new RedirectView("/calendar");
-    }
-
     @GetMapping("/event/import")
     public ModelAndView showICSImportPage() {
         return new ModelAndView("/calendar/import.html");
     }
-
 }

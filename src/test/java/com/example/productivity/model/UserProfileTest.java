@@ -3,6 +3,8 @@ package com.example.productivity.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserProfileTest {
@@ -12,7 +14,17 @@ class UserProfileTest {
 
     @BeforeEach
     void setUp() {
-        userProfile = new UserProfile(1L, "John", "Doe", "Smith", "http://example.com/photo.jpg", "Johnny");
+        userProfile = new UserProfile(
+                1L,
+                "John",
+                "Doe",
+                "Smith",
+                "http://example.com/photo.jpg",
+                "Johnny",
+                "johnny.doe@example.com",
+                "123-456-7890",
+                LocalDate.of(1990, 1, 1)
+        );
     }
 
     @Test

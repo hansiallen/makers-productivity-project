@@ -130,6 +130,7 @@
 .submit-btn,
 .submit-btn-square{
     background-color: var(--secondary-accent);
+    color: black;
     padding: 1em 3em;
     border-radius: 1em;
     font-size: 1em;
