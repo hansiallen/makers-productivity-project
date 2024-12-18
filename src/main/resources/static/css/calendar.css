@@ -6,7 +6,7 @@
     height: 9vh;
     margin: 0.5%;
     background-color:#666;
-    overflow:hidden;
+    overflow-x: auto;
     white-space: pre-wrap;
 }
 .dark {
@@ -24,7 +24,7 @@
    float: auto;
    align :center;
    margin: auto;
-    padding-bottom: 2em;
+   padding-bottom: 2em;
 }
 
 .add-custom-btns{
@@ -162,6 +162,21 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     display:block;
 }
 
+.hour-time {
+    left: 5vh;
+    display: grid;
+    height: 9.5vh;
+    margin: 0.5%;
+    white-space: pre-wrap;
+   margin:0;
+   border-top: 0.5vh solid #4588ba;
+}
+
+.event{
+   position : absolute;
+   left: 15%;
+   background: #666;
+   margin:0;
 .event-contacts {
     margin-top: 1em;
 }
@@ -171,4 +186,29 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+
+.hour-time {
+    left: 5vh;
+    display: grid;
+    height: 9.5vh;
+    margin: 0.5%;
+    white-space: pre-wrap;
+    margin:0;
+    border-top: 0.5vh solid #4588ba;
+}
+
+.event{
+   position : absolute;
+   left: 15%;
+   overflow-x: auto;
+   background: #666;
+   margin:0;
+   white-space: pre-wrap;
+   width: 5vh;
+}
+
+.event-text{
+  margin:10px;
+
 }

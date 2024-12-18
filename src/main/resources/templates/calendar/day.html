@@ -2,9 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head th:replace="~{core/head}"></head>
-<body>
+<body style="padding: 0; margin: 0; padding-left: 20px;">
+<link rel="stylesheet" href="/css/calendar.css">
+<div th:each="i : ${#numbers.sequence( 0, 24)}" class="hour-time">
+    <div th:if="${i}<10" th:text="'0' + ${i} + ':00'" >
+    </div>
+    <div th:if="${i}>=10"th:text="${i} + ':00'">
+    </div>
+</div>
+<div th:each="event, i : ${events}">
+<div class="event" th:style="'left: '+${i.index *5 + 10}+'%; top : ' + ${event.getTimeAsVH(event.startTime)} +'vh; height : ' + ${event.getTimeAsVH(event.endTime) - event.getTimeAsVH(event.startTime)} +'vh;'">
+    <div th:text="${event.title}" class="event-text"></div>
+    <span th:text="${event.description}" class="event-text"></span>
+</div>
 
-
+</div>
 <div th:replace="~{core/navbar}"></div>
 </body>
 </html>

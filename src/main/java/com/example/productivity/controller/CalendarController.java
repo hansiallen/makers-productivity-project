@@ -35,6 +35,8 @@ public class CalendarController {
     public ModelAndView dayPage(@PathVariable Integer day, @PathVariable Integer month, @PathVariable Integer year) {
         ModelAndView model = new ModelAndView("calendar/day");
         LocalDate currentTime =LocalDate.of(year,month,day);
+        List<Event> events= eventRepository.findEventsInTimePeriodForUser(currentUser.getCurrentUser().getId(),currentTime,currentTime.plusDays(1));
+        model.addObject("events", events);
         return model;
     }
 
