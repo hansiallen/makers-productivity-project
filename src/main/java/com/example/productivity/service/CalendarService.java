@@ -45,7 +45,15 @@ public class CalendarService {
 
                     notificationsService.userIsInvitedToEvent(event.getUserId(), contactId, event);
                 } else {
-                    notificationsService.eventIsUpdated(event.getUserId(), contactId, event);
+                    EventAttendee attendee = eventAttendeesRepository.findByEventIdAndAttendeeId(event.getId(), contactId)
+                            .orElseThrow(() -> new RuntimeException("Attendee not found"));
+                    if (attendee.getAttendingStatus().equals("removed")) {
+                        attendee.setAttendingStatus("pending");
+                        eventAttendeesRepository.save(attendee);
+                        notificationsService.userIsInvitedToEvent(event.getUserId(), contactId, event);
+                    } else {
+                        notificationsService.eventIsUpdated(event.getUserId(), contactId, event);
+                    }
                 }
             }
         }

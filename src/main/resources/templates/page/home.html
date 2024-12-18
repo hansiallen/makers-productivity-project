@@ -46,17 +46,19 @@
         <div th:if="${upcomingEvents.size() > 0}" class="homepage-events-container">
             <div th:each="event: ${upcomingEvents}">
                 <div class="upcoming-event-card homepage-card">
-                    <h3 th:text="${event.title}"></h3>
-                    <div class="upcoming-event-details">
-                        <div class="upcoming-event-detail">
-                            <i class="fa-solid fa-clock"></i>
-                            <p th:text="${#temporals.dayOfWeekNameShort(event.date)} + ' ' + ${#temporals.format(event.date, 'dd MMM')} + ' ' + ${event.startTime}"></p>
+                    <a th:href="@{/events/{id}(id=${event.id})}">
+                        <h3 th:text="${event.title}"></h3>
+                        <div class="upcoming-event-details">
+                            <div class="upcoming-event-detail">
+                                <i class="fa-solid fa-clock"></i>
+                                <p th:text="${#temporals.dayOfWeekNameShort(event.date)} + ' ' + ${#temporals.format(event.date, 'dd MMM')} + ' ' + ${event.startTime}"></p>
+                            </div>
+                            <div class="upcoming-event-detail">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <p>Event location?</p>
+                            </div>
                         </div>
-                        <div class="upcoming-event-detail">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p>Event location?</p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

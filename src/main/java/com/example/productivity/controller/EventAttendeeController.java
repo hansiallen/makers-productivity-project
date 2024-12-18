@@ -34,8 +34,9 @@ public class EventAttendeeController {
 
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));;
-
-        notificationsService.userRespondsToEventInvitation(event.getUserId(), attendeeId, event, status);
+        if (!status.equals("removed")) {
+            notificationsService.userRespondsToEventInvitation(event.getUserId(), attendeeId, event, status);
+        }
 
         return ResponseEntity.ok().build();
     }

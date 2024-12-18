@@ -53,4 +53,17 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    const modal = document.querySelector("[data-modal]")
+    const closeBtn = document.querySelector("[data-close-modal]")
+    const modalForm = document.querySelector("[data-modal-form]")
+
+    closeBtn.addEventListener("click", () => {
+        modal.close()
+    })
+
+    window.removeConnectionModal = (event, id) => {
+        event.preventDefault()
+        modal.showModal()
+        modalForm.action = `/contact/remove/${id}`
+    }
 });
