@@ -79,7 +79,7 @@ function showScannerInterface() {
     console.log(width);
     console.log(height);
 
-    if (width < 432) {
+    if (width > 432) {
         width = 432;
     }
 
