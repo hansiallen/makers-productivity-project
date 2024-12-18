@@ -24,7 +24,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
         SELECT e.id, e.date, e.start_time, e.end_time, e.title, e.description, e.user_id, e.is_cancelled
         FROM events e, event_attendees a
         WHERE (e.date >= :earliest)
-           and (e.date < :latest) and (:userId = e.user_id) or (a.attendee_id = :userId and a.event_id = e.id)
+           and (e.date < :latest) and ((:userId = e.user_id) or (a.attendee_id = :userId and a.event_id = e.id))
         ORDER BY e.date ASC, e.start_time ASC
     """, nativeQuery = true)
     List<Event> findEventsInTimePeriodForUser(Long userId, LocalDate earliest, LocalDate latest);
