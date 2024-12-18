@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
         dropdownContent.innerHTML = "";
 
         if (contacts.length === 0) {
-            dropdownContent.innerHTML = `<div class="dropdown-item">No contacts found</div>`;
+            dropdownContent.innerHTML = `<div class="dropdown-empty-msg" style="padding: 1em;">No contacts found</div>`;
             return;
         }
 
