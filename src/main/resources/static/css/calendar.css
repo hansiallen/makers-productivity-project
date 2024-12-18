@@ -109,6 +109,17 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     margin-top: 1em;
 }
 
+.event-contacts {
+    margin-top: 1em;
+}
+
+.event-contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .hidden {
     display: none;
 }
@@ -145,7 +156,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     background-color: var(--page-background);
     font-size: inherit;
     border-radius: 0.75em;
-
 }
 
 .dropdown-content p {
@@ -170,22 +180,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     white-space: pre-wrap;
    margin:0;
    border-top: 0.5vh solid #4588ba;
-}
-
-.event{
-   position : absolute;
-   left: 15%;
-   background: #666;
-   margin:0;
-.event-contacts {
-    margin-top: 1em;
-}
-
-.event-contact {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
 }
 
 .hour-time {

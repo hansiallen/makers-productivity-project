@@ -39,11 +39,11 @@
                     <p class="attendee-event-status" th:data-contact-id="${attendee.userId}" th:text="${attendeeEventStatuses[attendee.userId]}"></p>
                 </div>
             </div>
-            <div th:if="${userIsEventOrganiser}" class="event-btns">
-                <a class="event-btn organiser-event-btn">Edit</a>
-                <a class="event-btn organiser-event-btn">Cancel</a>
+            <div th:if="${userIsEventOrganiser && !eventIsCancelled}" class="event-btns">
+                <a th:href="@{'/event/edit/' + ${event.id}}" th:data-event-id="${event.id}" class="event-btn organiser-event-btn event-edit">Edit</a>
+                <a th:data-event-id="${event.id}" class="event-btn organiser-event-btn event-cancel">Cancel</a>
             </div>
-            <div th:if="${!userIsEventOrganiser}" class="event-btns">
+            <div th:if="${!userIsEventOrganiser && !eventIsCancelled}" class="event-btns">
                 <a class="event-btn attendee-event-btn"
                     id="event-decline"
                     th:data-attendee-id="${currentUserId}"
@@ -62,6 +62,9 @@
                    th:data-event-id="${event.id}"
                    th:classappend="${userEventStatus == 'Accepted' ? ' attendee-event-btn-selected' : ''}"
                 ><i class="fa-solid fa-check"></i></a>
+            </div>
+            <div th:if="${eventIsCancelled}" class="event-cancel-text">
+                CANCELLED
             </div>
         </div>
     </div>

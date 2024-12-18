@@ -23,13 +23,30 @@ public class CalendarService {
 
     @Transactional
     public void createEventWithAttendees(String title, String description, LocalDate date, LocalTime startTime, LocalTime endTime, Long userId, List<Long> contactIds) {
-        Event newEvent = new Event(date, startTime, endTime, title, description, userId);
+        Event newEvent = new Event(date, startTime, endTime, title, description, userId, false);
         eventRepository.save(newEvent);
         if (contactIds != null && !contactIds.isEmpty()) {
             for (Long contactId : contactIds) {
                 EventAttendee eventAttendee = new EventAttendee(newEvent.getId(), contactId, "pending");
                 eventAttendeesRepository.save(eventAttendee);
                 notificationsService.userIsInvitedToEvent(userId, contactId, newEvent);
+            }
+        }
+    }
+
+    public void addAttendeesToEvent(Event event, List<Long> contactIds) {
+        if (contactIds != null && !contactIds.isEmpty()) {
+            for (Long contactId : contactIds) {
+                boolean attendeeExists = eventAttendeesRepository.existsByAttendeeIdAndEventId(contactId, event.getId());
+
+                if (!attendeeExists) {
+                    EventAttendee eventAttendee = new EventAttendee(event.getId(), contactId, "pending");
+                    eventAttendeesRepository.save(eventAttendee);
+
+                    notificationsService.userIsInvitedToEvent(event.getUserId(), contactId, event);
+                } else {
+                    notificationsService.eventIsUpdated(event.getUserId(), contactId, event);
+                }
             }
         }
     }

@@ -131,5 +131,15 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("End time must be after start time.");
         }
     }
+
+    // Remove contact from update form
+    const existingRemoveIcons = document.querySelectorAll(".contact-remove");
+    existingRemoveIcons.forEach(icon => {
+        icon.addEventListener("click", function() {
+            const contactDiv = icon.closest(".event-contact");
+            const contactId = contactDiv.dataset.eventContactId;
+            removeContactFromEvent(contactId);
+        });
+    });
 })
 
