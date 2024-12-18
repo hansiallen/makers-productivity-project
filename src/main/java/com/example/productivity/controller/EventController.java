@@ -46,6 +46,25 @@ public class EventController {
         return new RedirectView("/calendar");
     }
 
+    @PostMapping("/event/create/recur")
+    public RedirectView createRecurringEvent(@RequestParam String title, @RequestParam String description, @RequestParam LocalDate date, @RequestParam LocalTime startTime,
+                                             @RequestParam LocalTime endTime, @RequestParam(required = false) List<Long> contactIds, @RequestParam Integer recurCount){
+        // New params:
+        // recurCount - Amount of times for event to reoccur (saves db space)
+        int day = date.getDayOfMonth();
+        int month = date.getMonthValue();
+        int year = LocalDate.now().getYear();
+        Long currentUserId = currentUser.getCurrentUser().getId();
+
+        for(int newYear = year;  newYear < recurCount + year; newYear++){
+
+            LocalDate newDate = LocalDate.of(newYear,month,day);
+            calendarService.createEventWithAttendees(title,description,newDate,startTime,endTime,currentUserId,contactIds);
+
+        }
+        return new RedirectView("/calendar");
+    }
+
     @GetMapping("/events/{eventId}")
     public ModelAndView viewEvent(@PathVariable Long eventId) {
         Event event = eventRepository.findById(eventId)
