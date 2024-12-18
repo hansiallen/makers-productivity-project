@@ -17,13 +17,6 @@
    margin: auto;
 }
 
-.separate-menu{
-   float: auto;
-   align :center;
-   margin: auto;
-    padding-bottom: 2em;
-}
-
 .add-custom-btns{
     display: flex;
     flex-direction: row;
