@@ -82,4 +82,9 @@ public class CalendarController {
         }
         return days;
     }
+
+    @GetMapping("/event/import")
+    public ModelAndView showICSImportPage() {
+        return new ModelAndView("/calendar/import.html");
+    }
 }

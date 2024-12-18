@@ -80,7 +80,19 @@
     border: 1px solid red;
 }
 
+.hidden {
+    display: none;
+}
+
+.event-cancel-text {
+    margin-top: 2em;
+    text-align: center;
+    font-size: 1.5em;
+    color: var(--red-dark-mode);
+}
+
 .event-error-msg {
     margin-top: 12em;
     text-align: center;
 }
+
