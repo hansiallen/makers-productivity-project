@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface EventRepository extends CrudRepository<Event, Long> {
     @Query(value = """
-        SELECT e.*
+        SELECT DISTINCT e.*
         FROM events e
         LEFT JOIN event_attendees ea ON e.id = ea.event_id
         WHERE (
@@ -21,6 +21,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
             e.user_id = :userId
             OR (ea.attendee_id = :userId AND ea.attending_status IN ('accepted', 'maybe', 'pending'))
         )
+        AND e.is_cancelled = false
         ORDER BY e.date ASC, e.start_time ASC
         LIMIT :limit
     """, nativeQuery = true)
