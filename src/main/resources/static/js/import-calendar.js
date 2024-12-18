@@ -27,7 +27,7 @@ function processEvents(events) {
             event.push('00:00:00');
             event.push('23:59:59');
         } else {
-            if (eventObject.hasOwnProperty('DTSTART')) {
+            if (eventObject.hasOwnProperty('DTSTART') && eventObject.hasOwnProperty('DTEND')) {
                 event.push(formatFullDTDate(eventObject['DTSTART']));
                 event.push(formatTime(eventObject['DTSTART']));
                 event.push(formatTime(eventObject['DTEND']));
