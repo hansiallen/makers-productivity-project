@@ -53,6 +53,10 @@
     right: 1em;
 }
 
+.upcoming-event-card a {
+    color: var(--primary-accent);
+}
+
 .upcoming-event-details {
     display: flex;
     flex-direction: column;

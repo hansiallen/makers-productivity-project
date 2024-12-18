@@ -77,9 +77,12 @@ public class EventController {
         List<EventAttendee> attendees = eventAttendeesRepository.findAttendeesByEventId(id);
         List<UserProfile> eventAttendees = userProfileRepository.findByUserIdIn(attendeeIds);
 
+        Long userId = currentUser.getCurrentUser().getId();
+        Boolean userIsEventOrganiser = userId.equals(event.getUserId());
 
         eventFormView.addObject("event", event);
         eventFormView.addObject("eventAttendees", eventAttendees);
+        eventFormView.addObject("userIsEventOrganiser", userIsEventOrganiser);
         return eventFormView;
     }
 
@@ -92,7 +95,6 @@ public class EventController {
         existingEvent.setDate(updatedEvent.getDate());
         existingEvent.setStartTime(updatedEvent.getStartTime());
         existingEvent.setEndTime(updatedEvent.getEndTime());
-
         eventRepository.save(existingEvent);
         if (contactIds != null && !contactIds.isEmpty()) {
             calendarService.addAttendeesToEvent(existingEvent, contactIds);

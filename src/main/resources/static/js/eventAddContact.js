@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const addContactsBtn = document.querySelector(".event-add-contacts");
     const contactSearchContainer = document.querySelector(".event-contact-search-container");
 
-    addContactsBtn.addEventListener("click", showContacts)
+    if (addContactsBtn) {
+        addContactsBtn.addEventListener("click", showContacts)
+    }
 
     function showContacts() {
         contactSearchContainer.classList.remove("hidden");
@@ -14,18 +16,20 @@ document.addEventListener("DOMContentLoaded", function() {
     const dropdownContent = document.querySelector(".dropdown-content");
     const dropdownInput = document.querySelector(".dropdown-input");
 
-    dropdownInput.addEventListener("focus", () => {
-        dropdownContent.classList.add("show");
-        loadAllContacts();
-    });
+    if (dropdownInput) {
+        dropdownInput.addEventListener("focus", () => {
+            dropdownContent.classList.add("show");
+            loadAllContacts();
+        });
+
+        dropdownInput.addEventListener("keyup", filterResults);
+    }
 
     document.addEventListener("click", (e) => {
         if (!e.target.closest(".dropdown")) {
             dropdownContent.classList.remove("show");
         }
     });
-
-    dropdownInput.addEventListener("keyup", filterResults);
 
     async function filterResults() {
         const query = dropdownInput.value.toLowerCase().trim();
@@ -120,7 +124,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Check end time after start time
-    createEventForm.addEventListener("submit", checkEventTimes);
+    if (createEventForm) {
+        createEventForm.addEventListener("submit", checkEventTimes);
+    }
 
     function checkEventTimes(e) {
         const startTime = document.querySelector("input[name='startTime']").value;
@@ -138,8 +144,28 @@ document.addEventListener("DOMContentLoaded", function() {
         icon.addEventListener("click", function() {
             const contactDiv = icon.closest(".event-contact");
             const contactId = contactDiv.dataset.eventContactId;
+            const eventId = contactDiv.dataset.eventId;
             removeContactFromEvent(contactId);
+            removeContactFromDB(eventId, contactId);
         });
     });
+
+    function removeContactFromDB(eventId, contactId) {
+        fetch(`/${eventId}/${contactId}/status`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ status: "removed" })
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Error updating attendee status');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 })
 

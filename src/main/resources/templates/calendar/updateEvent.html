@@ -7,7 +7,7 @@
 <script src="/js/eventAddContact.js" defer></script>
 <body>
 
-    <div class="create-event-container">
+    <div class="create-event-container" th:if="${userIsEventOrganiser}">
         <h2 class="page-header">Edit Event</h2>
         <form method="POST" th:action="@{'/event/update/' + ${event.id}}" class="create-event-form">
             <div class="create-event-field">
@@ -39,10 +39,13 @@
                     <div id="myDropdown" class="dropdown-content">
                     </div>
                 </div>
-                <div class="event-contacts" th:each="attendee : ${eventAttendees}">
-                    <div class="event-contact" th:data-event-contact-id="${attendee.userId}">
-                        <p th:text="${attendee.firstName}"></p>
-                        <i class="fa-regular fa-circle-xmark contact-remove"></i>
+                <div class="event-contacts">
+                    <div th:each="attendee : ${eventAttendees}">
+                        <div class="event-contact" th:data-event-contact-id="${attendee.userId}" th:data-event-id="${event.id}">
+                            <p th:text="${attendee.firstName} + ' ' + ${attendee.lastName}"></p>
+                            <i class="fa-regular fa-circle-xmark contact-remove"></i>
+                        </div>
+                        <input type="hidden" name="contactIds" th:value="${attendee.userId}" th:data-input-contact-id="${attendee.userId}" />
                     </div>
                 </div>
             </div>
@@ -50,6 +53,11 @@
                 <button type="submit" class="create-event-btn">Update</button>
             </div>
         </form>
+    </div>
+
+    <div th:if="${!userIsEventOrganiser}">
+        <h2 class="page-header">networks</h2>
+        <p class="event-error-msg">No event to view.</p>
     </div>
 
     <div th:replace="~{core/navbar}"></div>

@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventAttendeesRepository extends CrudRepository<EventAttendee,Long> {
-    @Query(value = "SELECT attendee_id FROM event_attendees WHERE event_id = :eventId;", nativeQuery = true)
+    @Query(value = "SELECT attendee_id FROM event_attendees WHERE event_id = :eventId AND attending_status != 'removed';", nativeQuery = true)
     List<Long> findAttendeeIdsByEventId(Long eventId);
 
+    @Query(value = "SELECT * FROM event_attendees WHERE event_id = :eventId AND attending_status != 'removed'", nativeQuery = true)
     List<EventAttendee> findAttendeesByEventId(Long eventId);
 
     Optional<EventAttendee> findByEventIdAndAttendeeId(Long eventId, Long attendeeId);

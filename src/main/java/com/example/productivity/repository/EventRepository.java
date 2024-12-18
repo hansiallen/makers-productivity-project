@@ -10,11 +10,17 @@ import java.util.List;
 
 public interface EventRepository extends CrudRepository<Event, Long> {
     @Query(value = """
-        SELECT *
+        SELECT e.*
         FROM events e
-        WHERE ((e.date > CURRENT_DATE)
-           OR (e.date = CURRENT_DATE AND e.start_time > CURRENT_TIME))
-           AND e.user_id = :userId
+        LEFT JOIN event_attendees ea ON e.id = ea.event_id
+        WHERE (
+            (e.date > CURRENT_DATE)
+            OR (e.date = CURRENT_DATE AND e.start_time > CURRENT_TIME)
+        )
+        AND (
+            e.user_id = :userId
+            OR (ea.attendee_id = :userId AND ea.attending_status IN ('accepted', 'maybe', 'pending'))
+        )
         ORDER BY e.date ASC, e.start_time ASC
         LIMIT :limit
     """, nativeQuery = true)
