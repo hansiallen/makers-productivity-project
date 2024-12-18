@@ -180,6 +180,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     width: 100%;
 }
 
+.event-error-msg {
+    margin-top: 12em;
+    text-align: center;
+}
+
 .hidden {
     display: none;
 }
