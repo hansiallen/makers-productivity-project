@@ -30,6 +30,7 @@ public class CalendarDay {
     public List<String> getEvents(){
         return events;
     }
+
     public void addEvent(String Event){
         this.events.add(Event);
     }
