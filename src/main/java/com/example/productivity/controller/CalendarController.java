@@ -5,6 +5,7 @@ import com.example.productivity.model.CalendarDay;
 import com.example.productivity.model.Event;
 import com.example.productivity.repository.EventRepository;
 import com.example.productivity.repository.UserRepository;
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -91,6 +92,11 @@ public class CalendarController {
         System.out.println(newEvent.getId());
         eventRepository.save(newEvent);
         return new RedirectView("/calendar");
+    }
+
+    @GetMapping("/event/import")
+    public ModelAndView showICSImportPage() {
+        return new ModelAndView("/calendar/import.html");
     }
 
 }
