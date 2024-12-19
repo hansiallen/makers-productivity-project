@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const createEventForm = document.querySelector(".create-event-form");
     const addContactsBtn = document.querySelector(".event-add-contacts");
     const contactSearchContainer = document.querySelector(".event-contact-search-container");
+    const selectedContacts = new Set();
 
     if (addContactsBtn) {
         addContactsBtn.addEventListener("click", showContacts)
@@ -31,6 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // For update events page, adding existing attendees to set so that they don't appear in search dropdown
+    const contactInputs = document.querySelectorAll("input[name='contactIds']");
+    contactInputs.forEach(input => selectedContacts.add(parseInt(input.value, 10)));
+
     async function filterResults() {
         const query = dropdownInput.value.toLowerCase().trim();
 
@@ -44,8 +49,11 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!response.ok) {
                 throw new Error("Failed to fetch contacts");
             }
+
             const contacts = await response.json();
-            updateDropdown(contacts);
+            const filteredContacts = contacts.filter(contact => !selectedContacts.has(contact.userId));
+
+            updateDropdown(filteredContacts);
         } catch (error) {
             console.error("Error fetching contacts:", error);
         }
@@ -58,7 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 throw new Error("Failed to fetch contacts");
             }
             const contacts = await response.json();
-            updateDropdown(contacts);
+            const filteredContacts = contacts.filter(contact => !selectedContacts.has(contact.userId));
+            updateDropdown(filteredContacts);
         } catch (error) {
             console.error("Error fetching contacts:", error);
         }
@@ -84,6 +93,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function selectContact(contact) {
         dropdownInput.value = "";
         dropdownContent.classList.remove("show");
+        selectedContacts.add(contact.userId);
+
         const eventContactsDiv = document.querySelector(".event-contacts");
         const contactDiv = document.createElement("div");
         contactDiv.classList.add("event-contact");
@@ -116,6 +127,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (contactDiv) {
             contactDiv.remove();
         }
+
+        selectedContacts.delete(contactId);
 
         const hiddenInput = createEventForm.querySelector(`input[name='contactIds'][value='${contactId}']`);
         if (hiddenInput) {
