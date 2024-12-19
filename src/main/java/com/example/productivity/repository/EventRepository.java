@@ -28,14 +28,14 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     List<Event> findNextUpcomingEvents(int limit, Long userId);
 
     @Query(value = """
-        SELECT e.id, e.date, e.start_time, e.end_time, e.title, e.description, e.user_id, e.is_cancelled
+        SELECT DISTINCT e.*
         FROM events e
         LEFT JOIN event_attendees a ON a.event_id = e.id
         WHERE e.date >= :earliest
           AND e.date < :latest
           AND (
-              e.user_id = :userId\s
-              OR (a.attendee_id = :userId)
+              e.user_id = :userId
+              OR (a.attendee_id = :userId AND a.attending_status != 'removed')
           )
         ORDER BY e.date ASC, e.start_time ASC
     """, nativeQuery = true)
