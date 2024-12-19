@@ -77,6 +77,7 @@ public class EventController {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
         event.setIsCancelled(true);
+        eventRepository.save(event);
 
         List<Long> attendeeIds = eventAttendeesRepository.findAttendeeIdsByEventId(eventId);
         for (Long attendeeId : attendeeIds) {

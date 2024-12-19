@@ -57,9 +57,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeBtn = document.querySelector("[data-close-modal]")
     const modalForm = document.querySelector("[data-modal-form]")
 
-    closeBtn.addEventListener("click", () => {
-        modal.close()
-    })
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            modal.close()
+        })
+    }
 
     window.removeConnectionModal = (event, id) => {
         event.preventDefault()
